@@ -1,0 +1,90 @@
+<mat-sidenav-container class="sidenav-container mat-app-background" [ngClass]="{ 'dark-mode' : isDarkMode, 'light-mode' : !isDarkMode }">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false"
+      position="end">
+    <mat-toolbar color="primary">
+      <a mat-list-item *ngIf="isUserAuthenticated">
+        <span class="logged-user">
+          <mat-icon class="img-space img-alignment">person</mat-icon>
+          {{ this.email }}
+        </span>
+      </a>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item>
+        <mat-icon>wb_sunny</mat-icon>
+        <mat-slide-toggle color="primary" labelPosition="before" (click)="toggleDarkMode()" [(ngModel)]="isDarkMode">
+        </mat-slide-toggle>
+        <mat-icon>bedtime</mat-icon>
+      </a>
+      <mat-divider></mat-divider>
+      <div *ngIf="!isUserAuthenticated">
+        <a mat-list-item *ngIf="!isUserAuthenticated" [routerLink]="['/authentication/login']">
+          <mat-icon class="img-space">login</mat-icon>
+          Logowanie
+        </a>
+        <mat-divider></mat-divider>
+        <a mat-list-item *ngIf="!isUserAuthenticated" [routerLink]="['/authentication/registration']">
+          <mat-icon class="img-space">how_to_reg</mat-icon>
+          Rejestracja
+        </a>
+        <mat-divider></mat-divider>
+      </div>
+      <a mat-list-item [routerLink]="['/orders']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon class="img-space">article</mat-icon>
+        Zamówienia
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="['/orders']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon class="img-space">groups</mat-icon>
+        Dostawcy
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="['/tools/tools-list']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon class="img-space">construction</mat-icon>
+        Narzędzia
+      </a>
+      <!-- <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="['/privacy']">
+        <mat-icon class="img-space">lock</mat-icon>
+        Prywatność
+      </a> -->
+      <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="['/about']">
+        <mat-icon class="img-space">info</mat-icon>
+        O systemie
+      </a>
+      <mat-divider></mat-divider>
+      <div *ngIf="isUserAuthenticated">
+        <a mat-list-item (click)="logout()">
+          <mat-icon class="img-space">logout</mat-icon>
+          Wyloguj
+        </a>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        class="menu"
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <div class="logo" [routerLink]="['/home']">
+        <img src="assets/images/logo.svg">
+        <h1>Komdeka</h1>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+    <mat-toolbar color="primary">
+      <span class="footer">Copyright &copy; 2022 Bartłomiej Czerny</span>
+    </mat-toolbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Weryfikacja dwuetapowa</mat-card-title>
+    <mat-card-subtitle>Wprowadź kod weryfikacyjny wysłany na podany adres e-mail, aby się zalogować.</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="two-step-form" [formGroup]="twoStepForm" autocomplete="off" novalidate (ngSubmit)="login(twoStepForm.value)">
+      <mat-card *ngIf="showError" class="error-card">{{ errorMessage }}</mat-card>
+      <mat-form-field class="field-width" appearance="fill">
+        <mat-label>Kod weryfikacyjny</mat-label>
+        <input matInput name="twoFactorCode" type="text" formControlName="twoFactorCode">
+        <mat-icon matSuffix>key</mat-icon>
+        <mat-error *ngIf="twoStepForm.controls['twoFactorCode'].errors?.required">Nie wprowadzono kodu weryfikacyjnego.</mat-error>
+        <mat-error *ngIf="twoStepForm.controls['twoFactorCode'].errors?.pattern">Kod weryfikacyjny składa się z 6 cyfr.</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!twoStepForm.valid">
+        Zaloguj
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

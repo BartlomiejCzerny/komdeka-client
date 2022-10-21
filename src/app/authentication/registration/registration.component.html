@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Rejestracja</mat-card-title>
+    <mat-card-subtitle>Zarejestruj konto użytkownika i dołącz do nas.</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="registration-form" [formGroup]="registrationForm" autocomplete="off" novalidate (ngSubmit)="register(registrationForm.value)">
+      <mat-form-field class="field-width" appearance="fill">
+        <mat-label>Imię</mat-label>
+        <input matInput formControlName="firstName" type="text">
+        <mat-icon matSuffix>contacts</mat-icon>
+        <mat-error *ngIf="registrationForm.controls['firstName'].errors?.required">Nie wprowadzono imienia.</mat-error>
+        <mat-error *ngIf="registrationForm.controls['firstName'].errors?.pattern">Imię zostało wprowadzone w nieprawidłowym formacie lub zawiera więcej niż 100 znaków.</mat-error>
+      </mat-form-field>
+      <mat-form-field class="field-width" appearance="fill">
+        <mat-label>Nazwisko</mat-label>
+        <input matInput formControlName="lastName" type="text">
+        <mat-icon matSuffix>contacts</mat-icon>
+        <mat-error *ngIf="registrationForm.controls['lastName'].errors?.required">Nie wprowadzono nazwiska.</mat-error>
+        <mat-error *ngIf="registrationForm.controls['lastName'].errors?.pattern">Nazwisko zostało wprowadzone w nieprawidłowym formacie lub zawiera więcej niż 100 znaków.</mat-error>
+      </mat-form-field>
+      <mat-card *ngIf="showError" class="error-card">{{ errorMessage }}</mat-card>
+      <mat-form-field class="field-width" appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email">
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="registrationForm.controls['email'].errors?.required">Nie wprowadzono adresu e-mail.</mat-error>
+        <mat-error *ngIf="registrationForm.controls['email'].errors?.email">E-mail został wprowadzony w nieprawidłowym formacie.</mat-error>
+      </mat-form-field>
+      <mat-form-field class="field-width" appearance="fill">
+        <mat-label>Hasło</mat-label>
+        <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'">
+        <mat-icon class="password-visibility" matSuffix (click)="hidePassword = !hidePassword">{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        <mat-error *ngIf="registrationForm.controls['password'].errors?.required">Nie wprowadzono hasła.</mat-error>
+        <mat-error *ngIf="registrationForm.controls['password'].errors?.pattern">Hasło musi zawierać małą i wielką literę, cyfrę, znak specjalny oraz wymaga od 8 do 64 znaków.</mat-error>
+      </mat-form-field>
+      <mat-form-field class="field-width" appearance="fill">
+        <mat-label>Powtórz hasło</mat-label>
+        <input matInput formControlName="confirmPassword" [type]="hideConfirmPassword ? 'password' : 'text'">
+        <mat-icon class="password-visibility" matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        <mat-error *ngIf="registrationForm.controls['confirmPassword'].errors?.required">Nie powtórzono hasła.</mat-error>
+        <mat-error *ngIf="registrationForm.controls['confirmPassword'].errors?.pattern">Hasło musi zawierać małą i wielką literę, cyfrę, znak specjalny oraz wymaga od 8 do 64 znaków.</mat-error>
+        <mat-error *ngIf="confirmPassword.hasError('matching')">Wprowadzone hasła różnią się.</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!registrationForm.valid">
+        Zarejestruj
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

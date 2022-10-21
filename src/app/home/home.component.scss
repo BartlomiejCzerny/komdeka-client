@@ -1,0 +1,20 @@
+mat-card {
+  background-color: #000000 !important;
+  opacity: 0.8;
+  padding: 3%;
+}
+
+@media (max-width: 599.5px) and (orientation: portrait), (max-width: 959.5px) and (orientation: landscape) {
+  mat-card {
+    padding: 10%;
+  }
+}
+
+@media not screen and (max-width: 599.5px) and (orientation: portrait), (max-width: 959.5px) and (orientation: landscape) {
+  img {
+    display: block;
+    margin: 0 auto;
+    width: 55%;
+    pointer-events: none;
+  }
+}

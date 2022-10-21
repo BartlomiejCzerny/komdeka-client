@@ -1,0 +1,67 @@
+.success-error-card {
+  display: block;
+  margin: 0 auto;
+  width: 550px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 599.5px) and (orientation: portrait) {
+  .success-card {
+    margin-bottom: 30px !important;
+  }
+
+  .success-error-card {
+    width: 300px;
+  }
+
+  .error-card {
+    margin-bottom: 30px !important;
+  }
+}
+
+@media (max-width: 360px) and (orientation: portrait) {
+  .success-card {
+    margin-bottom: 30px !important;
+  }
+
+  .success-error-card {
+    width: 220px;
+  }
+
+  .error-card {
+    margin-bottom: 30px !important;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 810px) and (orientation: portrait) {
+  .success-card {
+    margin-bottom: 30px !important;
+  }
+
+  .success-error-card {
+    width: 520px;
+  }
+
+  .error-card {
+    margin-bottom: 30px !important;
+  }
+}
+
+mat-icon {
+  display: block;
+  margin: 0 auto;
+  font-size: 100px;
+  height: 100px;
+  width: 100px;
+}
+
+h1 {
+  text-align: center;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 30px;
+}

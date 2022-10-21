@@ -1,0 +1,49 @@
+.tool-form {
+  min-width: 300px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.input-container {
+  display: flex;
+}
+
+.input-field {
+  flex: 1;
+}
+
+.input-space {
+  margin-left: 50px;
+}
+
+.cancel-button {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 599.5px) and (orientation: portrait) {
+  // mat-form-field {
+  //   margin-bottom: 15px;
+  // }
+
+  // .error-card {
+  //   margin-bottom: 30px !important;
+  // }
+  .input-container {
+    display: block;
+  }
+
+  .input-space {
+    margin-left: 0;
+  }
+
+  .cancel-button {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+}

@@ -1,0 +1,93 @@
+@use '@angular/material' as mat;
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$komdeka-client-primary-light: mat.define-palette(mat.$blue-palette, 500);
+$komdeka-client-accent-light: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$komdeka-client-warn-light: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$komdeka-client-theme-light: mat.define-light-theme((
+  color: (
+    primary: $komdeka-client-primary-light,
+    accent: $komdeka-client-accent-light,
+    warn: $komdeka-client-warn-light,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($komdeka-client-theme-light);
+
+.light-mode {
+  @include mat.all-component-themes($komdeka-client-theme-light);
+}
+
+// Dark theme
+$komdeka-client-primary-dark: mat.define-palette(mat.$gray-palette, 900);
+$komdeka-client-accent-dark: mat.define-palette(mat.$amber-palette, A700);
+$komdeka-client-warn-dark: mat.define-palette(mat.$red-palette, 700);
+
+$komdeka-client-theme-dark: mat.define-dark-theme((
+  color: (
+    primary: $komdeka-client-primary-dark,
+    accent: $komdeka-client-accent-dark,
+    warn: $komdeka-client-warn-dark,
+  )
+));
+
+.dark-mode {
+  @include mat.all-component-themes($komdeka-client-theme-dark);
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+// Test
+.field-width {
+  width: 100%;
+}
+
+.img-space {
+  padding-right: 5%;
+}
+
+.mat-dialog-container {
+  margin: 0;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+.password-visibility {
+  cursor: pointer;
+}
+
+.success-card {
+  background-color: #22a109 !important;
+  color: #fffcfc !important;
+  margin-bottom: 15px;
+}
+
+.error-card {
+  background-color: #f44336 !important;
+  color: #fffcfc !important;
+  margin-bottom: 15px;
+}

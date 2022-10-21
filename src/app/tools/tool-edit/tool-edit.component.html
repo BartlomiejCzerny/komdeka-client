@@ -1,0 +1,102 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Edytowanie narzędzia</mat-card-title>
+    <mat-card-subtitle>Zmodyfikuj dane dotyczące narzędzi.</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="tool-form" [formGroup]="toolForm" autocomplete="off" novalidate (ngSubmit)="updateTool(toolForm.value)">
+      <div class="input-container">
+        <div class="input-field">
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Numer identyfikacyjny</mat-label>
+            <input matInput type="text" formControlName="idNumber" id="idNumber">
+            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
+            <mat-error *ngIf="hasError('idNumber', 'required')">Name is required</mat-error>
+            <mat-error *ngIf="hasError('idNumber', 'maxlength')">You have more than 60 characters</mat-error> -->
+          </mat-form-field>
+        </div>
+        <div class="input-field input-space">
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Numer fabryczny</mat-label>
+            <input matInput type="text" formControlName="serialNumber" id="serialNumber">
+            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
+            <mat-error *ngIf="hasError('serialNumber', 'required')">Name is required</mat-error>
+            <mat-error *ngIf="hasError('serialNumber', 'maxlength')">You have more than 60 characters</mat-error> -->
+          </mat-form-field>
+        </div>
+        <div class="input-field input-space">
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Data ostatniej obsługi metrologicznej</mat-label>
+            <input matInput type="text" formControlName="lastMetrologicalService" id="lastMetrologicalService">
+            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
+            <mat-error *ngIf="hasError('lastMetrologicalService', 'required')">Name is required</mat-error>
+            <mat-error *ngIf="hasError('lastMetrologicalService', 'maxlength')">You have more than 60 characters</mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="input-container">
+        <div class="input-field">
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Nazwa</mat-label>
+            <input matInput type="text" formControlName="name" id="name">
+            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
+            <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+            <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error> -->
+          </mat-form-field>
+        </div>
+        <div class="input-field input-space">
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Czy podlega obsłudze metrologicznej</mat-label>
+            <input matInput type="text" formControlName="isMetrologicalService" id="isMetrologicalService">
+            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
+            <mat-error *ngIf="hasError('isMetrologicalService', 'required')">Name is required</mat-error>
+            <mat-error *ngIf="hasError('isMetrologicalService', 'maxlength')">You have more than 60 characters</mat-error> -->
+          </mat-form-field>
+        </div>
+        <div class="input-field input-space">
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Ważny do</mat-label>
+            <input matInput type="text" formControlName="validUntil" id="validUntil">
+            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
+            <mat-error *ngIf="hasError('validUntil', 'required')">Name is required</mat-error>
+            <mat-error *ngIf="hasError('validUntil', 'maxlength')">You have more than 60 characters</mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="input-container">
+        <div class="input-field">
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Typ</mat-label>
+            <input matInput type="text" formControlName="type" id="type">
+            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
+            <mat-error *ngIf="hasError('type', 'required')">Name is required</mat-error>
+            <mat-error *ngIf="hasError('type', 'maxlength')">You have more than 60 characters</mat-error> -->
+          </mat-form-field>
+        </div>
+        <div class="input-field input-space">
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Interwał obsługi metrologicznej</mat-label>
+            <input matInput type="text" formControlName="metrologicalServiceInterval" id="metrologicalServiceInterval">
+            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
+            <mat-error *ngIf="hasError('metrologicalServiceInterval', 'required')">Name is required</mat-error>
+            <mat-error *ngIf="hasError('metrologicalServiceInterval', 'maxlength')">You have more than 60 characters</mat-error> -->
+          </mat-form-field>
+        </div>
+        <div class="input-field input-space">
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Status</mat-label>
+            <input matInput type="text" formControlName="status" id="status">
+            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
+            <mat-error *ngIf="hasError('status', 'required')">Name is required</mat-error>
+            <mat-error *ngIf="hasError('status', 'maxlength')">You have more than 60 characters</mat-error> -->
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="save-tool-button" mat-raised-button color="primary" type="submit" [disabled]="!toolForm.valid">Zapisz</button>
+        <button class="cancel-button" mat-raised-button color="accent" [routerLink]="['/tools/tools-list']" cdkFocusInitial>Anuluj</button>
+        <button mat-raised-button color="warn" (click)="resetToolForm()">Wyczyść</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
