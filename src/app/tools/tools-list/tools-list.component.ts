@@ -30,7 +30,7 @@ export class ToolsListComponent implements OnInit {
     'deleting'
   ];
 
-  public toolsData = new MatTableDataSource<Tool>();
+  toolsData = new MatTableDataSource<Tool>();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -41,7 +41,7 @@ export class ToolsListComponent implements OnInit {
     this.getTools();
   }
 
-  public getTools() {
+  getTools() {
     this.toolService.getTool('api/tools')
     .subscribe(res => {
       this.toolsData.data = res as unknown as Tool[];
@@ -62,17 +62,17 @@ export class ToolsListComponent implements OnInit {
     this.applyFilter();
   }
 
-  public redirectToDetails(id: any) {
+  redirectToDetails(id: any) {
     let url = `/tools/tool-details/${id}`;
     this.router.navigate([url]);
   }
 
-  public redirectToEdit(id: any) {
+  redirectToEdit(id: any) {
     let url = `/tools/tool-edit/${id}`;
     this.router.navigate([url]);
   }
 
-  public redirectToDeleting(id: any) {
+  redirectToDeleting(id: any) {
     let url = `/tools/tool-delete/${id}`;
     this.router.navigate([url]);
   }

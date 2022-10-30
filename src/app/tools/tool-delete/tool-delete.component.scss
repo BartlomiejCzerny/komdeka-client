@@ -1,0 +1,80 @@
+.tool-delete-card {
+  min-width: 150px;
+  max-width: 550px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 25px !important;
+  margin-bottom: 25px !important;
+  padding: 25px 5px 25px 5px;
+}
+
+.tool-delete-header {
+  margin-left: 10px;
+}
+
+.tool-form {
+  min-width: 200px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.tool-delete-card > mat-card-content > .tool-form > .input-container {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.input-container {
+  display: flex;
+}
+
+.input-field {
+  flex: 1;
+}
+
+.input-space {
+  margin-left: 20px;
+}
+
+.cancel-button {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.tool-mobile-form {
+  display: none;
+}
+
+@media (max-width: 700px) and (orientation: portrait) {
+  section {
+    margin-bottom: 15px;
+  }
+
+  .tool-mobile-form {
+    display: block;
+    min-width: 200px;
+    max-width: 1000px;
+    width: 100%;
+  }
+
+  .tool-delete-card > mat-card-content > .tool-mobile-form > .input-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .input-container {
+    display: block;
+  }
+
+  .tool-form {
+    display: none;
+  }
+}
