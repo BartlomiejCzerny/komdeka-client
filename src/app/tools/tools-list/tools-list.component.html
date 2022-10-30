@@ -33,7 +33,7 @@
           <td mat-cell *matCellDef="let element"> {{element.serialNumber}} </td>
         </ng-container>
         <ng-container matColumnDef="isMetrologicalService">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Czy podlega obsłudze metrologicznej</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Czy podlega obsłudze metrologicznej?</th>
           <td mat-cell *matCellDef="let element"> {{element.isMetrologicalService === true ? 'Tak' : 'Nie'}} </td>
         </ng-container>
         <ng-container matColumnDef="metrologicalServiceInterval" style="display: none;">
