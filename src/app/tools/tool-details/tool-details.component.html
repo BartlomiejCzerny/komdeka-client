@@ -1,1 +1,120 @@
-<p>tool-details works!</p>
+<mat-card>
+  <mat-card class="tool-details-card">
+    <mat-card-header class="tool-details-header">
+      <mat-card-title>Szczegóły narzędzia</mat-card-title>
+      <mat-card-subtitle>Zapoznaj się ze szczegółami tego narzędzia.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="tool-form">
+        <div class="input-container">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Numer identyfikacyjny</mat-label>
+              <input matInput disabled [value]="tool.idNumber">
+            </mat-form-field>
+          </div>
+          <div class="input-field input-space">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Interwał obsługi metrologicznej</mat-label>
+              <input matInput disabled [value]="tool.metrologicalServiceInterval">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Nazwa</mat-label>
+              <input matInput disabled [value]="tool.name">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Typ</mat-label>
+              <input matInput disabled [value]="tool.type">
+            </mat-form-field>
+          </div>
+          <div class="input-field input-space">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Data ostatniej obsługi metrologicznej</mat-label>
+              <input matInput disabled [value]="tool.lastMetrologicalService | date:'dd.MM.yyyy'">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Numer fabryczny</mat-label>
+              <input matInput disabled [value]="tool.serialNumber">
+            </mat-form-field>
+          </div>
+          <div class="input-field input-space">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Ważny do</mat-label>
+              <input matInput disabled [value]="tool.validUntil | date:'dd.MM.yyyy'">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input-field">
+            <section class="field-width">
+              <mat-checkbox disabled [checked]="tool.isMetrologicalService === true ? true : false">Czy podlega obsłudze<br>metrologicznej?</mat-checkbox>
+            </section>
+          </div>
+          <div class="input-field input-space">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Status</mat-label>
+              <input matInput disabled [value]="tool.status">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="buttons">
+          <button mat-raised-button color="primary" (click)="redirectToToolsList()">Wróć do listy narzędzi</button>
+        </div>
+      </form>
+      <form class="tool-mobile-form">
+        <div class="input-container">
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Numer identyfikacyjny</mat-label>
+            <input matInput disabled [value]="tool.idNumber">
+          </mat-form-field>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Nazwa</mat-label>
+            <input matInput disabled [value]="tool.name">
+          </mat-form-field>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Typ</mat-label>
+            <input matInput disabled [value]="tool.type">
+          </mat-form-field>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Numer fabryczny</mat-label>
+            <input matInput disabled [value]="tool.serialNumber">
+          </mat-form-field>
+          <section class="field-width">
+            <mat-checkbox disabled [checked]="tool.isMetrologicalService === true ? true : false">Czy podlega obsłudze<br>metrologicznej?</mat-checkbox>
+          </section>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Interwał obsługi metrologicznej</mat-label>
+            <input matInput disabled [value]="tool.metrologicalServiceInterval">
+          </mat-form-field>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Data ostatniej obsługi metrologicznej</mat-label>
+            <input matInput disabled [value]="tool.lastMetrologicalService | date:'dd.MM.yyyy'">
+          </mat-form-field>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Ważny do</mat-label>
+            <input matInput disabled [value]="tool.validUntil | date:'dd.MM.yyyy'">
+          </mat-form-field>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Status</mat-label>
+            <input matInput disabled [value]="tool.status">
+          </mat-form-field>
+        </div>
+        <div class="buttons">
+          <button mat-raised-button color="primary" (click)="redirectToToolsList()">Wróć do listy narzędzi</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</mat-card>
