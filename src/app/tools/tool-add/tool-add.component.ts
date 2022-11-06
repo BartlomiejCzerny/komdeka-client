@@ -12,22 +12,41 @@ import { ToolService } from '../../shared/services/tool.service';
 })
 export class ToolAddComponent implements OnInit {
   toolForm: FormGroup;
-  isMetrologicalService: boolean;
+
+  types: Tool[] = [
+    { type: 'Narzędzie mechaniczne' },
+    { type: 'Narzędzie pomiarowe' },
+    { type: 'Inne' }
+  ]
+
+  isMetrologicalService: Tool[] = [
+    { isMetrologicalService: true, isMetrologicalServiceOption: 'Tak' },
+    { isMetrologicalService: false, isMetrologicalServiceOption: 'Nie' }
+  ]
+
+  statuses: Tool[] = [
+    { status: 'W użyciu' },
+    { status: 'Wysłany do obsługi' },
+    { status: 'Wycofany z użytkowania' }
+  ]
+
+  errorMessage = 'Narzędzie o podanym numerze identyfikacyjnym istnieje.';
+  showError: boolean;
+  hasMetrologicalService: boolean;
 
   constructor(private toolService: ToolService, public location: Location, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.toolForm = new FormGroup({
-      idNumber: new FormControl('', [Validators.required, Validators.maxLength(255)]),
+      idNumber: new FormControl('', [Validators.required, Validators.maxLength(15)]),
       name: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      type: new FormControl('', [Validators.required, Validators.maxLength(255)]),
+      type: new FormControl('', [Validators.required]),
       serialNumber: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      isMetrologicalService: new FormControl(false),
-      // periodValidity: new FormControl('', [Validators.required]),
+      isMetrologicalService: new FormControl('', [Validators.required]),
       metrologicalServiceInterval: new FormControl(''),
-      lastMetrologicalService: new FormControl(''),
-      validUntil: new FormControl(''),
-      status: new FormControl('', [Validators.required, Validators.maxLength(255)])
+      lastMetrologicalService: new FormControl(),
+      validUntil: new FormControl(),
+      status: new FormControl('', [Validators.required])
     });
   }
 
@@ -48,8 +67,8 @@ export class ToolAddComponent implements OnInit {
       type: toolFormValue.type,
       serialNumber: toolFormValue.serialNumber,
       isMetrologicalService: toolFormValue.isMetrologicalService,
-      // periodValidity: toolFormValue.periodValidity,
-      metrologicalServiceInterval: toolFormValue.metrologicalServiceInterval,
+      metrologicalServiceInterval: ((toolFormValue.lastMetrologicalService) != null && (toolFormValue.validUntil) != null)
+                                  ? (toolFormValue.validUntil.getFullYear() - toolFormValue.lastMetrologicalService.getFullYear()).toString() + ' lat(a)' : '',
       lastMetrologicalService: toolFormValue.lastMetrologicalService,
       validUntil: toolFormValue.validUntil,
       status: toolFormValue.status
@@ -57,19 +76,18 @@ export class ToolAddComponent implements OnInit {
 
     const apiUrl = 'api/tools';
     this.toolService.postTool(apiUrl, tool)
-      .subscribe(res => {
-        //this is temporary, until we create our dialogs
-        // this.location.back();
-        // this.matDialogRef.close();
-        // this.router.navigate(['/tools/tools-list']);
+      .subscribe(() => {
         this.location.back();
         this.openToolAddSnackbar();
       },
-      (error => {
-        //temporary as well
-        // this.location.back();
+      (() => {
+        this.showError = true;
       })
     );
+  }
+
+  redirectToToolsList() {
+    this.location.back();
   }
 
   resetToolForm() {
