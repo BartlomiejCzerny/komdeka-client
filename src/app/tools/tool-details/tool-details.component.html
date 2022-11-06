@@ -10,7 +10,7 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Numer identyfikacyjny</mat-label>
-              <input matInput disabled [value]="tool.idNumber">
+              <input matInput [readonly]="true" [value]="tool.idNumber">
             </mat-form-field>
           </div>
           <div class="input-field input-space">

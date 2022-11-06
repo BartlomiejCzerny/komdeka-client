@@ -1,7 +1,26 @@
+.tool-add-card {
+  min-width: 150px;
+  max-width: 550px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 25px !important;
+  margin-bottom: 25px !important;
+  padding: 25px 5px 25px 5px;
+}
+
+.tool-add-header {
+  margin-left: 10px;
+}
+
 .tool-form {
-  min-width: 300px;
+  min-width: 200px;
   max-width: 1000px;
   width: 100%;
+}
+
+.tool-add-card > mat-card-content > .tool-form > .input-container {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .input-container {
@@ -13,7 +32,7 @@
 }
 
 .input-space {
-  margin-left: 50px;
+  margin-left: 20px;
 }
 
 .cancel-button {
@@ -21,29 +40,46 @@
   margin-right: 10px;
 }
 
+button {
+  margin-top: 20px;
+}
+
 .buttons {
   display: flex;
   justify-content: center;
 }
 
-@media (max-width: 599.5px) and (orientation: portrait) {
-  // mat-form-field {
-  //   margin-bottom: 15px;
-  // }
+.tool-mobile-form {
+  display: none;
+}
 
-  // .error-card {
-  //   margin-bottom: 30px !important;
-  // }
+@media (max-width: 700px) and (orientation: portrait) {
+  .tool-mobile-form {
+    display: block;
+    min-width: 200px;
+    max-width: 1000px;
+    width: 100%;
+  }
+
+  .tool-add-card > mat-card-content > .tool-mobile-form > .input-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .input-container {
     display: block;
   }
 
-  .input-space {
-    margin-left: 0;
+  .tool-form {
+    display: none;
   }
 
   .cancel-button {
     margin-left: 8px;
     margin-right: 8px;
+  }
+
+  button {
+    margin-top: 10px;
   }
 }
