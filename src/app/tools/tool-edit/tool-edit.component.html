@@ -1,102 +1,146 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Edytowanie narzędzia</mat-card-title>
-    <mat-card-subtitle>Zmodyfikuj dane dotyczące narzędzi.</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <form class="tool-form" [formGroup]="toolForm" autocomplete="off" novalidate (ngSubmit)="updateTool(toolForm.value)">
-      <div class="input-container">
-        <div class="input-field">
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Numer identyfikacyjny</mat-label>
-            <input matInput type="text" formControlName="idNumber" id="idNumber">
-            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
-            <mat-error *ngIf="hasError('idNumber', 'required')">Name is required</mat-error>
-            <mat-error *ngIf="hasError('idNumber', 'maxlength')">You have more than 60 characters</mat-error> -->
-          </mat-form-field>
+  <mat-card class="tool-edit-card">
+    <mat-card-header class="tool-edit-header">
+      <mat-card-title>Edytowanie narzędzia</mat-card-title>
+      <mat-card-subtitle>Zaktualizuj dane tego narzędzia.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="tool-form" [formGroup]="toolForm" autocomplete="off" novalidate (ngSubmit)="updateTool(toolForm.value)">
+        <div class="input-container">
+          <input type="hidden" formControlName="idNumber" id="idNumber">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Numer fabryczny</mat-label>
+              <input matInput type="text" formControlName="serialNumber" id="serialNumber" tabindex="1">
+              <mat-error *ngIf="toolForm.controls['serialNumber'].errors?.required">Nie wprowadzono numeru fabrycznego.</mat-error>
+              <mat-error *ngIf="toolForm.controls['serialNumber'].errors?.maxlength">Nr fabryczny może zawierać maks. 255 znaków.</mat-error>
+            </mat-form-field>
+          </div>
         </div>
-        <div class="input-field input-space">
+        <div class="input-container">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Nazwa</mat-label>
+              <input matInput type="text" formControlName="name" id="name" tabindex="2">
+              <mat-error *ngIf="toolForm.controls['name'].errors?.required">Nie wprowadzono nazwy.</mat-error>
+              <mat-error *ngIf="toolForm.controls['name'].errors?.maxlength">Nazwa może zawierać maksymalnie 255 znaków.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Typ</mat-label>
+              <mat-select formControlName="type" id="type" name="type" tabindex="3">
+                <mat-option *ngFor="let type of types" [value]="type.type">
+                  {{type.type}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="toolForm.controls['type'].errors?.required">Nie wybrano typu.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="input-field input-space">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Czy podlega obsłudze metrologicznej?</mat-label>
+              <mat-select formControlName="isMetrologicalService" id="isMetrologicalService" name="isMetrologicalService" tabindex="4" [(ngModel)]="hasMetrologicalService">
+                <mat-option *ngFor="let isMetrologicalService of isMetrologicalService" [value]="isMetrologicalService.isMetrologicalService">
+                  {{isMetrologicalService.isMetrologicalServiceOption}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="toolForm.controls['isMetrologicalService'].errors?.required">Nie wybrano, czy podlega obsł. metrologicznej.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Okres ważności</mat-label>
+              <mat-date-range-input [formGroup]="toolForm" [rangePicker]="picker" [disabled]="!hasMetrologicalService" tabindex="5">
+                <input matStartDate formControlName="lastMetrologicalService" placeholder="Data ostatniej obsługi metrologicznej">
+                <input matEndDate formControlName="validUntil" placeholder="Ważny do">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+              <mat-error *ngIf="toolForm.controls.lastMetrologicalService.hasError || toolForm.controls.validUntil.hasError">Wybrano nieprawidłowy okres ważności.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="input-field input-space">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status" id="status" name="status" tabindex="6">
+                <mat-option *ngFor="let status of statuses" [value]="status.status">
+                  {{status.status}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="toolForm.controls['status'].errors?.required">Nie wybrano statusu.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="save-tool-button" mat-raised-button color="primary" type="submit" [disabled]="!toolForm.valid" tabindex="7">Zapisz</button>
+          <button class="cancel-button" mat-raised-button color="accent" tabindex="8" (click)="redirectToToolsList()">Anuluj</button>
+          <button mat-raised-button color="warn" (click)="resetToolForm()" tabindex="9">Wyczyść</button>
+        </div>
+      </form>
+      <form class="tool-mobile-form" [formGroup]="toolForm" autocomplete="off" novalidate (ngSubmit)="updateTool(toolForm.value)">
+        <div class="input-container">
+          <input type="hidden" formControlName="idNumber" id="idNumber">
           <mat-form-field class="field-width" appearance="fill">
             <mat-label>Numer fabryczny</mat-label>
-            <input matInput type="text" formControlName="serialNumber" id="serialNumber">
-            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
-            <mat-error *ngIf="hasError('serialNumber', 'required')">Name is required</mat-error>
-            <mat-error *ngIf="hasError('serialNumber', 'maxlength')">You have more than 60 characters</mat-error> -->
+            <input matInput type="text" formControlName="serialNumber" id="serialNumber" tabindex="2">
+            <mat-error *ngIf="toolForm.controls['serialNumber'].errors?.required">Nie wprowadzono numeru fabrycznego.</mat-error>
+            <mat-error *ngIf="toolForm.controls['serialNumber'].errors?.maxlength">Nr fabryczny może zawierać maks. 255 znaków.</mat-error>
           </mat-form-field>
-        </div>
-        <div class="input-field input-space">
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Data ostatniej obsługi metrologicznej</mat-label>
-            <input matInput type="text" formControlName="lastMetrologicalService" id="lastMetrologicalService">
-            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
-            <mat-error *ngIf="hasError('lastMetrologicalService', 'required')">Name is required</mat-error>
-            <mat-error *ngIf="hasError('lastMetrologicalService', 'maxlength')">You have more than 60 characters</mat-error> -->
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="input-container">
-        <div class="input-field">
           <mat-form-field class="field-width" appearance="fill">
             <mat-label>Nazwa</mat-label>
-            <input matInput type="text" formControlName="name" id="name">
-            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
-            <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
-            <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error> -->
+            <input matInput type="text" formControlName="name" id="name" tabindex="3">
+            <mat-error *ngIf="toolForm.controls['name'].errors?.required">Nie wprowadzono nazwy.</mat-error>
+            <mat-error *ngIf="toolForm.controls['name'].errors?.maxlength">Nazwa może zawierać maksymalnie 255 znaków.</mat-error>
           </mat-form-field>
-        </div>
-        <div class="input-field input-space">
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Czy podlega obsłudze metrologicznej</mat-label>
-            <input matInput type="text" formControlName="isMetrologicalService" id="isMetrologicalService">
-            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
-            <mat-error *ngIf="hasError('isMetrologicalService', 'required')">Name is required</mat-error>
-            <mat-error *ngIf="hasError('isMetrologicalService', 'maxlength')">You have more than 60 characters</mat-error> -->
-          </mat-form-field>
-        </div>
-        <div class="input-field input-space">
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Ważny do</mat-label>
-            <input matInput type="text" formControlName="validUntil" id="validUntil">
-            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
-            <mat-error *ngIf="hasError('validUntil', 'required')">Name is required</mat-error>
-            <mat-error *ngIf="hasError('validUntil', 'maxlength')">You have more than 60 characters</mat-error> -->
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="input-container">
-        <div class="input-field">
           <mat-form-field class="field-width" appearance="fill">
             <mat-label>Typ</mat-label>
-            <input matInput type="text" formControlName="type" id="type">
-            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
-            <mat-error *ngIf="hasError('type', 'required')">Name is required</mat-error>
-            <mat-error *ngIf="hasError('type', 'maxlength')">You have more than 60 characters</mat-error> -->
+            <mat-select formControlName="type" id="type" name="type" tabindex="4">
+              <mat-option *ngFor="let type of types" [value]="type.type">
+                {{type.type}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="toolForm.controls['type'].errors?.required">Nie wybrano typu.</mat-error>
           </mat-form-field>
-        </div>
-        <div class="input-field input-space">
           <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Interwał obsługi metrologicznej</mat-label>
-            <input matInput type="text" formControlName="metrologicalServiceInterval" id="metrologicalServiceInterval">
-            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
-            <mat-error *ngIf="hasError('metrologicalServiceInterval', 'required')">Name is required</mat-error>
-            <mat-error *ngIf="hasError('metrologicalServiceInterval', 'maxlength')">You have more than 60 characters</mat-error> -->
+            <mat-label>Czy podlega obsłudze metrologicznej?</mat-label>
+            <mat-select formControlName="isMetrologicalService" id="isMetrologicalService" name="isMetrologicalService" tabindex="5" [(ngModel)]="hasMetrologicalService">
+              <mat-option *ngFor="let isMetrologicalService of isMetrologicalService" [value]="isMetrologicalService.isMetrologicalService">
+                {{isMetrologicalService.isMetrologicalServiceOption}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="toolForm.controls['isMetrologicalService'].errors?.required">Nie wybrano, czy podlega obsł. metrologicznej.</mat-error>
           </mat-form-field>
-        </div>
-        <div class="input-field input-space">
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Okres ważności</mat-label>
+            <mat-date-range-input [formGroup]="toolForm" [rangePicker]="mobilePicker" [disabled]="!hasMetrologicalService" tabindex="6">
+              <input matStartDate formControlName="lastMetrologicalService" placeholder="Data ostatniej obsługi metrologicznej">
+              <input matEndDate formControlName="validUntil" placeholder="Ważny do">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="mobilePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #mobilePicker></mat-date-range-picker>
+            <mat-error *ngIf="toolForm.controls.lastMetrologicalService.hasError || toolForm.controls.validUntil.hasError">Wybrano nieprawidłowy okres ważności.</mat-error>
+          </mat-form-field>
           <mat-form-field class="field-width" appearance="fill">
             <mat-label>Status</mat-label>
-            <input matInput type="text" formControlName="status" id="status">
-            <!-- <mat-hint>Not more then 60 characters long.</mat-hint>
-            <mat-error *ngIf="hasError('status', 'required')">Name is required</mat-error>
-            <mat-error *ngIf="hasError('status', 'maxlength')">You have more than 60 characters</mat-error> -->
+            <mat-select formControlName="status" id="status" name="status" tabindex="7">
+              <mat-option *ngFor="let status of statuses" [value]="status.status">
+                {{status.status}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="toolForm.controls['status'].errors?.required">Nie wybrano statusu.</mat-error>
           </mat-form-field>
         </div>
-      </div>
-      <div class="buttons">
-        <button class="save-tool-button" mat-raised-button color="primary" type="submit" [disabled]="!toolForm.valid">Zapisz</button>
-        <button class="cancel-button" mat-raised-button color="accent" [routerLink]="['/tools/tools-list']">Anuluj</button>
-        <button mat-raised-button color="warn" (click)="resetToolForm()">Wyczyść</button>
-      </div>
-    </form>
-  </mat-card-content>
+        <div class="buttons">
+          <button class="save-tool-button" mat-raised-button color="primary" type="submit" [disabled]="!toolForm.valid">Zapisz</button>
+          <button class="cancel-button" mat-raised-button color="accent" [routerLink]="['/tools/tools-list']">Anuluj</button>
+          <button mat-raised-button color="warn" (click)="resetToolForm()">Wyczyść</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </mat-card>

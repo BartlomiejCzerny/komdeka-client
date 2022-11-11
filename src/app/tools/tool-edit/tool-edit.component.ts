@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RepositoryService } from './../../shared/services/repository.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
@@ -13,29 +13,50 @@ import { ToolService } from '../../shared/services/tool.service';
   styleUrls: ['./tool-edit.component.scss']
 })
 export class ToolEditComponent implements OnInit {
+  toolForm: FormGroup;
+  tool: Tool;
 
-  public toolForm: FormGroup;
-  public tool: Tool;
+  types: Tool[] = [
+    { type: 'Narzędzie mechaniczne' },
+    { type: 'Narzędzie pomiarowe' },
+    { type: 'Inne' }
+  ]
+
+  isMetrologicalService: Tool[] = [
+    { isMetrologicalService: true, isMetrologicalServiceOption: 'Tak' },
+    { isMetrologicalService: false, isMetrologicalServiceOption: 'Nie' }
+  ]
+
+  statuses: Tool[] = [
+    { status: 'W użyciu' },
+    { status: 'Wysłany do obsługi' },
+    { status: 'Wycofany z użytkowania' }
+  ]
+
+  errorMessage = 'Narzędzie o podanym numerze identyfikacyjnym istnieje.';
+  showError: boolean;
+  hasMetrologicalService: boolean;
 
   constructor(
     private repository: RepositoryService,
     private toolService: ToolService,
     private activeRoute: ActivatedRoute,
     private location: Location,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.toolForm = new FormGroup({
-      idNumber: new FormControl('', [Validators.required, Validators.maxLength(255)]),
+      idNumber: new FormControl('', [Validators.required, Validators.maxLength(15)]),
       name: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      type: new FormControl('', [Validators.required, Validators.maxLength(255)]),
+      type: new FormControl('', [Validators.required]),
       serialNumber: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      isMetrologicalService: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      metrologicalServiceInterval: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      lastMetrologicalService: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      validUntil: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      status: new FormControl('', [Validators.required, Validators.maxLength(255)])
+      isMetrologicalService: new FormControl('', [Validators.required]),
+      metrologicalServiceInterval: new FormControl(''),
+      lastMetrologicalService: new FormControl(),
+      validUntil: new FormControl(),
+      status: new FormControl('', [Validators.required])
     });
 
     this.getToolById();
@@ -47,10 +68,8 @@ export class ToolEditComponent implements OnInit {
 
   private getToolById() {
     let toolId = this.activeRoute.snapshot.params['id'];
-
     let toolByIdUrl = `api/tools/${toolId}`;
-
-    this.repository.getData(toolByIdUrl)
+    this.toolService.getTool(toolByIdUrl)
       .subscribe(res => {
         this.tool = res as Tool;
         this.toolForm.patchValue(this.tool);
@@ -73,30 +92,36 @@ export class ToolEditComponent implements OnInit {
       type: toolFormValue.type,
       serialNumber: toolFormValue.serialNumber,
       isMetrologicalService: toolFormValue.isMetrologicalService,
-      metrologicalServiceInterval: toolFormValue.metrologicalServiceInterval,
+      metrologicalServiceInterval: ((toolFormValue.lastMetrologicalService) != null && (toolFormValue.validUntil) != null)
+                                  ? (new Date (toolFormValue.validUntil).getFullYear() - new Date (toolFormValue.lastMetrologicalService).getFullYear()).toString() + ' lat(a)' : '',
       lastMetrologicalService: toolFormValue.lastMetrologicalService,
       validUntil: toolFormValue.validUntil,
       status: toolFormValue.status
-    }
+    };
 
     let apiUrl = `api/tools/${this.tool.idNumber}`;
     this.toolService.putTool(apiUrl, tool)
-      .subscribe(res => {
-        // this.location.back();
+      .subscribe(() => {
+        this.redirectToToolsList();
+        this.openToolUpdateSnackbar();
       },
-      (error => {
-
+      (() => {
+        // console.log('ID nie można zmienić');
         // this.errorService.handleError(error);
       })
     )
+  }
+
+  redirectToToolsList() {
+    this.router.navigate(['/tools/tools-list']);
   }
 
   resetToolForm() {
     this.toolForm.reset();
   }
 
-  openToolAddSnackbar() {
-    this.snackBar.open('Narzędzie zostało dodane pomyślnie.', 'OK', {
+  openToolUpdateSnackbar() {
+    this.snackBar.open('Dane tego narzędzia zostały zaktualizowane pomyślnie.', 'OK', {
       duration: 5000
     });
   }
