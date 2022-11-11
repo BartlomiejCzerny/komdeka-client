@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { ToolService } from './../../shared/services/tool.service';
 import { Tool } from './../../interfaces/tool/tool.interface';
@@ -20,7 +20,8 @@ export class ToolDeleteComponent implements OnInit {
     private errorHandlerService: ErrorHandlerService,
     private location: Location,
     private activeRoute: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -51,7 +52,7 @@ export class ToolDeleteComponent implements OnInit {
   }
 
   redirectToToolsList() {
-    this.location.back();
+    this.router.navigate(['/tools/tools-list']);
   }
 
   openToolDeleteSnackbar() {

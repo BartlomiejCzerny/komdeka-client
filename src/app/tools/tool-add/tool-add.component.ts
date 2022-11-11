@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Tool } from '../../interfaces/tool/tool.interface';
 import { ToolService } from '../../shared/services/tool.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tool-add',
@@ -34,7 +35,7 @@ export class ToolAddComponent implements OnInit {
   showError: boolean;
   hasMetrologicalService: boolean;
 
-  constructor(private toolService: ToolService, public location: Location, private snackBar: MatSnackBar) { }
+  constructor(private toolService: ToolService, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.toolForm = new FormGroup({
@@ -77,7 +78,7 @@ export class ToolAddComponent implements OnInit {
     const apiUrl = 'api/tools';
     this.toolService.postTool(apiUrl, tool)
       .subscribe(() => {
-        this.location.back();
+        this.redirectToToolsList();
         this.openToolAddSnackbar();
       },
       (() => {
@@ -87,7 +88,7 @@ export class ToolAddComponent implements OnInit {
   }
 
   redirectToToolsList() {
-    this.location.back();
+    this.router.navigate(['/tools/tools-list']);
   }
 
   resetToolForm() {

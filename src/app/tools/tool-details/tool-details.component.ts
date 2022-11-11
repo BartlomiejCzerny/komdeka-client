@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { ToolService } from './../../shared/services/tool.service';
 import { Tool } from './../../interfaces/tool/tool.interface';
@@ -18,7 +18,8 @@ export class ToolDetailsComponent implements OnInit {
     private toolService: ToolService,
     private errorHandlerService: ErrorHandlerService,
     private location: Location,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +37,6 @@ export class ToolDetailsComponent implements OnInit {
   }
 
   redirectToToolsList() {
-    this.location.back();
+    this.router.navigate(['/tools/tools-list']);
   }
 }
