@@ -4,7 +4,6 @@ import { ErrorHandlerService } from './../../shared/services/error-handler.servi
 import { ToolService } from './../../shared/services/tool.service';
 import { Tool } from './../../interfaces/tool/tool.interface';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-tool-details',
@@ -17,7 +16,6 @@ export class ToolDetailsComponent implements OnInit {
   constructor(
     private toolService: ToolService,
     private errorHandlerService: ErrorHandlerService,
-    private location: Location,
     private activeRoute: ActivatedRoute,
     private router: Router
   ) { }

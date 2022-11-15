@@ -5,7 +5,7 @@
     Twoje konto użytkownika zostało aktywowane.
   </mat-card>
   <mat-card *ngIf="showError" class="error-card success-error-card">{{ errorMessage }}</mat-card>
-  <button *ngIf="showSuccess" mat-raised-button color="primary" [routerLink]="['/authentication/login']">
+  <button *ngIf="showSuccess" mat-raised-button color="primary" tabindex="1" (click)="redirectToLogin()">
     Zaloguj
   </button>
 </mat-card>

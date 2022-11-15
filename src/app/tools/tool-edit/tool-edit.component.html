@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card class="tool-edit-card">
     <mat-card-header class="tool-edit-header">
-      <mat-card-title>Edytowanie narzędzia</mat-card-title>
+      <mat-card-title>Edycja narzędzia</mat-card-title>
       <mat-card-subtitle>Zaktualizuj dane tego narzędzia.</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
@@ -55,7 +55,7 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Okres ważności</mat-label>
-              <mat-date-range-input [formGroup]="toolForm" [rangePicker]="picker" [disabled]="!hasMetrologicalService" tabindex="5">
+              <mat-date-range-input tabindex="5" [formGroup]="toolForm" [rangePicker]="picker" [disabled]="!hasMetrologicalService">
                 <input matStartDate formControlName="lastMetrologicalService" placeholder="Data ostatniej obsługi metrologicznej">
                 <input matEndDate formControlName="validUntil" placeholder="Ważny do">
               </mat-date-range-input>
@@ -77,9 +77,9 @@
           </div>
         </div>
         <div class="buttons">
-          <button class="save-tool-button" mat-raised-button color="primary" type="submit" [disabled]="!toolForm.valid" tabindex="7">Zapisz</button>
+          <button class="save-tool-button" mat-raised-button color="primary" type="submit" tabindex="7" [disabled]="!toolForm.valid">Zapisz</button>
           <button class="cancel-button" mat-raised-button color="accent" tabindex="8" (click)="redirectToToolsList()">Anuluj</button>
-          <button mat-raised-button color="warn" (click)="resetToolForm()" tabindex="9">Wyczyść</button>
+          <button mat-raised-button color="warn" tabindex="9" (click)="resetToolForm()">Wyczyść</button>
         </div>
       </form>
       <form class="tool-mobile-form" [formGroup]="toolForm" autocomplete="off" novalidate (ngSubmit)="updateTool(toolForm.value)">
@@ -87,19 +87,19 @@
           <input type="hidden" formControlName="idNumber" id="idNumber">
           <mat-form-field class="field-width" appearance="fill">
             <mat-label>Numer fabryczny</mat-label>
-            <input matInput type="text" formControlName="serialNumber" id="serialNumber" tabindex="2">
+            <input matInput type="text" formControlName="serialNumber" id="serialNumber" tabindex="1">
             <mat-error *ngIf="toolForm.controls['serialNumber'].errors?.required">Nie wprowadzono numeru fabrycznego.</mat-error>
             <mat-error *ngIf="toolForm.controls['serialNumber'].errors?.maxlength">Nr fabryczny może zawierać maks. 255 znaków.</mat-error>
           </mat-form-field>
           <mat-form-field class="field-width" appearance="fill">
             <mat-label>Nazwa</mat-label>
-            <input matInput type="text" formControlName="name" id="name" tabindex="3">
+            <input matInput type="text" formControlName="name" id="name" tabindex="2">
             <mat-error *ngIf="toolForm.controls['name'].errors?.required">Nie wprowadzono nazwy.</mat-error>
             <mat-error *ngIf="toolForm.controls['name'].errors?.maxlength">Nazwa może zawierać maksymalnie 255 znaków.</mat-error>
           </mat-form-field>
           <mat-form-field class="field-width" appearance="fill">
             <mat-label>Typ</mat-label>
-            <mat-select formControlName="type" id="type" name="type" tabindex="4">
+            <mat-select formControlName="type" id="type" name="type" tabindex="3">
               <mat-option *ngFor="let type of types" [value]="type.type">
                 {{type.type}}
               </mat-option>
@@ -108,7 +108,7 @@
           </mat-form-field>
           <mat-form-field class="field-width" appearance="fill">
             <mat-label>Czy podlega obsłudze metrologicznej?</mat-label>
-            <mat-select formControlName="isMetrologicalService" id="isMetrologicalService" name="isMetrologicalService" tabindex="5" [(ngModel)]="hasMetrologicalService">
+            <mat-select formControlName="isMetrologicalService" id="isMetrologicalService" name="isMetrologicalService" tabindex="4" [(ngModel)]="hasMetrologicalService">
               <mat-option *ngFor="let isMetrologicalService of isMetrologicalService" [value]="isMetrologicalService.isMetrologicalService">
                 {{isMetrologicalService.isMetrologicalServiceOption}}
               </mat-option>
@@ -117,7 +117,7 @@
           </mat-form-field>
           <mat-form-field class="field-width" appearance="fill">
             <mat-label>Okres ważności</mat-label>
-            <mat-date-range-input [formGroup]="toolForm" [rangePicker]="mobilePicker" [disabled]="!hasMetrologicalService" tabindex="6">
+            <mat-date-range-input tabindex="5" [formGroup]="toolForm" [rangePicker]="mobilePicker" [disabled]="!hasMetrologicalService">
               <input matStartDate formControlName="lastMetrologicalService" placeholder="Data ostatniej obsługi metrologicznej">
               <input matEndDate formControlName="validUntil" placeholder="Ważny do">
             </mat-date-range-input>
@@ -127,7 +127,7 @@
           </mat-form-field>
           <mat-form-field class="field-width" appearance="fill">
             <mat-label>Status</mat-label>
-            <mat-select formControlName="status" id="status" name="status" tabindex="7">
+            <mat-select formControlName="status" id="status" name="status" tabindex="6">
               <mat-option *ngFor="let status of statuses" [value]="status.status">
                 {{status.status}}
               </mat-option>
@@ -136,9 +136,9 @@
           </mat-form-field>
         </div>
         <div class="buttons">
-          <button class="save-tool-button" mat-raised-button color="primary" type="submit" [disabled]="!toolForm.valid">Zapisz</button>
-          <button class="cancel-button" mat-raised-button color="accent" [routerLink]="['/tools/tools-list']">Anuluj</button>
-          <button mat-raised-button color="warn" (click)="resetToolForm()">Wyczyść</button>
+          <button class="save-tool-button" mat-raised-button color="primary" type="submit" tabindex="7" [disabled]="!toolForm.valid">Zapisz</button>
+          <button class="cancel-button" mat-raised-button color="accent" tabindex="8" (click)="redirectToToolsList()">Anuluj</button>
+          <button mat-raised-button color="warn" tabindex="9" (click)="resetToolForm()">Wyczyść</button>
         </div>
       </form>
     </mat-card-content>
