@@ -25,9 +25,7 @@ export class ToolsListComponent implements OnInit {
     'lastMetrologicalService',
     'validUntil',
     'status',
-    'details',
-    'edit',
-    'deleting'
+    'actions'
   ];
 
   toolsData = new MatTableDataSource<Tool>();
@@ -62,6 +60,10 @@ export class ToolsListComponent implements OnInit {
     this.applyFilter();
   }
 
+  redirectToAdd() {
+    this.router.navigate(['/tools/tool-add']);
+  }
+
   redirectToDetails(id: any) {
     let url = `/tools/tool-details/${id}`;
     this.router.navigate([url]);
@@ -72,7 +74,7 @@ export class ToolsListComponent implements OnInit {
     this.router.navigate([url]);
   }
 
-  redirectToDeleting(id: any) {
+  redirectToDelete(id: any) {
     let url = `/tools/tool-delete/${id}`;
     this.router.navigate([url]);
   }

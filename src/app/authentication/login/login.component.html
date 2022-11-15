@@ -10,7 +10,7 @@
         <mat-card *ngIf="showError" class="error-card">{{ errorMessage }}</mat-card>
         <mat-form-field class="field-width" appearance="fill">
           <mat-label>E-mail</mat-label>
-          <input matInput name="email" type="email" formControlName="email">
+          <input matInput name="email" type="email" formControlName="email" tabindex="1">
           <mat-icon matSuffix>email</mat-icon>
           <mat-error *ngIf="loginForm.controls['email'].errors?.required">Nie wprowadzono adresu e-mail.</mat-error>
           <mat-error *ngIf="loginForm.controls['email'].errors?.email">E-mail został wprowadzony w nieprawidłowym
@@ -18,7 +18,7 @@
         </mat-form-field>
         <mat-form-field class="field-width" appearance="fill">
           <mat-label>Hasło</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" formControlName="password">
+          <input matInput name="password" formControlName="password" tabindex="2" [type]="hidePassword ? 'password' : 'text'">
           <mat-icon class="password-visibility" matSuffix (click)="hidePassword = !hidePassword">{{ hidePassword ?
             'visibility_off' : 'visibility' }}</mat-icon>
           <mat-error *ngIf="loginForm.controls['password'].errors?.required">Nie wprowadzono hasła.</mat-error>
@@ -26,9 +26,9 @@
             cyfrę, znak specjalny oraz wymaga od 8 do 64 znaków.</mat-error>
         </mat-form-field>
         <div>
-          <a [routerLink]="['/authentication/account-recovery']">Nie pamiętasz hasła?</a>
+          <a tabindex="4" [routerLink]="['/authentication/account-recovery']">Nie pamiętasz hasła?</a>
         </div>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">
+        <button mat-raised-button color="primary" type="submit" tabindex="3" [disabled]="!loginForm.valid">
           Dalej
         </button>
       </form>

@@ -19,6 +19,7 @@ import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginato
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { customPaginator } from '../configuration/custom-paginator';
 import localePl from '@angular/common/locales/pl';
@@ -47,7 +48,8 @@ registerLocaleData(localePl, 'pl');
     MatPaginatorModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule
   ],
   exports: [
     MatSidenavModule,
@@ -68,7 +70,8 @@ registerLocaleData(localePl, 'pl');
     MatPaginatorModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pl' },

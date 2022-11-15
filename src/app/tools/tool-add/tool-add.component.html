@@ -67,7 +67,7 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Okres ważności</mat-label>
-              <mat-date-range-input [formGroup]="toolForm" [rangePicker]="picker" [disabled]="!hasMetrologicalService" tabindex="6">
+              <mat-date-range-input tabindex="6" [formGroup]="toolForm" [rangePicker]="picker" [disabled]="!hasMetrologicalService">
                 <input matStartDate formControlName="lastMetrologicalService" placeholder="Data ostatniej obsługi metrologicznej">
                 <input matEndDate formControlName="validUntil" placeholder="Ważny do">
               </mat-date-range-input>
@@ -89,9 +89,9 @@
           </div>
         </div>
         <div class="buttons">
-          <button class="add-tool-button" mat-raised-button color="primary" type="submit" [disabled]="!toolForm.valid" tabindex="8">Dodaj</button>
-          <button class="cancel-button" mat-raised-button color="accent" (click)="redirectToToolsList()" tabindex="9">Anuluj</button>
-          <button mat-raised-button color="warn" (click)="resetToolForm()" tabindex="10">Wyczyść</button>
+          <button class="add-tool-button" mat-raised-button color="primary" type="submit" tabindex="8" [disabled]="!toolForm.valid">Dodaj</button>
+          <button class="cancel-button" mat-raised-button color="accent" tabindex="9" (click)="redirectToToolsList()">Anuluj</button>
+          <button mat-raised-button color="warn" tabindex="10" (click)="resetToolForm()">Wyczyść</button>
         </div>
       </form>
       <form class="tool-mobile-form" [formGroup]="toolForm" autocomplete="off" novalidate (ngSubmit)="addTool(toolForm.value)">
@@ -139,7 +139,7 @@
           </mat-form-field>
           <mat-form-field class="field-width" appearance="fill">
             <mat-label>Okres ważności</mat-label>
-            <mat-date-range-input [formGroup]="toolForm" [rangePicker]="mobilePicker" [disabled]="!hasMetrologicalService" tabindex="6">
+            <mat-date-range-input tabindex="6" [formGroup]="toolForm" [rangePicker]="mobilePicker" [disabled]="!hasMetrologicalService">
               <input matStartDate formControlName="lastMetrologicalService" placeholder="Data ostatniej obsługi metrologicznej">
               <input matEndDate formControlName="validUntil" placeholder="Ważny do">
             </mat-date-range-input>
@@ -158,9 +158,9 @@
           </mat-form-field>
         </div>
         <div class="buttons">
-          <button class="add-tool-button" mat-raised-button color="primary" type="submit" [disabled]="!toolForm.valid" tabindex="8">Dodaj</button>
-          <button class="cancel-button" mat-raised-button color="accent" (click)="redirectToToolsList()" tabindex="9">Anuluj</button>
-          <button mat-raised-button color="warn" (click)="resetToolForm()" tabindex="10">Wyczyść</button>
+          <button class="add-tool-button" mat-raised-button color="primary" type="submit" tabindex="8" [disabled]="!toolForm.valid">Dodaj</button>
+          <button class="cancel-button" mat-raised-button color="accent" tabindex="9" (click)="redirectToToolsList()">Anuluj</button>
+          <button mat-raised-button color="warn" tabindex="10" (click)="resetToolForm()">Wyczyść</button>
         </div>
       </form>
     </mat-card-content>

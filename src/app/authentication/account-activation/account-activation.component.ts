@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './../../shared/services/authentication.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-activation',
@@ -14,7 +14,8 @@ export class AccountActivationComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -38,5 +39,9 @@ export class AccountActivationComponent implements OnInit {
           this.errorMessage = error;
         }
       );
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['/authentication/login']);
   }
 }

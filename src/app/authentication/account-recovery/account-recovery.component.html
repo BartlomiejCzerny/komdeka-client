@@ -8,12 +8,12 @@
       <mat-card *ngIf="showError" class="error-card">{{ errorMessage }}</mat-card>
       <mat-form-field class="field-width" appearance="fill">
         <mat-label>E-mail</mat-label>
-        <input matInput name="email" type="email" formControlName="email">
+        <input matInput name="email" type="email" formControlName="email" tabindex="1">
         <mat-icon matSuffix>email</mat-icon>
         <mat-error *ngIf="accountRecoveryForm.controls['email'].errors?.required">Nie wprowadzono adresu e-mail.</mat-error>
         <mat-error *ngIf="accountRecoveryForm.controls['email'].errors?.email">E-mail został wprowadzony w nieprawidłowym formacie.</mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit" [disabled]="!accountRecoveryForm.valid">
+      <button mat-raised-button color="primary" type="submit" tabindex="2" [disabled]="!accountRecoveryForm.valid">
         Dalej
       </button>
     </form>
