@@ -6,6 +6,11 @@
     </mat-card-header>
     <mat-card-content>
       <form class="tool-form" [formGroup]="toolForm" autocomplete="off" novalidate (ngSubmit)="updateTool(toolForm.value)">
+        <div *ngIf="showError" class="input-container">
+          <div class="input-field">
+            <mat-card class="error-card">{{errorMessage}}</mat-card>
+          </div>
+        </div>
         <div class="input-container">
           <input type="hidden" formControlName="idNumber" id="idNumber">
           <div class="input-field">
@@ -83,6 +88,11 @@
         </div>
       </form>
       <form class="tool-mobile-form" [formGroup]="toolForm" autocomplete="off" novalidate (ngSubmit)="updateTool(toolForm.value)">
+        <div *ngIf="showError" class="input-container">
+          <div class="input-field">
+            <mat-card class="error-card">{{errorMessage}}</mat-card>
+          </div>
+        </div>
         <div class="input-container">
           <input type="hidden" formControlName="idNumber" id="idNumber">
           <mat-form-field class="field-width" appearance="fill">
