@@ -31,7 +31,7 @@ export class ToolAddComponent implements OnInit {
     { status: 'Wycofany z użytkowania' }
   ]
 
-  errorMessage = 'Narzędzie o podanym numerze identyfikacyjnym istnieje.';
+  errorMessage: string;
   showError: boolean;
   hasMetrologicalService: boolean;
 
@@ -81,10 +81,11 @@ export class ToolAddComponent implements OnInit {
         this.redirectToToolsList();
         this.openToolAddSnackbar();
       },
-      (() => {
-        this.showError = true;
-      })
-    );
+        ((error) => {
+          this.errorMessage = error;
+          this.showError = true;
+        })
+      );
   }
 
   redirectToToolsList() {

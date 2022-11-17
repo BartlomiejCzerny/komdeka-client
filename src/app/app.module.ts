@@ -14,7 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AboutComponent } from './about/about.component';
 import { OrdersComponent } from './orders/orders.component';
-import { PrivacyComponent } from './privacy/privacy.component';
+// import { PrivacyComponent } from './privacy/privacy.component';
 import { AddOrderDialogComponent } from './orders/add-order-dialog/add-order-dialog.component';
 // import { ToolsComponent } from './tools/tools.component';
 // import { AddToolDialogComponent } from './tools/add-tool-dialog/add-tool-dialog.component';

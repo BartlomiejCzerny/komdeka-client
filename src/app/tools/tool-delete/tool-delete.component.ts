@@ -4,7 +4,6 @@ import { ToolService } from './../../shared/services/tool.service';
 import { Tool } from './../../interfaces/tool/tool.interface';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -15,10 +14,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ToolDeleteComponent implements OnInit {
   tool: Tool;
 
+  errorMessage: string;
+  showError: boolean;
+
   constructor(
     private toolService: ToolService,
     private errorHandlerService: ErrorHandlerService,
-    private location: Location,
     private activeRoute: ActivatedRoute,
     private snackBar: MatSnackBar,
     private router: Router
@@ -41,12 +42,13 @@ export class ToolDeleteComponent implements OnInit {
   deleteTool() {
     const deleteUri: string = `api/tools/${this.tool.idNumber}`;
     this.toolService.deleteTool(deleteUri)
-      .subscribe(res => {
+      .subscribe(() => {
         this.redirectToToolsList();
         this.openToolDeleteSnackbar();
       },
-        (error => {
-          console.log("Błąd usuwania");
+        ((error) => {
+          this.errorMessage = error;
+          this.showError = true;
         })
       );
   }
