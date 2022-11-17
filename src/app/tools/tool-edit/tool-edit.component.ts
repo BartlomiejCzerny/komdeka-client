@@ -121,7 +121,7 @@ export class ToolEditComponent implements OnInit {
   }
 
   openToolUpdateSnackbar() {
-    this.snackBar.open('Dane tego narzędzia zostały zaktualizowane pomyślnie.', 'OK', {
+    this.snackBar.open('Narzędzie zostało zaktualizowane pomyślnie.', 'OK', {
       duration: 5000
     });
   }
