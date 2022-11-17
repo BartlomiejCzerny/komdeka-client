@@ -1,25 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { RepositoryService } from './../shared/services/repository.service';
+// import { Component, OnInit } from '@angular/core';
+// import { RepositoryService } from './../shared/services/repository.service';
 
-@Component({
-  selector: 'app-privacy',
-  templateUrl: './privacy.component.html',
-  styleUrls: ['./privacy.component.scss']
-})
-export class PrivacyComponent implements OnInit {
+// @Component({
+//   selector: 'app-privacy',
+//   templateUrl: './privacy.component.html',
+//   styleUrls: ['./privacy.component.scss']
+// })
+// export class PrivacyComponent implements OnInit {
 
-  public claims: [] = [];
+//   public claims: [] = [];
 
-  constructor(private repository: RepositoryService) { }
+//   constructor(private repository: RepositoryService) { }
 
-  ngOnInit(): void {
-    this.getClaims();
-  }
+//   ngOnInit(): void {
+//     this.getClaims();
+//   }
 
-  public getClaims() {
-    this.repository.getData('api/privacy')
-    .subscribe(res => {
-      this.claims = res as [];
-    });
-  }
-}
+//   public getClaims() {
+//     this.repository.getData('api/privacy')
+//     .subscribe(res => {
+//       this.claims = res as [];
+//     });
+//   }
+// }

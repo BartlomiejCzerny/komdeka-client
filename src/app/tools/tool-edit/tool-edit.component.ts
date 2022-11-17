@@ -1,7 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { RepositoryService } from './../../shared/services/repository.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Tool } from '../../interfaces/tool/tool.interface';
@@ -33,15 +31,13 @@ export class ToolEditComponent implements OnInit {
     { status: 'Wycofany z użytkowania' }
   ]
 
-  errorMessage = 'Narzędzie o podanym numerze identyfikacyjnym istnieje.';
+  errorMessage: string;
   showError: boolean;
   hasMetrologicalService: boolean;
 
   constructor(
-    private repository: RepositoryService,
     private toolService: ToolService,
     private activeRoute: ActivatedRoute,
-    private location: Location,
     private snackBar: MatSnackBar,
     private router: Router
   ) { }
@@ -74,9 +70,11 @@ export class ToolEditComponent implements OnInit {
         this.tool = res as Tool;
         this.toolForm.patchValue(this.tool);
       },
-      (error) => {
-        // this.errorService.handleError(error);
-      })
+        ((error) => {
+          this.errorMessage = error;
+          this.showError = true;
+        })
+      );
   }
 
   public updateTool(toolFormValue: any) {
