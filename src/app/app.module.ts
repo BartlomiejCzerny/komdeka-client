@@ -21,6 +21,7 @@ import { AddOrderDialogComponent } from './orders/add-order-dialog/add-order-dia
 import { ToolService } from './shared/services/tool.service';
 // import { AddToolDialogComponent } from './tools/add-tool-dialog/add-tool-dialog.component';
 import { AccountActivationDialogComponent } from './authentication/account-activation/account-activation-dialog/account-activation-dialog.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 // import { SupplierAddComponent } from './suppliers/supplier-add/supplier-add.component';
 // import { SupplierDeleteComponent } from './suppliers/supplier-delete/supplier-delete.component';
 // import { SupplierDetailsComponent } from './suppliers/supplier-details/supplier-details.component';
@@ -43,6 +44,7 @@ import { AccountActivationDialogComponent } from './authentication/account-activ
     // ToolsComponent,
     // AddToolDialogComponent,
     AccountActivationDialogComponent,
+    ForbiddenComponent,
     // SupplierAddComponent,
     // SupplierDeleteComponent,
     // SupplierDetailsComponent,
