@@ -1,0 +1,174 @@
+<mat-card>
+  <mat-card class="supplier-edit-card">
+    <mat-card-header class="supplier-edit-header">
+      <mat-card-title>Edycja dostawcy</mat-card-title>
+      <mat-card-subtitle>Zaktualizuj dane tego dostawcy.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="supplier-form" [formGroup]="supplierForm" autocomplete="off" novalidate (ngSubmit)="updateSupplier(supplierForm.value)">
+        <div *ngIf="showError" class="input-container">
+          <div class="input-field">
+            <mat-card class="error-card">{{errorMessage}}</mat-card>
+          </div>
+        </div>
+        <div class="input-container">
+          <input type="hidden" formControlName="idNumber" id="idNumber">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Nazwa</mat-label>
+              <input matInput type="text" formControlName="name" id="name" tabindex="1">
+              <mat-error *ngIf="supplierForm.controls['name'].errors?.required">Nie wprowadzono nazwy.</mat-error>
+              <mat-error *ngIf="supplierForm.controls['name'].errors?.maxlength">Nazwa może zawierać maksymalnie 255 znaków.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Okres zatwierdzenia</mat-label>
+              <mat-date-range-input tabindex="2" [formGroup]="supplierForm" [rangePicker]="picker">
+                <input matStartDate formControlName="approvalDate" placeholder="Data zatwierdzenia">
+                <input matEndDate formControlName="approvalExpirationDate" placeholder="Data wygaśnięcia zatwierdzenia">
+              </mat-date-range-input>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+              <mat-error *ngIf="supplierForm.controls.approvalDate.hasError || supplierForm.controls.approvalExpirationDate.hasError">Nieprawidłowy okres zatwierdzenia.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Ulica</mat-label>
+              <input matInput type="text" formControlName="street" id="street" tabindex="3">
+              <mat-error *ngIf="supplierForm.controls['street'].errors?.pattern">Wprowadzono ulicę w nieprawidłowym formacie.</mat-error>
+              <mat-error *ngIf="supplierForm.controls['street'].errors?.maxlength">Ulica może zawierać maksymalnie 255 znaków.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="input-field input-space">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Numer budynku</mat-label>
+              <input matInput type="text" formControlName="buildingNumber" id="buildingNumber" tabindex="4">
+              <mat-error *ngIf="supplierForm.controls['buildingNumber'].errors?.required">Nie wprowadzono numeru budynku.</mat-error>
+              <mat-error *ngIf="supplierForm.controls['buildingNumber'].errors?.pattern">Wprowadzono numer budynku w nieprawidłowym formacie.</mat-error>
+              <mat-error *ngIf="supplierForm.controls['buildingNumber'].errors?.maxlength">Nr budynku może zawierać maks. 15 znaków.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Kod pocztowy</mat-label>
+              <input matInput type="text" formControlName="zipCode" id="zipCode" tabindex="5">
+              <mat-error *ngIf="supplierForm.controls['zipCode'].errors?.required">Nie wprowadzono kodu pocztowego.</mat-error>
+              <mat-error *ngIf="supplierForm.controls['zipCode'].errors?.pattern">Wprowadzono kod pocztowy w nieprawidłowym formacie.</mat-error>
+              <mat-error *ngIf="supplierForm.controls['zipCode'].errors?.maxlength">Kod pocztowy może zawierać maksymalnie 6 znaków.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="input-field input-space">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Miejscowość</mat-label>
+              <input matInput type="text" formControlName="place" id="place" tabindex="6">
+              <mat-error *ngIf="supplierForm.controls['place'].errors?.required">Nie wprowadzono miejscowości.</mat-error>
+              <mat-error *ngIf="supplierForm.controls['place'].errors?.pattern">Wprowadzono miejscowość w nieprawidłowym formacie.</mat-error>
+              <mat-error *ngIf="supplierForm.controls['place'].errors?.maxlength">Miejscowość może zawierać maks. 255 znaków.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Zakres działalności</mat-label>
+              <textarea matInput type="text" formControlName="activitiesRange" id="activitiesRange" tabindex="7"></textarea>
+              <mat-error *ngIf="supplierForm.controls['activitiesRange'].errors?.required">Nie wprowadzono zakresu działalności.</mat-error>
+              <mat-error *ngIf="supplierForm.controls['activitiesRange'].errors?.maxlength">Zakres działalności może zawierać maksymalnie 500 znaków.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="input-field">
+            <mat-form-field class="field-width" appearance="fill">
+              <mat-label>Uwagi</mat-label>
+              <textarea matInput type="text" formControlName="remarks" id="remarks" tabindex="8"></textarea>
+              <mat-error *ngIf="supplierForm.controls['remarks'].errors?.maxlength">Uwagi mogą zawierać maksymalnie 5000 znaków.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="buttons">
+          <button mat-raised-button color="primary" type="submit" tabindex="9" [disabled]="!supplierForm.valid">Zapisz</button>
+          <button class="cancel-button" mat-raised-button color="accent" tabindex="10" (click)="redirectToSuppliersList()">Anuluj</button>
+          <button mat-raised-button color="warn" tabindex="11" (click)="resetSupplierForm()">Wyczyść</button>
+        </div>
+      </form>
+      <form class="supplier-mobile-form" [formGroup]="supplierForm" autocomplete="off" novalidate (ngSubmit)="updateSupplier(supplierForm.value)">
+        <div *ngIf="showError" class="input-container">
+          <div class="input-field">
+            <mat-card class="error-card">{{errorMessage}}</mat-card>
+          </div>
+        </div>
+        <div class="input-container">
+          <input type="hidden" formControlName="idNumber" id="idNumber">
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Nazwa</mat-label>
+            <input matInput type="text" formControlName="name" id="name" tabindex="1">
+            <mat-error *ngIf="supplierForm.controls['name'].errors?.required">Nie wprowadzono nazwy.</mat-error>
+            <mat-error *ngIf="supplierForm.controls['name'].errors?.maxlength">Nazwa może zawierać maksymalnie 255 znaków.</mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Okres zatwierdzenia</mat-label>
+            <mat-date-range-input tabindex="2" [formGroup]="supplierForm" [rangePicker]="mobilePicker">
+              <input matStartDate formControlName="approvalDate" placeholder="Data zatwierdzenia">
+              <input matEndDate formControlName="approvalExpirationDate" placeholder="Data wygaśnięcia zatwierdzenia">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="mobilePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #mobilePicker></mat-date-range-picker>
+            <mat-error *ngIf="supplierForm.controls.approvalDate.hasError || supplierForm.controls.approvalExpirationDate.hasError">Nieprawidłowy okres zatwierdzenia.</mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Ulica</mat-label>
+            <input matInput type="text" formControlName="street" id="street" tabindex="3">
+            <mat-error *ngIf="supplierForm.controls['street'].errors?.pattern">Wprowadzono ulicę w nieprawidłowym formacie.</mat-error>
+            <mat-error *ngIf="supplierForm.controls['street'].errors?.maxlength">Ulica może zawierać maksymalnie 255 znaków.</mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Numer budynku</mat-label>
+            <input matInput type="text" formControlName="buildingNumber" id="buildingNumber" tabindex="4">
+            <mat-error *ngIf="supplierForm.controls['buildingNumber'].errors?.required">Nie wprowadzono numeru budynku.</mat-error>
+            <mat-error *ngIf="supplierForm.controls['buildingNumber'].errors?.pattern">Wprowadzono numer budynku w nieprawidłowym formacie.</mat-error>
+            <mat-error *ngIf="supplierForm.controls['buildingNumber'].errors?.maxlength">Nr budynku może zawierać maks. 15 znaków.</mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Kod pocztowy</mat-label>
+            <input matInput type="text" formControlName="zipCode" id="zipCode" tabindex="5">
+            <mat-error *ngIf="supplierForm.controls['zipCode'].errors?.required">Nie wprowadzono kodu pocztowego.</mat-error>
+            <mat-error *ngIf="supplierForm.controls['zipCode'].errors?.pattern">Wprowadzono kod pocztowy w nieprawidłowym formacie.</mat-error>
+            <mat-error *ngIf="supplierForm.controls['zipCode'].errors?.maxlength">Kod pocztowy może zawierać maksymalnie 6 znaków.</mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Miejscowość</mat-label>
+            <input matInput type="text" formControlName="place" id="place" tabindex="6">
+            <mat-error *ngIf="supplierForm.controls['place'].errors?.required">Nie wprowadzono miejscowości.</mat-error>
+            <mat-error *ngIf="supplierForm.controls['place'].errors?.pattern">Wprowadzono miejscowość w nieprawidłowym formacie.</mat-error>
+            <mat-error *ngIf="supplierForm.controls['place'].errors?.maxlength">Miejscowość może zawierać maks. 255 znaków.</mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Zakres działalności</mat-label>
+            <textarea matInput type="text" formControlName="activitiesRange" id="activitiesRange" tabindex="7"></textarea>
+            <mat-error *ngIf="supplierForm.controls['activitiesRange'].errors?.required">Nie wprowadzono zakresu działalności.</mat-error>
+            <mat-error *ngIf="supplierForm.controls['activitiesRange'].errors?.maxlength">Zakres działalności może zawierać maksymalnie 500 znaków.</mat-error>
+          </mat-form-field>
+          <mat-form-field class="field-width" appearance="fill">
+            <mat-label>Uwagi</mat-label>
+            <textarea matInput type="text" formControlName="remarks" id="remarks" tabindex="8"></textarea>
+            <mat-error *ngIf="supplierForm.controls['remarks'].errors?.maxlength">Uwagi mogą zawierać maksymalnie 5000 znaków.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="buttons">
+          <button mat-raised-button color="primary" type="submit" tabindex="9" [disabled]="!supplierForm.valid">Zapisz</button>
+          <button class="cancel-button" mat-raised-button color="accent" tabindex="10" (click)="redirectToSuppliersList()">Anuluj</button>
+          <button mat-raised-button color="warn" tabindex="11" (click)="resetSupplierForm()">Wyczyść</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</mat-card>
