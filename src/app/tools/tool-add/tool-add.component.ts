@@ -1,5 +1,4 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Tool } from '../../interfaces/tool/tool.interface';
@@ -51,9 +50,9 @@ export class ToolAddComponent implements OnInit {
     });
   }
 
-  public hasError(controlName: string, errorName: string) {
-    return this.toolForm.controls[controlName].hasError(errorName);
-  }
+  // public hasError(controlName: string, errorName: string) {
+  //   return this.toolForm.controls[controlName].hasError(errorName);
+  // }
 
   public addTool(toolFormValue: any) {
     if (this.toolForm.valid) {

@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'authentication', loadChildren: () => import('../authentication/authentication.module').then(m => m.AuthenticationModule) },
   // { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
   // { path: 'providers', component: ProvidersComponent, canActivate: [AuthGuard] },
+  { path: 'suppliers', loadChildren: () => import('../suppliers/suppliers.module').then(m => m.SuppliersModule) },
   { path: 'tools', loadChildren: () => import('../tools/tools.module').then(m => m.ToolsModule) },
   // { path: 'privacy', component: PrivacyComponent },
   { path: 'about', component: AboutComponent },

@@ -103,9 +103,9 @@ export class ToolEditComponent implements OnInit {
         this.redirectToToolsList();
         this.openToolUpdateSnackbar();
       },
-      (() => {
-        // console.log('ID nie można zmienić');
-        // this.errorService.handleError(error);
+      ((error) => {
+        this.errorMessage = error;
+        this.showError = true;
       })
     )
   }
@@ -123,5 +123,4 @@ export class ToolEditComponent implements OnInit {
       duration: 5000
     });
   }
-
 }

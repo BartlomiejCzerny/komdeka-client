@@ -1,0 +1,71 @@
+.supplier-details-card {
+  min-width: 150px;
+  max-width: 550px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 25px !important;
+  margin-bottom: 25px !important;
+  padding: 25px 5px 25px 5px;
+}
+
+.supplier-details-header {
+  margin-left: 10px;
+}
+
+.supplier-form {
+  min-width: 200px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.supplier-details-card > mat-card-content > .supplier-form > .input-container {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.input-container {
+  display: flex;
+}
+
+.input-field {
+  flex: 1;
+}
+
+.input-space {
+  margin-left: 20px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.supplier-mobile-form {
+  display: none;
+}
+
+@media (max-width: 700px) and (orientation: portrait) {
+  .supplier-mobile-form {
+    display: block;
+    min-width: 200px;
+    max-width: 1000px;
+    width: 100%;
+  }
+
+  .supplier-details-card > mat-card-content > .supplier-mobile-form > .input-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .input-container {
+    display: block;
+  }
+
+  .supplier-form {
+    display: none;
+  }
+}
