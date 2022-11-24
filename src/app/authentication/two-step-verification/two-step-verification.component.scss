@@ -1,7 +1,21 @@
-.two-step-form {
+.two-step-verification-card {
   min-width: 150px;
-  max-width: 500px;
+  max-width: 550px;
   width: 100%;
+  margin: 0 auto;
+  margin-top: 25px !important;
+  margin-bottom: 25px !important;
+  padding: 25px 5px 25px 5px;
+}
+
+.two-step-verification-header {
+  margin-left: 10px;
+}
+
+.two-step-verification-form {
+  min-width: 100px;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 button {
@@ -9,6 +23,13 @@ button {
 }
 
 @media (max-width: 599.5px) and (orientation: portrait) {
+  .two-step-verification-form {
+    min-width: 50px;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+
   mat-form-field {
     margin-bottom: 15px;
   }
