@@ -10,7 +10,7 @@ import { TwoFactorDto } from './../../interfaces/two-factor/two-factor-dto.inter
   styleUrls: ['./two-step-verification.component.scss'],
 })
 export class TwoStepVerificationComponent implements OnInit {
-  twoStepForm: FormGroup;
+  twoStepVerificationForm: FormGroup;
   private twoFactorCode: FormControl;
 
   showError: boolean;
@@ -31,7 +31,7 @@ export class TwoStepVerificationComponent implements OnInit {
       Validators.required,
       Validators.pattern('[0-9]{6}')
     ]);
-    this.twoStepForm = new FormGroup({
+    this.twoStepVerificationForm = new FormGroup({
       twoFactorCode: this.twoFactorCode
     });
 
@@ -40,9 +40,9 @@ export class TwoStepVerificationComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
   }
 
-  login(twoStepFormValue: any) {
+  login(twoStepVerificationFormValue: any) {
     this.showError = false;
-    const formValue = { ...twoStepFormValue };
+    const formValue = { ...twoStepVerificationFormValue };
     let twoFactorDto: TwoFactorDto = {
       email: this.email,
       provider: this.provider,

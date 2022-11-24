@@ -1,11 +1,15 @@
 <mat-card>
-  <h1>Aktywacja konta użytkownika</h1>
-  <mat-icon>check_circle</mat-icon>
-  <mat-card *ngIf="showSuccess" class="success-card success-error-card">
-    Twoje konto użytkownika zostało aktywowane.
+  <mat-card class="account-activation-card">
+    <mat-card-content>
+      <h1>Aktywacja konta użytkownika</h1>
+      <mat-icon>check_circle</mat-icon>
+      <mat-card *ngIf="showSuccess" class="success-card success-error-card">
+        Twoje konto użytkownika zostało aktywowane.
+      </mat-card>
+      <mat-card *ngIf="showError" class="error-card success-error-card">{{ errorMessage }}</mat-card>
+      <button *ngIf="showSuccess" mat-raised-button color="primary" tabindex="1" (click)="redirectToLogin()">
+        Zaloguj
+      </button>
+    </mat-card-content>
   </mat-card>
-  <mat-card *ngIf="showError" class="error-card success-error-card">{{ errorMessage }}</mat-card>
-  <button *ngIf="showSuccess" mat-raised-button color="primary" tabindex="1" (click)="redirectToLogin()">
-    Zaloguj
-  </button>
 </mat-card>

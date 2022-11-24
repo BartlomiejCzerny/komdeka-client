@@ -1,0 +1,18 @@
+.about-card {
+  min-width: 150px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 25px !important;
+  margin-bottom: 25px !important;
+  padding: 25px 5px 25px 5px;
+}
+
+.about-header {
+  margin-left: 10px;
+}
+
+.about-card > mat-card-content {
+  padding-left: 20px;
+  padding-right: 20px;
+}
