@@ -1,34 +1,60 @@
+import { Observable } from 'rxjs';
 import { Order } from './../../interfaces/order/order.interface';
+import { EnvironmentUrlService } from './environment-url.service';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from './../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class OrderService {
-  orderForm: Order = new Order();
-  readonly baseURL = 'http://localhost:5001/api/Order';
-  list: Order[];
+  constructor(
+    private http: HttpClient,
+    private envUrl: EnvironmentUrlService
+  ) {}
 
-  constructor(private http: HttpClient) {}
-
-  postOrder() {
-    return this.http.post(this.baseURL, this.orderForm);
-  }
-  putOrder() {
-    return this.http.put(
-      `${this.baseURL}/${this.orderForm.orderNumber}`,
-      this.orderForm
+  public getOrders(route: string): Observable<Order[]> {
+    return this.http.get<Order[]>(
+      this.createCompleteRoute(route, this.envUrl.urlAddress)
     );
   }
-  deleteOrder(id: number) {
-    return this.http.delete(`${this.baseURL}/${id}`);
+
+  public getOrder(route: string) {
+    return this.http.get<Order>(
+      this.createCompleteRoute(route, this.envUrl.urlAddress)
+    );
   }
 
-  refreshList() {
-    this.http
-      .get(this.baseURL)
-      .toPromise()
-      .then((res) => (this.list = res as Order[]));
+  public postOrder(route: string, body: any) {
+    return this.http.post(
+      this.createCompleteRoute(route, environment.urlAddress),
+      body,
+      this.generateHeaders()
+    );
+  }
+
+  public putOrder(route: string, body: any) {
+    return this.http.put(
+      this.createCompleteRoute(route, environment.urlAddress),
+      body,
+      this.generateHeaders()
+    );
+  }
+
+  public deleteOrder(route: string) {
+    return this.http.delete(
+      this.createCompleteRoute(route, environment.urlAddress)
+    );
+  }
+
+  private createCompleteRoute(route: string, envAddress: string) {
+    return `${envAddress}/${route}`;
+  }
+
+  private generateHeaders() {
+    return {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
   }
 }
