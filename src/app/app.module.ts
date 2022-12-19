@@ -13,23 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AboutComponent } from './about/about.component';
-import { OrdersComponent } from './orders/orders.component';
-// import { PrivacyComponent } from './privacy/privacy.component';
-import { AddOrderDialogComponent } from './orders/add-order-dialog/add-order-dialog.component';
-// import { ToolsComponent } from './tools/tools.component';
-// import { AddToolDialogComponent } from './tools/add-tool-dialog/add-tool-dialog.component';
-import { ToolService } from './shared/services/tool.service';
-// import { AddToolDialogComponent } from './tools/add-tool-dialog/add-tool-dialog.component';
 import { AccountActivationDialogComponent } from './authentication/account-activation/account-activation-dialog/account-activation-dialog.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
-// import { SupplierAddComponent } from './suppliers/supplier-add/supplier-add.component';
-// import { SupplierDeleteComponent } from './suppliers/supplier-delete/supplier-delete.component';
-// import { SupplierDetailsComponent } from './suppliers/supplier-details/supplier-details.component';
-// import { SupplierEditComponent } from './suppliers/supplier-edit/supplier-edit.component';
-// import { SuppliersListComponent } from './suppliers/suppliers-list/suppliers-list.component';
-// import { AddToolComponent } from './tools/add-tool/add-tool.component';
-// import { EditToolComponent } from './tools/edit-tool/edit-tool.component';
-// import { DeleteToolComponent } from './tools/delete-tool/delete-tool.component';
 
 @NgModule({
   declarations: [
@@ -38,22 +23,8 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     HomeComponent,
     NotFoundComponent,
     AboutComponent,
-    // OrdersComponent,
-    // PrivacyComponent,
-    // AddOrderDialogComponent,
-    // ToolsComponent,
-    // AddToolDialogComponent,
     AccountActivationDialogComponent,
-    ForbiddenComponent,
-    // SupplierAddComponent,
-    // SupplierDeleteComponent,
-    // SupplierDetailsComponent,
-    // SupplierEditComponent,
-    // SuppliersListComponent,
-    // AddToolComponent,
-    // EditToolComponent,
-    // DeleteToolComponent
-    // AddToolDialogComponent
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,

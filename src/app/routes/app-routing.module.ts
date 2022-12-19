@@ -1,7 +1,4 @@
-// import { PrivacyComponent } from './../privacy/privacy.component';
 import { HomeComponent } from './../home/home.component';
-// import { OrdersComponent } from '../orders/orders.component';
-// import { ToolsComponent } from '../tools/tools.component';
 import { AboutComponent } from './../about/about.component';
 import { NotFoundComponent } from './../not-found/not-found.component';
 import { NgModule } from '@angular/core';
@@ -12,11 +9,9 @@ import { ForbiddenComponent } from '../forbidden/forbidden.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'authentication', loadChildren: () => import('../authentication/authentication.module').then(m => m.AuthenticationModule) },
-  // { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
-  // { path: 'providers', component: ProvidersComponent, canActivate: [AuthGuard] },
+  { path: 'orders', loadChildren: () => import('../orders/orders.module').then(m => m.OrdersModule), canActivate: [AuthGuard] },
   { path: 'suppliers', loadChildren: () => import('../suppliers/suppliers.module').then(m => m.SuppliersModule), canActivate: [AuthGuard] },
   { path: 'tools', loadChildren: () => import('../tools/tools.module').then(m => m.ToolsModule), canActivate: [AuthGuard] },
-  // { path: 'privacy', component: PrivacyComponent },
   { path: 'about', component: AboutComponent },
   { path: 'forbidden', component: ForbiddenComponent },
   { path: '404', component: NotFoundComponent },

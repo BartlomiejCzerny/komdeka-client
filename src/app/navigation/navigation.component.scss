@@ -13,8 +13,7 @@
 }
 
 .menu {
-  position: absolute;
-  margin-left: 0;
+  margin: auto 0 auto auto;
 }
 
 img {
@@ -30,11 +29,8 @@ img {
 	opacity: 0.5;
 }
 
-@media (max-width: 599.5px) and (orientation: portrait), (max-width: 959.5px) and (orientation: landscape) {
-  .logo {
-    display: inline-flex;
-    margin: 0 auto;
-  }
+.mat-toolbar-items {
+  margin: auto 0 auto auto;
 }
 
 .logged-user {
