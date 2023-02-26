@@ -54,10 +54,10 @@ export class SupplierAddComponent implements OnInit {
         Validators.required,
         Validators.maxLength(500)
       ]),
-      approvalDate: new FormControl([
+      approvalDate: new FormControl('',[
         Validators.required
       ]),
-      approvalExpirationDate: new FormControl([
+      approvalExpirationDate: new FormControl('',[
         Validators.required
       ]),
       remarks: new FormControl('', [

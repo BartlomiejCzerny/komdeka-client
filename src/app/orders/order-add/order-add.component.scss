@@ -1,6 +1,6 @@
 .order-add-card {
   min-width: 150px;
-  max-width: 550px;
+  max-width: 800px;
   width: 100%;
   margin: 0 auto;
   margin-top: 25px !important;
@@ -13,8 +13,8 @@
 }
 
 .order-form {
-  min-width: 200px;
-  max-width: 1000px;
+  min-width: 150px;
+  max-width: 800px;
   width: 100%;
 }
 
@@ -40,6 +40,20 @@
   margin-right: 10px;
 }
 
+.stepper-button {
+  margin-left: 5px;
+  margin-right: 5px;
+  min-width: 80px;
+}
+
+::ng-deep .mat-step-label {
+  display: none !important;
+}
+
+h2 {
+  text-align: center;
+}
+
 button {
   margin-top: 20px;
 }
@@ -49,19 +63,20 @@ button {
   justify-content: center;
 }
 
-.order-mobile-form {
-  display: none;
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 @media (max-width: 700px) and (orientation: portrait) {
-  .order-mobile-form {
-    display: block;
-    min-width: 200px;
-    max-width: 1000px;
-    width: 100%;
-  }
-
-  .order-add-card > mat-card-content > .order-mobile-form > .input-container {
+  .order-add-card > mat-card-content > .order-form > .input-container {
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -70,8 +85,8 @@ button {
     display: block;
   }
 
-  .order-form {
-    display: none;
+  .input-space {
+    margin-left: 0;
   }
 
   .cancel-button {

@@ -26,15 +26,15 @@
         </ng-container>
         <ng-container matColumnDef="admissionOrderDate">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="hide-column">Data</th>
-          <td mat-cell *matCellDef="let element" class="hide-column"> {{element.admissionOrderDate}} </td>
+          <td mat-cell *matCellDef="let element" class="hide-column"> {{element.admissionOrderDate | date:'dd.MM.yyyy'}} </td>
         </ng-container>
         <ng-container matColumnDef="customerName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Klient</th>
           <td mat-cell *matCellDef="let element"> {{element.customerName}} </td>
         </ng-container>
-        <ng-container matColumnDef="reviewResult">
+        <ng-container matColumnDef="orderReviewResult">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Wynik przeglądu</th>
-          <td mat-cell *matCellDef="let element"> {{element.reviewResult}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.orderReviewResult === true ? "Pozytywny" : "Negatywny"}} </td>
         </ng-container>
         <ng-container matColumnDef="orderComments">
           <th mat-header-cell *matHeaderCellDef mat-sort-header class="hide-column">Uwagi</th>

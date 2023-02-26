@@ -15,6 +15,9 @@ import { ToolService } from '../../shared/services/tool.service';
 export class ToolsListComponent implements OnInit {
   searchKey: string;
 
+  testowa = false;
+  today = new Date();
+
   public displayedColumns = [
     'idNumber',
     'name',

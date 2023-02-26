@@ -66,7 +66,7 @@
               </mat-date-range-input>
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-date-range-picker #picker></mat-date-range-picker>
-              <mat-error *ngIf="toolForm.controls.lastMetrologicalService.hasError || toolForm.controls.validUntil.hasError">Wybrano nieprawidłowy okres ważności.</mat-error>
+              <mat-error *ngIf="toolForm.controls.lastMetrologicalService.invalid || toolForm.controls.validUntil.invalid">Wybrano nieprawidłowy okres ważności.</mat-error>
             </mat-form-field>
           </div>
           <div class="input-field input-space">
@@ -133,7 +133,7 @@
             </mat-date-range-input>
             <mat-datepicker-toggle matSuffix [for]="mobilePicker"></mat-datepicker-toggle>
             <mat-date-range-picker #mobilePicker></mat-date-range-picker>
-            <mat-error *ngIf="toolForm.controls.lastMetrologicalService.hasError || toolForm.controls.validUntil.hasError">Wybrano nieprawidłowy okres ważności.</mat-error>
+            <mat-error *ngIf="toolForm.controls.lastMetrologicalService.invalid || toolForm.controls.validUntil.invalid">Wybrano nieprawidłowy okres ważności.</mat-error>
           </mat-form-field>
           <mat-form-field class="field-width" appearance="fill">
             <mat-label>Status</mat-label>
