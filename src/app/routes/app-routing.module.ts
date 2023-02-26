@@ -9,9 +9,10 @@ import { ForbiddenComponent } from '../forbidden/forbidden.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'authentication', loadChildren: () => import('../authentication/authentication.module').then(m => m.AuthenticationModule) },
-  { path: 'orders', loadChildren: () => import('../orders/orders.module').then(m => m.OrdersModule), canActivate: [AuthGuard] },
-  { path: 'suppliers', loadChildren: () => import('../suppliers/suppliers.module').then(m => m.SuppliersModule), canActivate: [AuthGuard] },
-  { path: 'tools', loadChildren: () => import('../tools/tools.module').then(m => m.ToolsModule), canActivate: [AuthGuard] },
+  { path: 'orders', loadChildren: () => import('../orders/orders.module').then(m => m.OrdersModule) },
+  { path: 'suppliers', loadChildren: () => import('../suppliers/suppliers.module').then(m => m.SuppliersModule),  },
+  // { path: 'tools', loadChildren: () => import('../tools/tools.module').then(m => m.ToolsModule), canActivate: [AuthGuard] },
+  { path: 'tools', loadChildren: () => import('../tools/tools.module').then(m => m.ToolsModule), },
   { path: 'about', component: AboutComponent },
   { path: 'forbidden', component: ForbiddenComponent },
   { path: '404', component: NotFoundComponent },

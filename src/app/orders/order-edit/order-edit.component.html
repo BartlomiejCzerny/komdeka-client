@@ -1,1 +1,909 @@
-<p>order-edit works!</p>
+<mat-card>
+  <mat-card class="order-edit-card">
+    <mat-card-header class="order-edit-header">
+      <mat-card-title>Edycja zamówienia</mat-card-title>
+      <mat-card-subtitle>Zaktualizuj dane tego zamówienia.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="order-form" [formGroup]="orderForm" autocomplete="off" novalidate (ngSubmit)="updateOrder(orderForm.value)">
+        <mat-stepper [orientation]="(stepperOrientation | async)!" labelPosition="bottom">
+          <mat-step [stepControl]="orderForm">
+            <h2>Karta zamówienia</h2>
+            <div *ngIf="showError" class="input-container">
+              <div class="input-field">
+                <mat-card class="error-card">{{errorMessage}}</mat-card>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer zamówienia</mat-label>
+                  <input matInput type="number" formControlName="orderNumber" id="orderNumber" tabindex="1">
+                  <mat-error *ngIf="orderForm.controls['orderNumber'].errors?.required">Nie wprowadzono numeru zamówienia.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['orderNumber'].errors?.pattern">Nr zamówienia może zawierać maks. 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Nazwa zamawiającego</mat-label>
+                  <input matInput type="text" formControlName="customerName" id="customerName" tabindex="2">
+                  <mat-error *ngIf="orderForm.controls['customerName'].errors?.required">Nie wprowadzono nazwy zamawiającego.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['customerName'].errors?.maxlength">Nazwa zamawiającego może zawierać maks. 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Ulica</mat-label>
+                  <input matInput type="text" formControlName="street" id="street" tabindex="3">
+                  <mat-error *ngIf="orderForm.controls['street'].errors?.pattern">Wprowadzono ulicę w nieprawidłowym formacie.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['street'].errors?.maxlength">Ulica może zawierać maksymalnie 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer budynku</mat-label>
+                  <input matInput type="text" formControlName="buildingNumber" id="buildingNumber" tabindex="4">
+                  <mat-error *ngIf="orderForm.controls['buildingNumber'].errors?.required">Nie wprowadzono numeru budynku.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['buildingNumber'].errors?.pattern">Wprowadzono numer budynku w nieprawidłowym formacie.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['buildingNumber'].errors?.maxlength">Nr budynku może zawierać maks. 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Kod pocztowy</mat-label>
+                  <input matInput type="text" formControlName="zipCode" id="zipCode" tabindex="5">
+                  <mat-error *ngIf="orderForm.controls['zipCode'].errors?.required">Nie wprowadzono kodu pocztowego.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['zipCode'].errors?.pattern">Wprowadzono kod pocztowy w nieprawidłowym formacie.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['zipCode'].errors?.maxlength">Kod pocztowy może zawierać maksymalnie 6 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Miejscowość</mat-label>
+                  <input matInput type="text" formControlName="place" id="place" tabindex="6">
+                  <mat-error *ngIf="orderForm.controls['place'].errors?.required">Nie wprowadzono miejscowości.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['place'].errors?.pattern">Wprowadzono miejscowość w nieprawidłowym formacie.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['place'].errors?.maxlength">Miejscowość może zawierać maks. 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Imię osoby zamawiającej</mat-label>
+                  <input matInput type="text" formControlName="customerFirstName" id="customerFirstName" tabindex="7">
+                  <mat-error *ngIf="orderForm.controls['customerFirstName'].errors?.required">Nie wprowadzono imienia osoby zamawiającej.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['customerFirstName'].errors?.maxlength">Imię osoby zamawiającej może zawierać maks. 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Nazwisko osoby zamawiającej</mat-label>
+                  <input matInput type="text" formControlName="customerLastName" id="customerLastName" tabindex="8">
+                  <mat-error *ngIf="orderForm.controls['customerLastName'].errors?.required">Nie wprowadzono nazwiska osoby zamawiającej.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['customerLastName'].errors?.maxlength">Nazwisko osoby zamawiającej może zawierać maks. 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Data</mat-label>
+                  <input matInput [matDatepicker]="admissionOrderDatePicker" tabindex="9" [formGroup]="orderForm" formControlName="admissionOrderDate">
+                  <mat-datepicker-toggle matSuffix [for]="admissionOrderDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #admissionOrderDatePicker></mat-datepicker>
+                  <mat-error *ngIf="orderForm.controls.admissionOrderDate.invalid">Nieprawidłowa data.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Opis zamówienia</mat-label>
+                  <textarea matInput type="text" formControlName="orderDescription" id="orderDescription" tabindex="10" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['orderDescription'].errors?.required">Nie wprowadzono opisu zamówienia.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['orderDescription'].errors?.maxlength">Opis zamówienia może zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Uwagi do zamówienia</mat-label>
+                  <textarea matInput type="text" formControlName="orderComments" id="orderComments" tabindex="11" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['orderComments'].errors?.maxlength">Uwagi do zamówienia mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpis osoby zamawiającej</mat-label>
+                  <mat-select formControlName="customerSignature" id="customerSignature" name="customerSignature" tabindex="12">
+                    <mat-option *ngFor="let customerSignature of customerSignature" [value]="customerSignature.customerSignature">
+                      {{customerSignature.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['customerSignature'].errors?.required">Nie określono, czy podpisano przez osobę zamawiającą.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpis wykonawcy</mat-label>
+                  <mat-select formControlName="contractorSignature" id="contractorSignature" name="contractorSignature" tabindex="13">
+                    <mat-option *ngFor="let contractorSignature of contractorSignature" [value]="contractorSignature.contractorSignature">
+                      {{contractorSignature.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['contractorSignature'].errors?.required">Nie określono, czy podpisano przez osobę zamawiającą.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="14" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Przegląd zamówienia</h2>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy wymagania do zamówienia są odpowiednio zdefiniowane?</mat-label>
+                  <mat-select formControlName="areRequirementsDefined" id="areRequirementsDefined" name="areRequirementsDefined" tabindex="15">
+                    <mat-option *ngFor="let areRequirementsDefined of areRequirementsDefined" [value]="areRequirementsDefined.areRequirementsDefined">
+                      {{areRequirementsDefined.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['areRequirementsDefined'].errors?.required">Nie określono, czy wymagania do zamówienia są odpowiednio zdefiniowane.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy wszystkie rysunki i dokumenty są aktualne?</mat-label>
+                  <mat-select formControlName="areDocumentsUpToDate" id="areDocumentsUpToDate" name="areDocumentsUpToDate" tabindex="16">
+                    <mat-option *ngFor="let areDocumentsUpToDate of areDocumentsUpToDate" [value]="areDocumentsUpToDate.areDocumentsUpToDate">
+                      {{areDocumentsUpToDate.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['areDocumentsUpToDate'].errors?.required">Nie określono, czy wszystkie rysunki i dokumenty są aktualne.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy posiadamy aktualne zatwierdzenia jakości?</mat-label>
+                  <mat-select formControlName="areQualityApprovalsUpToDate" id="areQualityApprovalsUpToDate" name="areQualityApprovalsUpToDate" tabindex="17">
+                    <mat-option *ngFor="let areQualityApprovalsUpToDate of areQualityApprovalsUpToDate" [value]="areQualityApprovalsUpToDate.areQualityApprovalsUpToDate">
+                      {{areQualityApprovalsUpToDate.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['areQualityApprovalsUpToDate'].errors?.required">Nie określono, czy posiadamy aktualne zatwierdzenia jakości.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy proponowani poddostawcy posiadają niezbędne zatwierdzenia?</mat-label>
+                  <mat-select formControlName="haveSuppliersApprovals" id="haveSuppliersApprovals" name="haveSuppliersApprovals" tabindex="18">
+                    <mat-option *ngFor="let haveSuppliersApprovals of haveSuppliersApprovals" [value]="haveSuppliersApprovals.haveSuppliersApprovals">
+                      {{haveSuppliersApprovals.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['haveSuppliersApprovals'].errors?.required">Nie określono, czy proponowani poddostawcy posiadają niezbędne zatwierdzenia.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy mamy niezbędne procedury produkcji i wyposażenia?</mat-label>
+                  <mat-select formControlName="haveProductionAndEquipmentProcedures" id="haveProductionAndEquipmentProcedures" name="haveProductionAndEquipmentProcedures" tabindex="19">
+                    <mat-option *ngFor="let haveProductionAndEquipmentProcedures of haveProductionAndEquipmentProcedures" [value]="haveProductionAndEquipmentProcedures.haveProductionAndEquipmentProcedures">
+                      {{haveProductionAndEquipmentProcedures.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['haveProductionAndEquipmentProcedures'].errors?.required">Nie określono, czy mamy niezbędne procedury produkcji i wyposażenia.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy mamy niezbędne procedury kontroli?</mat-label>
+                  <mat-select formControlName="haveControlProcedures" id="haveControlProcedures" name="haveControlProcedures" tabindex="20">
+                    <mat-option *ngFor="let haveControlProcedures of haveControlProcedures" [value]="haveControlProcedures.haveControlProcedures">
+                      {{haveControlProcedures.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['haveControlProcedures'].errors?.required">Nie określono, czy mamy niezbędne procedury kontroli.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy mamy niezbędne zasoby do wykonania wyrobu lub usługi?</mat-label>
+                  <mat-select formControlName="haveTheResources" id="haveTheResources" name="haveTheResources" tabindex="21">
+                    <mat-option *ngFor="let haveTheResources of haveTheResources" [value]="haveTheResources.haveTheResources">
+                      {{haveTheResources.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['haveTheResources'].errors?.required">Nie określono, czy mamy niezbędne zasoby.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy mamy wystarczającą ilość pracowników i umiejętności?</mat-label>
+                  <mat-select formControlName="haveEmployeesAndSkills" id="haveEmployeesAndSkills" name="haveEmployeesAndSkills" tabindex="22">
+                    <mat-option *ngFor="let haveEmployeesAndSkills of haveEmployeesAndSkills" [value]="haveEmployeesAndSkills.haveEmployeesAndSkills">
+                      {{haveEmployeesAndSkills.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['haveEmployeesAndSkills'].errors?.required">Nie określono, czy mamy wystarczającą ilość pracowników i umiejętności.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy wymagania kontroli pierwszej sztuki jasno zostały zdefiniowane i wzięte pod uwagę?</mat-label>
+                  <mat-select formControlName="areFirstPieceRequirementsDefined" id="areFirstPieceRequirementsDefined" name="areFirstPieceRequirementsDefined" tabindex="23">
+                    <mat-option *ngFor="let areFirstPieceRequirementsDefined of areFirstPieceRequirementsDefined" [value]="areFirstPieceRequirementsDefined.areFirstPieceRequirementsDefined">
+                      {{areFirstPieceRequirementsDefined.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['areFirstPieceRequirementsDefined'].errors?.required">Nie określono, czy wymagania kontroli pierwszej sztuki jasno zostały zdefiniowane i wzięte pod uwagę.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy posiadamy magazyny i zasoby do produkcji?</mat-label>
+                  <mat-select formControlName="haveWarehousesAndResources" id="haveWarehousesAndResources" name="haveWarehousesAndResources" tabindex="24">
+                    <mat-option *ngFor="let haveWarehousesAndResources of haveWarehousesAndResources" [value]="haveWarehousesAndResources.haveWarehousesAndResources">
+                      {{haveWarehousesAndResources.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['haveWarehousesAndResources'].errors?.required">Nie określono, czy posiadamy magazyny i zasoby do produkcji.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy ryzyko zostało ocenione?</mat-label>
+                  <mat-select formControlName="hasRiskAssessed" id="hasRiskAssessed" name="hasRiskAssessed" tabindex="25">
+                    <mat-option *ngFor="let hasRiskAssessed of hasRiskAssessed" [value]="hasRiskAssessed.hasRiskAssessed">
+                      {{hasRiskAssessed.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['hasRiskAssessed'].errors?.required">Nie określono, czy ryzyko zostało ocenione.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy cena na zamówieniu odpowiada cenie oferowanej?</mat-label>
+                  <mat-select formControlName="isPriceCorrect" id="isPriceCorrect" name="isPriceCorrect" tabindex="26">
+                    <mat-option *ngFor="let isPriceCorrect of isPriceCorrect" [value]="isPriceCorrect.isPriceCorrect">
+                      {{isPriceCorrect.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['isPriceCorrect'].errors?.required">Nie określono, czy cena na zamówieniu odpowiada cenie oferowanej.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy warunki dostaw zostały sprawdzone?</mat-label>
+                  <mat-select formControlName="areDeliveryTermsChecked" id="areDeliveryTermsChecked" name="areDeliveryTermsChecked" tabindex="27">
+                    <mat-option *ngFor="let areDeliveryTermsChecked of areDeliveryTermsChecked" [value]="areDeliveryTermsChecked.areDeliveryTermsChecked">
+                      {{areDeliveryTermsChecked.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['areDeliveryTermsChecked'].errors?.required">Nie określono, czy warunki dostaw zostały sprawdzone.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <input type="hidden" formControlName="orderReviewResult" id="orderReviewResult" name="orderReviewResult" value="orderReviewResult">
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="28" matStepperPrevious>Wstecz</button>
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="29" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Wymagania do zamówienia</h2>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer zamówienia</mat-label>
+                  <input matInput type="number" formControlName="orderNum" id="orderNum" tabindex="30">
+                  <mat-error *ngIf="orderForm.controls['orderNum'].errors?.required">Nie wprowadzono numeru zamówienia.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['orderNum'].errors?.maxlength">Nr zamówienia może zawierać maks. 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Wymagania do zamówienia</mat-label>
+                  <textarea matInput type="text" formControlName="orderRequirements" id="orderRequirements" tabindex="31" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['orderRequirements'].errors?.required">Nie wprowadzono wymagań do zamówienia.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['orderRequirements'].errors?.maxlength">Wymagania do zamówienia mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Data</mat-label>
+                  <input matInput [matDatepicker]="requirementsEstablishedDatePicker" tabindex="32" [formGroup]="orderForm" formControlName="requirementsEstablishedDate">
+                  <mat-datepicker-toggle matSuffix [for]="requirementsEstablishedDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #requirementsEstablishedDatePicker></mat-datepicker>
+                  <mat-error *ngIf="orderForm.controls.requirementsEstablishedDate.invalid">Nieprawidłowa data.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpis</mat-label>
+                  <mat-select formControlName="orderingPersonSignature" id="orderingPersonSignature" name="orderingPersonSignature" tabindex="33">
+                    <mat-option *ngFor="let orderingPersonSignature of orderingPersonSignature" [value]="orderingPersonSignature.orderingPersonSignature">
+                      {{orderingPersonSignature.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['orderingPersonSignature'].errors?.required">Nie określono, czy podpisano przez osobę zamawiającą.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="34" matStepperPrevious>Wstecz</button>
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="35" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Karta projektu</h2>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer karty projektu</mat-label>
+                  <input matInput type="text" formControlName="projectCardNumber" id="projectCardNumber" tabindex="36">
+                  <mat-error *ngIf="orderForm.controls['projectCardNumber'].errors?.required">Nie wprowadzono numeru karty projektu.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['projectCardNumber'].errors?.maxlength">Nr karty projektu może zawierać maks. 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer zamówienia</mat-label>
+                  <input matInput type="number" formControlName="orderNo" id="orderNo" tabindex="37">
+                  <mat-error *ngIf="orderForm.controls['orderNo'].errors?.required">Nie wprowadzono numeru zamówienia.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['orderNo'].errors?.maxlength">Nr zamówienia może zawierać maks. 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zamawiający</mat-label>
+                  <input matInput type="text" formControlName="orderingPersonName" id="orderingPersonName" tabindex="38">
+                  <mat-error *ngIf="orderForm.controls['orderingPersonName'].errors?.required">Nie wprowadzono nazwy zamawiającego.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['orderingPersonName'].errors?.maxlength">Nazwa zamawiającego może zawierać maksymalnie 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zespół projektowy</mat-label>
+                  <textarea matInput type="text" formControlName="projectTeam" id="projectTeam" tabindex="39" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['projectTeam'].errors?.required">Nie wprowadzono danych zespołu projektowego.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['projectTeam'].errors?.maxlength">Dane zespołu projektowego mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Nazwa dokumentu</mat-label>
+                  <input matInput type="text" formControlName="documentName" id="documentName" tabindex="40">
+                  <mat-error *ngIf="orderForm.controls['documentName'].errors?.required">Nie wprowadzono nazwy dokumentu.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['documentName'].errors?.maxlength">Nazwa dokumentu może zawierać maksymalnie 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer dokumentu</mat-label>
+                  <input matInput type="number" formControlName="documentNumber" id="documentNumber" tabindex="41">
+                  <mat-error *ngIf="orderForm.controls['documentNumber'].errors?.required">Nie wprowadzono numeru dokumentu.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['documentNumber'].errors?.maxlength">Numer dokumentu może zawierać maksymalnie 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Uwagi</mat-label>
+                  <textarea matInput type="text" formControlName="comments" id="comments" tabindex="42" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['comments'].errors?.maxlength">Uwagi mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Wynik przeglądu</mat-label>
+                  <textarea matInput type="text" formControlName="reviewResult" id="reviewResult" tabindex="43" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['reviewResult'].errors?.required">Nie wprowadzono wyniku przeglądu.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['reviewResult'].errors?.maxlength">Wynik przeglądu może zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zidentyfikowane problemy</mat-label>
+                  <textarea matInput type="text" formControlName="identifiedProblems" id="identifiedProblems" tabindex="44" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['identifiedProblems'].errors?.maxlength">Zidentyfikowane problemy mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Planowane działania</mat-label>
+                  <textarea matInput type="text" formControlName="plannedActivities" id="plannedActivities" tabindex="45" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['plannedActivities'].errors?.maxlength">Planowane działania mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Wynik weryfikacji</mat-label>
+                  <textarea matInput type="text" formControlName="verificationResult" id="verificationResult" tabindex="46" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['verificationResult'].errors?.required">Nie wprowadzono wyniku weryfikacji.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['verificationResult'].errors?.maxlength">Wynik weryfikacji może zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zidentyfikowane problemy</mat-label>
+                  <textarea matInput type="text" formControlName="encounteredProblems" id="encounteredProblems" tabindex="47" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['encounteredProblems'].errors?.maxlength">Zidentyfikowane problemy mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Planowane działania</mat-label>
+                  <textarea matInput type="text" formControlName="plannedWorks" id="plannedWorks" tabindex="48" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['plannedWorks'].errors?.maxlength">Planowane działania mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Wynik walidacji</mat-label>
+                  <textarea matInput type="text" formControlName="validationResult" id="validationResult" tabindex="49" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['validationResult'].errors?.required">Nie wprowadzono wyniku walidacji.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['validationResult'].errors?.maxlength">Wynik walidacji może zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zidentyfikowane problemy</mat-label>
+                  <textarea matInput type="text" formControlName="problems" id="problems" tabindex="50" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['problems'].errors?.maxlength">Zidentyfikowane problemy mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Planowane działania</mat-label>
+                  <textarea matInput type="text" formControlName="activities" id="activities" tabindex="51" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['activities'].errors?.maxlength">Planowane działania mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Opis zmiany</mat-label>
+                  <textarea matInput type="text" formControlName="descriptionOfChange" id="descriptionOfChange" tabindex="52" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['descriptionOfChange'].errors?.maxlength">Opis zmiany może zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer karty zmian</mat-label>
+                  <input matInput type="text" formControlName="shiftCardNumber" id="shiftCardNumber" tabindex="53">
+                  <mat-error *ngIf="orderForm.controls['shiftCardNumber'].errors?.maxlength">Numer karty zmian może zawierać maksymalnie 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Nazwa dokumentu</mat-label>
+                  <input matInput type="text" formControlName="docName" id="docName" tabindex="54">
+                  <mat-error *ngIf="orderForm.controls['docName'].errors?.maxlength">Nazwa dokumentu może zawierać maksymalnie 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer dokumentu/rysunku</mat-label>
+                  <input matInput type="text" formControlName="documentOrDrawingNumber" id="documentOrDrawingNumber" tabindex="55">
+                  <mat-error *ngIf="orderForm.controls['documentOrDrawingNumber'].errors?.required">Nie wprowadzono numeru dokumentu/rysunku.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['documentOrDrawingNumber'].errors?.maxlength">Numer dokumentu/rysunku może zawierać maksymalnie 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Uwagi</mat-label>
+                  <textarea matInput type="text" formControlName="remarks" id="remarks" tabindex="56" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['remarks'].errors?.maxlength">Uwagi mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Dodatkowe informacje</mat-label>
+                  <textarea matInput type="text" formControlName="additionalInformation" id="additionalInformation" tabindex="57" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['additionalInformation'].errors?.maxlength">Dodatkowe informacje mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Dodatkowe uwagi</mat-label>
+                  <textarea matInput type="text" formControlName="additionalComments" id="additionalComments" tabindex="58" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['additionalComments'].errors?.maxlength">Dodatkowe uwagi mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zatwierdzenie projektu</mat-label>
+                  <textarea matInput type="text" formControlName="projectApproval" id="projectApproval" tabindex="59" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['projectApproval'].errors?.required">Nie wprowadzono danych zatwierdzenia projektu.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['projectApproval'].errors?.maxlength">Dane zatwierdzenia projektu mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpisy zespołu projektowego</mat-label>
+                  <mat-select formControlName="designTeamSignatures" id="designTeamSignatures" name="designTeamSignatures" tabindex="60">
+                    <mat-option *ngFor="let designTeamSignatures of designTeamSignatures" [value]="designTeamSignatures.designTeamSignatures">
+                      {{designTeamSignatures.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['designTeamSignatures'].errors?.required">Nie określono, czy podpisano przez osobę zamawiającą.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="61" matStepperPrevious>Wstecz</button>
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="62" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Przewodnik pracy</h2>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer przewodnika pracy</mat-label>
+                  <input matInput type="text" formControlName="jobGuideNumber" id="jobGuideNumber" tabindex="63">
+                  <mat-error *ngIf="orderForm.controls['jobGuideNumber'].errors?.required">Nie wprowadzono numeru przewodnika pracy.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['jobGuideNumber'].errors?.maxlength">Numer przewodnika pracy może zawierać maksymalnie 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Data wydania</mat-label>
+                  <input matInput [matDatepicker]="releaseDatePicker" tabindex="64" [formGroup]="orderForm" formControlName="releaseDate">
+                  <mat-datepicker-toggle matSuffix [for]="releaseDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #releaseDatePicker></mat-datepicker>
+                  <mat-error *ngIf="orderForm.controls.releaseDate.invalid">Nieprawidłowa data wydania.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Klient</mat-label>
+                  <input matInput type="text" formControlName="customer" id="customer" tabindex="65">
+                  <mat-error *ngIf="orderForm.controls['customer'].errors?.required">Nie wprowadzono nazwy klienta.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['customer'].errors?.maxlength">Nazwa klienta może zawierać maksymalnie 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Nazwa części</mat-label>
+                  <input matInput type="text" formControlName="productName" id="productName" tabindex="66">
+                  <mat-error *ngIf="orderForm.controls['productName'].errors?.required">Nie wprowadzono nazwy części.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['productName'].errors?.maxlength">Nazwa części może zawierać maksymalnie 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer rysunku</mat-label>
+                  <input matInput type="text" formControlName="drawingNumber" id="drawingNumber" tabindex="67">
+                  <mat-error *ngIf="orderForm.controls['drawingNumber'].errors?.required">Nie wprowadzono numeru rysunku.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['drawingNumber'].errors?.maxlength">Numer rysunku może zawierać maksymalnie 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Wydanie rysunku</mat-label>
+                  <input matInput type="number" formControlName="drawingRelease" id="drawingRelease" tabindex="68">
+                  <mat-error *ngIf="orderForm.controls['drawingRelease'].errors?.required">Nie wprowadzono wydania rysunku.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['drawingRelease'].errors?.maxlength">Wydanie rysunku może zawierać maksymalnie 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Materiał</mat-label>
+                  <input matInput type="text" formControlName="material" id="material" tabindex="69">
+                  <mat-error *ngIf="orderForm.controls['material'].errors?.required">Nie wprowadzono materiału.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['material'].errors?.maxlength">Materiał może zawierać maksymalnie 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Wytop / atest / dowód dostawy</mat-label>
+                  <input matInput type="text" formControlName="meltCertificateProof" id="meltCertificateProof" tabindex="70">
+                  <mat-error *ngIf="orderForm.controls['meltCertificateProof'].errors?.required">Nie wprowadzono wytopu / atestu / dowodu dostawy.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['meltCertificateProof'].errors?.maxlength">Wytop / atest / dowód dostawy może zawierać maksymalnie 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer zamówienia</mat-label>
+                  <input matInput type="number" formControlName="orderNr" id="orderNr" tabindex="71">
+                  <mat-error *ngIf="orderForm.controls['orderNr'].errors?.required">Nie wprowadzono numeru zamówienia.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['orderNr'].errors?.maxlength">Numer zamówienia może zawierać maksymalnie 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Ilość sztuk</mat-label>
+                  <input matInput type="number" formControlName="quantity" id="quantity" tabindex="72">
+                  <mat-error *ngIf="orderForm.controls['quantity'].errors?.required">Nie wprowadzono ilości sztuk.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['quantity'].errors?.maxlength">Ilość sztuk może zawierać maksymalnie 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Treść przewodnika pracy</mat-label>
+                  <textarea matInput type="text" formControlName="jobGuideContent" id="jobGuideContent" tabindex="73" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['jobGuideContent'].errors?.required">Nie wprowadzono treści przewodnika pracy.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['jobGuideContent'].errors?.maxlength">Treść przewodnika pracy może zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="74" matStepperPrevious>Wstecz</button>
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="75" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Świadectwo jakości</h2>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer świadectwa jakości</mat-label>
+                  <input matInput type="text" formControlName="qualityCertificateNumber" id="qualityCertificateNumber" tabindex="76">
+                  <mat-error *ngIf="orderForm.controls['qualityCertificateNumber'].errors?.required">Nie wprowadzono numeru świadectwa jakości.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['qualityCertificateNumber'].errors?.maxlength">Numer świadectwa jakości może zawierać maksymalnie 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer zamówienia</mat-label>
+                  <input matInput type="number" formControlName="orderNbr" id="orderNbr" tabindex="77">
+                  <mat-error *ngIf="orderForm.controls['orderNbr'].errors?.required">Nie wprowadzono numeru zamówienia.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['orderNbr'].errors?.maxlength">Numer zamówienia może zawierać maksymalnie 15 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zamawiający</mat-label>
+                  <input matInput type="text" formControlName="purchaser" id="purchaser" tabindex="78">
+                  <mat-error *ngIf="orderForm.controls['purchaser'].errors?.required">Nie wprowadzono danych zamawiającego.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['purchaser'].errors?.maxlength">Dane zamawiającego mogą zawierać maksymalnie 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Lista wykonanych części lub zespołów</mat-label>
+                  <textarea matInput type="text" formControlName="madeProducts" id="madeProducts" tabindex="79" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['madeProducts'].errors?.required">Nie wprowadzono listy wykonanych części lub zespołów.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['madeProducts'].errors?.maxlength">Lista wykonanych części lub zespołów może zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Uwagi i ograniczenia</mat-label>
+                  <textarea matInput type="text" formControlName="remarksAndLimitations" id="remarksAndLimitations" tabindex="80" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['remarksAndLimitations'].errors?.maxlength">Uwagi i ograniczenia mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Stanowisko</mat-label>
+                  <input matInput type="text" formControlName="position" id="position" tabindex="81">
+                  <mat-error *ngIf="orderForm.controls['position'].errors?.required">Nie wprowadzono stanowiska.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['position'].errors?.maxlength">Stanowisko może zawierać maksymalnie 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Imię</mat-label>
+                  <input matInput type="text" formControlName="firstName" id="firstName" tabindex="82">
+                  <mat-error *ngIf="orderForm.controls['firstName'].errors?.required">Nie wprowadzono imienia.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['firstName'].errors?.maxlength">Imię może zawierać maksymalnie 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Nazwisko</mat-label>
+                  <input matInput type="text" formControlName="lastName" id="lastName" tabindex="83">
+                  <mat-error *ngIf="orderForm.controls['lastName'].errors?.required">Nie wprowadzono nazwiska.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['lastName'].errors?.maxlength">Nazwisko może zawierać maksymalnie 255 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpis</mat-label>
+                  <mat-select formControlName="signature" id="signature" name="signature" tabindex="84">
+                    <mat-option *ngFor="let signature of signature" [value]="signature.signature">
+                      {{signature.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['signature'].errors?.required">Nie określono, czy podpisano.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Data</mat-label>
+                  <input matInput [matDatepicker]="datePicker" tabindex="85" [formGroup]="orderForm" formControlName="date">
+                  <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #datePicker></mat-datepicker>
+                  <mat-error *ngIf="orderForm.controls.date.invalid">Nieprawidłowa data.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="86" matStepperPrevious>Wstecz</button>
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="87" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Ankieta zadowolenia klienta</h2>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Uwagi</mat-label>
+                  <textarea matInput type="text" formControlName="customerComments" id="customerComments" tabindex="88" rows="5"></textarea>
+                  <mat-error *ngIf="orderForm.controls['customerComments'].errors?.maxlength">Uwagi mogą zawierać maksymalnie 5000 znaków.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Poziom zadowolenia z czasu realizacji zamówienia</mat-label>
+                  <input matInput type="number" formControlName="timeSatisfaction" id="timeSatisfaction" tabindex="89">
+                  <mat-error *ngIf="orderForm.controls['timeSatisfaction'].errors?.required">Nie wprowadzono poziomu zadowolenia.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['timeSatisfaction'].errors?.pattern">Poziom zadowolenia może zawierać cyfrę od 1 do 5.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Poziom zadowolenia z jakości wykonanego zamówienia</mat-label>
+                  <input matInput type="number" formControlName="qualitySatisfaction" id="qualitySatisfaction" tabindex="90">
+                  <mat-error *ngIf="orderForm.controls['qualitySatisfaction'].errors?.required">Nie wprowadzono poziomu zadowolenia.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['qualitySatisfaction'].errors?.pattern">Poziom zadowolenia może zawierać cyfrę od 1 do 5.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpis osoby zamawiającej</mat-label>
+                  <mat-select formControlName="clientSignature" id="clientSignature" name="clientSignature" tabindex="91">
+                    <mat-option *ngFor="let clientSignature of clientSignature" [value]="clientSignature.clientSignature">
+                      {{clientSignature.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['clientSignature'].errors?.required">Nie określono, czy podpisano przez osobę zamawiającą.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpis wykonawcy</mat-label>
+                  <mat-select formControlName="executingPersonSignature" id="executingPersonSignature" name="executingPersonSignature" tabindex="92">
+                    <mat-option *ngFor="let executingPersonSignature of executingPersonSignature" [value]="executingPersonSignature.executingPersonSignature">
+                      {{executingPersonSignature.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="orderForm.controls['executingPersonSignature'].errors?.required">Nie określono, czy podpisano przez wykonawcę.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="93" matStepperPrevious>Wstecz</button>
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="94" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Podsumowanie</h2>
+            <p>
+              Jeżeli wszystkie dokumenty zostały wypełnione prawidłowo możesz je zapisać. W przeciwnym wypadku sprawdź wprowadzone dane
+              i nanieś stosowne poprawki. Powodem braku możliwości zapisu może być nieuzupełnienie wymaganych pól, wprowadzenie danych
+              w nieprawidłowym formacie lub wpisanie numeru identyfikacyjnego, który wcześniej przyporządkowano do innego
+              zamówienia. Jeśli nie chcesz skorzystać z opcji zapisu anuluj edycję zamówienia lub wyczyść pola dokumentów.
+            </p>
+            <div class="buttons">
+              <button mat-raised-button color="primary" type="submit" tabindex="95" [disabled]="!orderForm.valid">Zapisz</button>
+              <button class="cancel-button" mat-raised-button color="accent" tabindex="96" (click)="redirectToOrdersList()">Anuluj</button>
+              <button mat-raised-button color="warn" tabindex="97" (click)="resetOrderForm()">Wyczyść</button>
+            </div>
+          </mat-step>
+        </mat-stepper>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</mat-card>

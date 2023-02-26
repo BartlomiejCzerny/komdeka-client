@@ -34,19 +34,38 @@ export class ToolAddComponent implements OnInit {
   showError: boolean;
   hasMetrologicalService: boolean;
 
-  constructor(private toolService: ToolService, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(
+    private toolService: ToolService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     this.toolForm = new FormGroup({
-      idNumber: new FormControl('', [Validators.required, Validators.maxLength(15)]),
-      name: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      type: new FormControl('', [Validators.required]),
-      serialNumber: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      isMetrologicalService: new FormControl('', [Validators.required]),
+      idNumber: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(15)
+      ]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(255)
+      ]),
+      type: new FormControl('', [
+        Validators.required
+      ]),
+      serialNumber: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(255)
+      ]),
+      isMetrologicalService: new FormControl('', [
+        Validators.required
+      ]),
       metrologicalServiceInterval: new FormControl(''),
-      lastMetrologicalService: new FormControl(),
-      validUntil: new FormControl(),
-      status: new FormControl('', [Validators.required])
+      lastMetrologicalService: new FormControl(''),
+      validUntil: new FormControl(''),
+      status: new FormControl('', [
+        Validators.required
+      ])
     });
   }
 
@@ -67,10 +86,14 @@ export class ToolAddComponent implements OnInit {
       type: toolFormValue.type,
       serialNumber: toolFormValue.serialNumber,
       isMetrologicalService: toolFormValue.isMetrologicalService,
-      metrologicalServiceInterval: ((toolFormValue.lastMetrologicalService) != null && (toolFormValue.validUntil) != null)
-                                  ? (toolFormValue.validUntil.getFullYear() - toolFormValue.lastMetrologicalService.getFullYear()).toString() + ' lat(a)' : '',
-      lastMetrologicalService: toolFormValue.lastMetrologicalService,
-      validUntil: toolFormValue.validUntil,
+      metrologicalServiceInterval: ((toolFormValue.lastMetrologicalService) != null && (toolFormValue.validUntil) != null && toolFormValue.isMetrologicalService !== false)
+        ? (new Date(toolFormValue.validUntil).getFullYear() - new Date(toolFormValue.lastMetrologicalService).getFullYear()) == 1
+          ? (new Date(toolFormValue.validUntil).getFullYear() - new Date(toolFormValue.lastMetrologicalService).getFullYear()).toString() + ' rok' : (new Date(toolFormValue.validUntil).getFullYear() - new Date(toolFormValue.lastMetrologicalService).getFullYear()) >= 2 && (new Date(toolFormValue.validUntil).getFullYear() - new Date(toolFormValue.lastMetrologicalService).getFullYear()) <= 4
+            ? (new Date(toolFormValue.validUntil).getFullYear() - new Date(toolFormValue.lastMetrologicalService).getFullYear()).toString() + ' lata' : (new Date(toolFormValue.validUntil).getFullYear() - new Date(toolFormValue.lastMetrologicalService).getFullYear()) >= 5
+              ? (new Date(toolFormValue.validUntil).getFullYear() - new Date(toolFormValue.lastMetrologicalService).getFullYear()).toString() + ' lat(a)' : 'Mniej niż 1 rok'
+        : '',
+      lastMetrologicalService: toolFormValue.isMetrologicalService === true ? toolFormValue.lastMetrologicalService : null,
+      validUntil: toolFormValue.isMetrologicalService === true ? toolFormValue.validUntil : null,
       status: toolFormValue.status
     };
 

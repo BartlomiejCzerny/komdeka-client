@@ -1,3 +1,11 @@
+mat-card {
+  padding: 40px;
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 0 !important;
+}
+
 .search-form-field {
   display: block;
   max-width: 400px;
@@ -36,7 +44,7 @@ table {
 
 .mat-cell {
   text-align: center;
-  justify-content:center;
+  justify-content: center;
 }
 
 .add-order-button {
@@ -46,6 +54,7 @@ table {
 
 th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   padding: 5px 15px 5px 15px;
+  text-align: center;
 }
 
 :host ::ng-deep .mat-sort-header-container {
@@ -57,7 +66,9 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   .search-form-field {
     width: 100%;
   }
+}
 
+@media (max-width: 800px) and (orientation: portrait) {
   .hide-column {
     display: none;
   }

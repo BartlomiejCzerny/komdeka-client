@@ -1,1 +1,791 @@
-<p>order-delete works!</p>
+<mat-card>
+  <mat-card class="order-details-card">
+    <mat-card-header class="order-details-header">
+      <mat-card-title>Szczegóły zamówienia</mat-card-title>
+      <mat-card-subtitle>Zapoznaj się ze szczegółami tego zamówienia.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="order-form" [formGroup]="orderForm">
+        <mat-stepper [orientation]="(stepperOrientation | async)!" labelPosition="bottom">
+          <mat-step [stepControl]="orderForm">
+            <h2>Karta zamówienia</h2>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer identyfikacyjny</mat-label>
+                  <input matInput disabled [value]="order.idNumber">
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer zamówienia</mat-label>
+                  <input matInput disabled [value]="order.orderNumber">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Nazwa zamawiającego</mat-label>
+                  <input matInput disabled [value]="order.customerName">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Ulica</mat-label>
+                  <input matInput disabled [value]="order.street">
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer budynku</mat-label>
+                  <input matInput disabled [value]="order.buildingNumber">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Kod pocztowy</mat-label>
+                  <input matInput disabled [value]="order.zipCode">
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Miejscowość</mat-label>
+                  <input matInput disabled [value]="order.place">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Imię osoby zamawiającej</mat-label>
+                  <input matInput disabled [value]="order.customerFirstName">
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Nazwisko osoby zamawiającej</mat-label>
+                  <input matInput disabled [value]="order.customerLastName">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Data</mat-label>
+                  <input matInput disabled [matDatepicker]="admissionOrderDatePicker" [value]="order.admissionOrderDate">
+                  <mat-datepicker-toggle matSuffix [for]="admissionOrderDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #admissionOrderDatePicker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Opis zamówienia</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.orderDescription"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Uwagi do zamówienia</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.orderComments"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpis osoby zamawiającej</mat-label>
+                  <mat-select disabled [value]="order.customerSignature">
+                    <mat-option *ngFor="let customerSignature of customerSignature" [value]="customerSignature.customerSignature">
+                      {{customerSignature.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpis wykonawcy</mat-label>
+                  <mat-select disabled [value]="order.contractorSignature">
+                    <mat-option *ngFor="let contractorSignature of contractorSignature" [value]="contractorSignature.contractorSignature">
+                      {{contractorSignature.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="1" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Przegląd zamówienia</h2>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy wymagania do zamówienia są odpowiednio zdefiniowane?</mat-label>
+                  <mat-select disabled [value]="order.areRequirementsDefined">
+                    <mat-option *ngFor="let areRequirementsDefined of areRequirementsDefined" [value]="areRequirementsDefined.areRequirementsDefined">
+                      {{areRequirementsDefined.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy wszystkie rysunki i dokumenty są aktualne?</mat-label>
+                  <mat-select disabled [value]="order.areDocumentsUpToDate">
+                    <mat-option *ngFor="let areDocumentsUpToDate of areDocumentsUpToDate" [value]="areDocumentsUpToDate.areDocumentsUpToDate">
+                      {{areDocumentsUpToDate.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy posiadamy aktualne zatwierdzenia jakości?</mat-label>
+                  <mat-select disabled [value]="order.areQualityApprovalsUpToDate">
+                    <mat-option *ngFor="let areQualityApprovalsUpToDate of areQualityApprovalsUpToDate" [value]="areQualityApprovalsUpToDate.areQualityApprovalsUpToDate">
+                      {{areQualityApprovalsUpToDate.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy proponowani poddostawcy posiadają niezbędne zatwierdzenia?</mat-label>
+                  <mat-select disabled [value]="order.haveSuppliersApprovals">
+                    <mat-option *ngFor="let haveSuppliersApprovals of haveSuppliersApprovals" [value]="haveSuppliersApprovals.haveSuppliersApprovals">
+                      {{haveSuppliersApprovals.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy mamy niezbędne procedury produkcji i wyposażenia?</mat-label>
+                  <mat-select disabled [value]="order.haveProductionAndEquipmentProcedures">
+                    <mat-option *ngFor="let haveProductionAndEquipmentProcedures of haveProductionAndEquipmentProcedures" [value]="haveProductionAndEquipmentProcedures.haveProductionAndEquipmentProcedures">
+                      {{haveProductionAndEquipmentProcedures.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy mamy niezbędne procedury kontroli?</mat-label>
+                  <mat-select disabled [value]="order.haveControlProcedures">
+                    <mat-option *ngFor="let haveControlProcedures of haveControlProcedures" [value]="haveControlProcedures.haveControlProcedures">
+                      {{haveControlProcedures.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy mamy niezbędne zasoby do wykonania wyrobu lub usługi?</mat-label>
+                  <mat-select disabled [value]="order.haveTheResources">
+                    <mat-option *ngFor="let haveTheResources of haveTheResources" [value]="haveTheResources.haveTheResources">
+                      {{haveTheResources.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy mamy wystarczającą ilość pracowników i umiejętności?</mat-label>
+                  <mat-select disabled [value]="order.haveEmployeesAndSkills">
+                    <mat-option *ngFor="let haveEmployeesAndSkills of haveEmployeesAndSkills" [value]="haveEmployeesAndSkills.haveEmployeesAndSkills">
+                      {{haveEmployeesAndSkills.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy wymagania kontroli pierwszej sztuki jasno zostały zdefiniowane i wzięte pod uwagę?</mat-label>
+                  <mat-select disabled [value]="order.areFirstPieceRequirementsDefined">
+                    <mat-option *ngFor="let areFirstPieceRequirementsDefined of areFirstPieceRequirementsDefined" [value]="areFirstPieceRequirementsDefined.areFirstPieceRequirementsDefined">
+                      {{areFirstPieceRequirementsDefined.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy posiadamy magazyny i zasoby do produkcji?</mat-label>
+                  <mat-select disabled [value]="order.haveWarehousesAndResources">
+                    <mat-option *ngFor="let haveWarehousesAndResources of haveWarehousesAndResources" [value]="haveWarehousesAndResources.haveWarehousesAndResources">
+                      {{haveWarehousesAndResources.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy ryzyko zostało ocenione?</mat-label>
+                  <mat-select disabled [value]="order.hasRiskAssessed">
+                    <mat-option *ngFor="let hasRiskAssessed of hasRiskAssessed" [value]="hasRiskAssessed.hasRiskAssessed">
+                      {{hasRiskAssessed.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy cena na zamówieniu odpowiada cenie oferowanej?</mat-label>
+                  <mat-select disabled [value]="order.isPriceCorrect">
+                    <mat-option *ngFor="let isPriceCorrect of isPriceCorrect" [value]="isPriceCorrect.isPriceCorrect">
+                      {{isPriceCorrect.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Czy warunki dostaw zostały sprawdzone?</mat-label>
+                  <mat-select disabled [value]="order.areDeliveryTermsChecked">
+                    <mat-option *ngFor="let areDeliveryTermsChecked of areDeliveryTermsChecked" [value]="areDeliveryTermsChecked.areDeliveryTermsChecked">
+                      {{areDeliveryTermsChecked.orderReviewOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Wynik przeglądu</mat-label>
+                  <input matInput disabled [value]="order.orderReviewResult ? 'Pozytywny' : 'Negatywny'">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="2" matStepperPrevious>Wstecz</button>
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="3" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Wymagania do zamówienia</h2>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer zamówienia</mat-label>
+                  <input matInput disabled [value]="order.orderNum">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Wymagania do zamówienia</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.orderRequirements"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Data</mat-label>
+                  <input matInput disabled [matDatepicker]="requirementsEstablishedDatePicker" [value]="order.requirementsEstablishedDate">
+                  <mat-datepicker-toggle matSuffix [for]="requirementsEstablishedDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #requirementsEstablishedDatePicker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpis</mat-label>
+                  <mat-select disabled [value]="order.orderingPersonSignature">
+                    <mat-option *ngFor="let orderingPersonSignature of orderingPersonSignature" [value]="orderingPersonSignature.orderingPersonSignature">
+                      {{orderingPersonSignature.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="4" matStepperPrevious>Wstecz</button>
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="5" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Karta projektu</h2>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer karty projektu</mat-label>
+                  <input matInput disabled [value]="order.projectCardNumber">
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer zamówienia</mat-label>
+                  <input matInput disabled [value]="order.orderNo">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zamawiający</mat-label>
+                  <input matInput disabled [value]="order.orderingPersonName">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zespół projektowy</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.projectTeam"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Nazwa dokumentu</mat-label>
+                  <input matInput disabled [value]="order.documentName">
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer dokumentu</mat-label>
+                  <input matInput disabled [value]="order.documentNumber">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Uwagi</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.comments"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Wynik przeglądu</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.reviewResult"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zidentyfikowane problemy</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.identifiedProblems"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Planowane działania</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.plannedActivities"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Wynik weryfikacji</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.verificationResult"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zidentyfikowane problemy</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.encounteredProblems"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Planowane działania</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.plannedWorks"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Wynik walidacji</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.validationResult"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zidentyfikowane problemy</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.problems"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Planowane działania</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.activities"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Opis zmiany</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.descriptionOfChange"></textarea>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer karty zmian</mat-label>
+                  <input matInput disabled [value]="order.shiftCardNumber">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Nazwa dokumentu</mat-label>
+                  <input matInput disabled [value]="order.docName">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer dokumentu/rysunku</mat-label>
+                  <input matInput disabled [value]="order.documentOrDrawingNumber">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Uwagi</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.remarks"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Dodatkowe informacje</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.additionalInformation"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Dodatkowe uwagi</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.additionalComments"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zatwierdzenie projektu</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.projectApproval"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpisy zespołu projektowego</mat-label>
+                  <mat-select disabled [value]="order.designTeamSignatures">
+                    <mat-option *ngFor="let designTeamSignatures of designTeamSignatures" [value]="designTeamSignatures.designTeamSignatures">
+                      {{designTeamSignatures.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="6" matStepperPrevious>Wstecz</button>
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="7" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Przewodnik pracy</h2>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer przewodnika pracy</mat-label>
+                  <input matInput disabled [value]="order.jobGuideNumber">
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Data wydania</mat-label>
+                  <input matInput disabled [matDatepicker]="releaseDatePicker" [value]="order.releaseDate">
+                  <mat-datepicker-toggle matSuffix [for]="releaseDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #releaseDatePicker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Klient</mat-label>
+                  <input matInput disabled [value]="order.customer">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Nazwa części</mat-label>
+                  <input matInput disabled [value]="order.productName">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer rysunku</mat-label>
+                  <input matInput disabled [value]="order.drawingNumber">
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Wydanie rysunku</mat-label>
+                  <input matInput disabled [value]="order.drawingRelease">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Materiał</mat-label>
+                  <input matInput disabled [value]="order.material">
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Wytop / atest / dowód dostawy</mat-label>
+                  <input matInput disabled [value]="order.meltCertificateProof">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer zamówienia</mat-label>
+                  <input matInput disabled [value]="order.orderNr">
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Ilość sztuk</mat-label>
+                  <input matInput disabled [value]="order.quantity">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Treść przewodnika pracy</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.jobGuideContent"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="8" matStepperPrevious>Wstecz</button>
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="9" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Świadectwo jakości</h2>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer świadectwa jakości</mat-label>
+                  <input matInput disabled [value]="order.qualityCertificateNumber">
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Numer zamówienia</mat-label>
+                  <input matInput disabled [value]="order.orderNbr">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Zamawiający</mat-label>
+                  <input matInput disabled [value]="order.purchaser">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Lista wykonanych części lub zespołów</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.madeProducts"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Uwagi i ograniczenia</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.remarksAndLimitations"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Stanowisko</mat-label>
+                  <input matInput disabled [value]="order.position">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Imię</mat-label>
+                  <input matInput disabled [value]="order.firstName">
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Nazwisko</mat-label>
+                  <input matInput disabled [value]="order.lastName">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpis</mat-label>
+                  <mat-select disabled [value]="order.signature">
+                    <mat-option *ngFor="let signature of signature" [value]="signature.signature">
+                      {{signature.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Data</mat-label>
+                  <input matInput disabled [matDatepicker]="datePicker" [value]="order.date">
+                  <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #datePicker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="10" matStepperPrevious>Wstecz</button>
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="11" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Ankieta zadowolenia klienta</h2>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Uwagi</mat-label>
+                  <textarea matInput disabled rows="5" [value]="order.customerComments"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Poziom zadowolenia z czasu realizacji zamówienia</mat-label>
+                  <input matInput disabled [value]="order.timeSatisfaction">
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Poziom zadowolenia z jakości wykonanego zamówienia</mat-label>
+                  <input matInput disabled [value]="order.qualitySatisfaction">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="input-field">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpis osoby zamawiającej</mat-label>
+                  <mat-select disabled [value]="order.clientSignature">
+                    <mat-option *ngFor="let clientSignature of clientSignature" [value]="clientSignature.clientSignature">
+                      {{clientSignature.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="input-field input-space">
+                <mat-form-field class="field-width" appearance="fill">
+                  <mat-label>Podpis wykonawcy</mat-label>
+                  <mat-select disabled [value]="order.executingPersonSignature">
+                    <mat-option *ngFor="let executingPersonSignature of executingPersonSignature" [value]="executingPersonSignature.executingPersonSignature">
+                      {{executingPersonSignature.signatureOption}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="12" matStepperPrevious>Wstecz</button>
+              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="13" matStepperNext>Dalej</button>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="orderForm">
+            <h2>Podsumowanie</h2>
+            <p>
+              Jeżeli wszystkie dokumenty zostały wypełnione prawidłowo możesz je zapisać. W przeciwnym wypadku sprawdź wprowadzone dane
+              i nanieś stosowne poprawki. Powodem braku możliwości zapisu może być nieuzupełnienie wymaganych pól, wprowadzenie danych
+              w nieprawidłowym formacie lub wpisanie numeru identyfikacyjnego, który wcześniej przyporządkowano do innego
+              zamówienia. Jeśli nie chcesz skorzystać z opcji zapisu anuluj dodawanie zamówienia lub wyczyść pola dokumentów.
+            </p>
+            <div class="buttons">
+              <button mat-raised-button color="warn" tabindex="14" (click)="deleteOrder()">Usuń</button>
+              <button class="cancel-button" mat-raised-button color="accent" tabindex="15" (click)="redirectToOrdersList()">Anuluj</button>
+            </div>
+          </mat-step>
+        </mat-stepper>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</mat-card>

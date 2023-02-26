@@ -19,7 +19,7 @@ export class OrdersListComponent implements OnInit {
     'orderNumber',
     'admissionOrderDate',
     'customerName',
-    'reviewResult',
+    'orderReviewResult',
     'orderComments',
     'actions'
   ];
