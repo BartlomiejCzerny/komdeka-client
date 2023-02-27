@@ -10,7 +10,7 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Numer identyfikacyjny</mat-label>
-              <input matInput tabindex="1" [value]="supplier.idNumber" [readonly]="true">
+              <input matInput disabled [value]="supplier.idNumber">
             </mat-form-field>
           </div>
         </div>
@@ -18,13 +18,13 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Data zatwierdzenia</mat-label>
-              <input matInput tabindex="2" [value]="supplier.approvalDate | date:'dd.MM.yyyy'" [readonly]="true">
+              <input matInput disabled [value]="supplier.approvalDate | date:'dd.MM.yyyy'">
             </mat-form-field>
           </div>
           <div class="input-field input-space">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Data wygaśnięcia zatwierdzenia</mat-label>
-              <input matInput tabindex="3" [value]="supplier.approvalExpirationDate | date:'dd.MM.yyyy'" [readonly]="true">
+              <input matInput disabled [value]="supplier.approvalExpirationDate | date:'dd.MM.yyyy'">
             </mat-form-field>
           </div>
         </div>
@@ -32,7 +32,7 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Nazwa</mat-label>
-              <input matInput tabindex="4" [value]="supplier.name" [readonly]="true">
+              <input matInput disabled [value]="supplier.name">
             </mat-form-field>
           </div>
         </div>
@@ -40,13 +40,13 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Ulica</mat-label>
-              <input matInput tabindex="5" [value]="supplier.street" [readonly]="true">
+              <input matInput disabled [value]="supplier.street">
             </mat-form-field>
           </div>
           <div class="input-field input-space">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Numer budynku</mat-label>
-              <input matInput tabindex="6" [value]="supplier.buildingNumber" [readonly]="true">
+              <input matInput disabled [value]="supplier.buildingNumber">
             </mat-form-field>
           </div>
         </div>
@@ -54,13 +54,13 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Kod pocztowy</mat-label>
-              <input matInput tabindex="7" [value]="supplier.zipCode" [readonly]="true">
+              <input matInput disabled [value]="supplier.zipCode">
             </mat-form-field>
           </div>
           <div class="input-field input-space">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Miejscowość</mat-label>
-              <input matInput tabindex="8" [value]="supplier.place" [readonly]="true">
+              <input matInput disabled [value]="supplier.place">
             </mat-form-field>
           </div>
         </div>
@@ -68,7 +68,7 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Zakres działalności</mat-label>
-              <textarea matInput tabindex="8" [value]="supplier.activitiesRange" [readonly]="true"></textarea>
+              <textarea matInput disabled rows="5" [value]="supplier.activitiesRange"></textarea>
             </mat-form-field>
           </div>
         </div>
@@ -76,57 +76,13 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Uwagi</mat-label>
-              <textarea matInput tabindex="9" [value]="supplier.remarks" [readonly]="true"></textarea>
+              <textarea matInput disabled rows="5" [value]="supplier.remarks"></textarea>
             </mat-form-field>
           </div>
         </div>
         <div class="buttons">
-          <button mat-raised-button color="warn" tabindex="10" (click)="deleteSupplier()">Usuń</button>
-          <button class="cancel-button" mat-raised-button color="accent" tabindex="11" (click)="redirectToSuppliersList()">Anuluj</button>
-        </div>
-      </form>
-      <form class="supplier-mobile-form">
-        <div class="input-container">
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Numer identyfikacyjny</mat-label>
-            <input matInput tabindex="1" [value]="supplier.idNumber" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Data zatwierdzenia</mat-label>
-            <input matInput tabindex="2" [value]="supplier.approvalDate | date:'dd.MM.yyyy'" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Data wygaśnięcia zatwierdzenia</mat-label>
-            <input matInput tabindex="3" [value]="supplier.approvalExpirationDate | date:'dd.MM.yyyy'" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Nazwa</mat-label>
-            <input matInput tabindex="4" [value]="supplier.name" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Ulica</mat-label>
-            <input matInput tabindex="5" [value]="supplier.street" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Numer budynku</mat-label>
-            <input matInput tabindex="6" [value]="supplier.buildingNumber" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Kod pocztowy</mat-label>
-            <input matInput tabindex="7" [value]="supplier.zipCode" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Zakres działalności</mat-label>
-            <textarea matInput tabindex="8" [value]="supplier.activitiesRange" [readonly]="true"></textarea>
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Uwagi</mat-label>
-            <textarea matInput tabindex="9" [value]="supplier.remarks" [readonly]="true"></textarea>
-          </mat-form-field>
-        </div>
-        <div class="buttons">
-          <button mat-raised-button color="warn" tabindex="10" (click)="deleteSupplier()">Usuń</button>
-          <button class="cancel-button" mat-raised-button color="accent" tabindex="11" (click)="redirectToSuppliersList()">Anuluj</button>
+          <button mat-raised-button color="warn" tabindex="1" (click)="deleteSupplier()">Usuń</button>
+          <button class="cancel-button" mat-raised-button color="accent" tabindex="2" (click)="redirectToSuppliersList()">Anuluj</button>
         </div>
       </form>
     </mat-card-content>

@@ -13,6 +13,23 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ToolDetailsComponent implements OnInit {
   tool: Tool;
 
+  types: Tool[] = [
+    { type: 'Narzędzie mechaniczne' },
+    { type: 'Narzędzie pomiarowe' },
+    { type: 'Inne' }
+  ]
+
+  isMetrologicalService: Tool[] = [
+    { isMetrologicalService: true, isMetrologicalServiceOption: 'Tak' },
+    { isMetrologicalService: false, isMetrologicalServiceOption: 'Nie' }
+  ]
+
+  statuses: Tool[] = [
+    { status: 'W użyciu' },
+    { status: 'Wysłany do obsługi' },
+    { status: 'Wycofany z użytkowania' }
+  ]
+
   constructor(
     private toolService: ToolService,
     private errorHandlerService: ErrorHandlerService,
