@@ -6,22 +6,17 @@
     </mat-card-header>
     <mat-card-content>
       <form class="tool-form">
-        <div *ngIf="showError" class="input-container">
-          <div class="input-field">
-            <mat-card class="error-card">{{errorMessage}}</mat-card>
-          </div>
-        </div>
         <div class="input-container">
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Numer identyfikacyjny</mat-label>
-              <input matInput tabindex="1" [value]="tool.idNumber" [readonly]="true">
+              <input matInput disabled [value]="tool.idNumber">
             </mat-form-field>
           </div>
           <div class="input-field input-space">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Numer fabryczny</mat-label>
-              <input matInput tabindex="2" [value]="tool.serialNumber" [readonly]="true">
+              <input matInput disabled [value]="tool.serialNumber">
             </mat-form-field>
           </div>
         </div>
@@ -29,7 +24,7 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Nazwa</mat-label>
-              <input matInput tabindex="3" [value]="tool.name" [readonly]="true">
+              <input matInput disabled [value]="tool.name">
             </mat-form-field>
           </div>
         </div>
@@ -37,13 +32,21 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Typ</mat-label>
-              <input matInput tabindex="4" [value]="tool.type" [readonly]="true">
+              <mat-select disabled [value]="tool.type">
+                <mat-option *ngFor="let type of types" [value]="type.type">
+                  {{type.type}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
           <div class="input-field input-space">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Czy podlega obsłudze metrologicznej?</mat-label>
-              <input matInput tabindex="5" [value]="tool.isMetrologicalService === true ? 'Tak' : 'Nie'" [readonly]="true">
+              <mat-select disabled [value]="tool.isMetrologicalService">
+                <mat-option *ngFor="let isMetrologicalService of isMetrologicalService" [value]="isMetrologicalService.isMetrologicalService">
+                  {{isMetrologicalService.isMetrologicalServiceOption}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
         </div>
@@ -51,13 +54,13 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Interwał obsługi metrologicznej</mat-label>
-              <input matInput tabindex="6" [value]="tool.metrologicalServiceInterval != '' ? tool.metrologicalServiceInterval : '-'" [readonly]="true">
+              <input matInput disabled [value]="tool.metrologicalServiceInterval != '' ? tool.metrologicalServiceInterval : '-'">
             </mat-form-field>
           </div>
           <div class="input-field input-space">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Data ostatniej obsługi metrologicznej</mat-label>
-              <input matInput tabindex="7" [value]="tool.lastMetrologicalService != null ? (tool.lastMetrologicalService | date:'dd.MM.yyyy') : '-'" [readonly]="true">
+              <input matInput disabled [value]="tool.lastMetrologicalService != null ? (tool.lastMetrologicalService | date:'dd.MM.yyyy') : '-'">
             </mat-form-field>
           </div>
         </div>
@@ -65,68 +68,23 @@
           <div class="input-field">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Ważny do</mat-label>
-              <input matInput tabindex="8" [value]="tool.validUntil != null ? (tool.validUntil | date:'dd.MM.yyyy') : '-'" [readonly]="true">
+              <input matInput disabled [value]="tool.validUntil != null ? (tool.validUntil | date:'dd.MM.yyyy') : '-'">
             </mat-form-field>
           </div>
           <div class="input-field input-space">
             <mat-form-field class="field-width" appearance="fill">
               <mat-label>Status</mat-label>
-              <input matInput tabindex="9" [value]="tool.status" [readonly]="true">
+              <mat-select disabled [value]="tool.status">
+                <mat-option *ngFor="let status of statuses" [value]="status.status">
+                  {{status.status}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
         </div>
         <div class="buttons">
-          <button mat-raised-button color="warn" tabindex="10" (click)="deleteTool()">Usuń</button>
-          <button class="cancel-button" mat-raised-button color="accent" tabindex="11" (click)="redirectToToolsList()">Anuluj</button>
-        </div>
-      </form>
-      <form class="tool-mobile-form">
-        <div *ngIf="showError" class="input-container">
-          <div class="input-field">
-            <mat-card class="error-card">{{errorMessage}}</mat-card>
-          </div>
-        </div>
-        <div class="input-container">
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Numer identyfikacyjny</mat-label>
-            <input matInput tabindex="1" [value]="tool.idNumber" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Numer fabryczny</mat-label>
-            <input matInput tabindex="2" [value]="tool.serialNumber" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Nazwa</mat-label>
-            <input matInput tabindex="3" [value]="tool.name" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Typ</mat-label>
-            <input matInput tabindex="4" [value]="tool.type" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Czy podlega obsłudze metrologicznej?</mat-label>
-            <input matInput tabindex="5" [value]="tool.isMetrologicalService === true ? 'Tak' : 'Nie'" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Interwał obsługi metrologicznej</mat-label>
-            <input matInput tabindex="6" [value]="tool.metrologicalServiceInterval != '' ? tool.metrologicalServiceInterval : '-'" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Data ostatniej obsługi metrologicznej</mat-label>
-            <input matInput tabindex="7" [value]="tool.lastMetrologicalService != null ? (tool.lastMetrologicalService | date:'dd.MM.yyyy') : '-'" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Ważny do</mat-label>
-            <input matInput tabindex="8" [value]="tool.validUntil != null ? (tool.validUntil | date:'dd.MM.yyyy') : '-'" [readonly]="true">
-          </mat-form-field>
-          <mat-form-field class="field-width" appearance="fill">
-            <mat-label>Status</mat-label>
-            <input matInput tabindex="9" [value]="tool.status" [readonly]="true">
-          </mat-form-field>
-        </div>
-        <div class="buttons">
-          <button mat-raised-button color="warn" tabindex="10" (click)="deleteTool()">Usuń</button>
-          <button class="cancel-button" mat-raised-button color="accent" tabindex="11" (click)="redirectToToolsList()">Anuluj</button>
+          <button mat-raised-button color="warn" tabindex="1" (click)="deleteTool()">Usuń</button>
+          <button class="cancel-button" mat-raised-button color="accent" tabindex="2" (click)="redirectToToolsList()">Anuluj</button>
         </div>
       </form>
     </mat-card-content>

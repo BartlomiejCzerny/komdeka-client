@@ -49,19 +49,8 @@ button {
   justify-content: center;
 }
 
-.supplier-mobile-form {
-  display: none;
-}
-
 @media (max-width: 700px) and (orientation: portrait) {
-  .supplier-mobile-form {
-    display: block;
-    min-width: 200px;
-    max-width: 1000px;
-    width: 100%;
-  }
-
-  .supplier-delete-card > mat-card-content > .supplier-mobile-form > .input-container {
+  .supplier-delete-card > mat-card-content > .supplier-form > .input-container {
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -70,7 +59,12 @@ button {
     display: block;
   }
 
-  .supplier-form {
-    display: none;
+  .input-space {
+    margin-left: 0;
+  }
+
+  .cancel-button {
+    margin-left: 8px;
+    margin-right: 8px;
   }
 }
