@@ -48,7 +48,6 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Ważny do</th>
           <td mat-cell *matCellDef="let element">
             {{element.validUntil != null ? (element.validUntil | date:'dd.MM.yyyy') : '-'}}
-            <!-- {{(element.validUntil - today <= 14) ? !testowa : '-'}} -->
           </td>
         </ng-container>
         <ng-container matColumnDef="status">
@@ -84,6 +83,3 @@
     </div>
   </mat-card-content>
 </mat-card>
-
-
-<!-- <ng-container *ngIf="testowa">DZIAŁA</ng-container> -->
