@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({
   selector: 'app-forbidden',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./forbidden.component.scss']
 })
 export class ForbiddenComponent implements OnInit {
+  isUserAuthenticated = false;
+  isUserAdmin = false;
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
+    if (this.authenticationService.isUserAuthenticated())
+      this.isUserAuthenticated = true;
+    if (this.authenticationService.isUserAdmin())
+      this.isUserAdmin = true;
   }
-
 }

@@ -70,6 +70,13 @@ export class AuthenticationService {
     return token && !this.jwtHelper.isTokenExpired(token);
   };
 
+  public isUserAdmin(): any {
+    const token = localStorage.getItem('token');
+    const decodedToken = this.jwtHelper.decodeToken(token?.toString());
+    const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    return role === 'Administrator';
+  }
+
   private createCompleteRoute(route: string, envAddress: string) {
     return `${envAddress}/${route}`;
   }

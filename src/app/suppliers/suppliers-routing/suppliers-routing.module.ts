@@ -6,13 +6,14 @@ import { SupplierDetailsComponent } from '../supplier-details/supplier-details.c
 import { SupplierAddComponent } from '../supplier-add/supplier-add.component';
 import { SupplierEditComponent } from '../supplier-edit/supplier-edit.component';
 import { SupplierDeleteComponent } from '../supplier-delete/supplier-delete.component';
+import { AdminGuard } from '../../shared/guards/admin.guard';
 
 const routes: Routes = [
   { path: 'suppliers-list', component: SuppliersListComponent },
   { path: 'supplier-details/:id', component: SupplierDetailsComponent },
-  { path: 'supplier-add', component: SupplierAddComponent },
+  { path: 'supplier-add', component: SupplierAddComponent, canActivate: [AdminGuard]},
   { path: 'supplier-edit/:id', component: SupplierEditComponent },
-  { path: 'supplier-delete/:id', component: SupplierDeleteComponent }
+  { path: 'supplier-delete/:id', component: SupplierDeleteComponent, canActivate: [AdminGuard]}
 ];
 
 @NgModule({
