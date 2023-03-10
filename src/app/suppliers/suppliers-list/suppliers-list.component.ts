@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Supplier } from './../../interfaces/supplier/supplier.interface';
 import { SupplierService } from 'src/app/shared/services/supplier.service';
+import { AuthenticationService } from '../../shared/services/authentication.service';
 
 @Component({
   selector: 'app-suppliers-list',
@@ -12,6 +13,8 @@ import { SupplierService } from 'src/app/shared/services/supplier.service';
   styleUrls: ['./suppliers-list.component.scss']
 })
 export class SuppliersListComponent implements OnInit {
+  isUserAdmin = false;
+
   searchKey: string;
 
   public displayedColumns = [
@@ -35,11 +38,14 @@ export class SuppliersListComponent implements OnInit {
 
   constructor(
     private supplierService: SupplierService,
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
     this.getSuppliers();
+    if (this.authenticationService.isUserAdmin())
+      this.isUserAdmin = true;
   }
 
   getSuppliers() {

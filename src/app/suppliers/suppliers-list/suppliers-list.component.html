@@ -12,7 +12,7 @@
           <mat-icon>cancel</mat-icon>
         </button>
       </mat-form-field>
-      <button class="add-supplier-button" mat-raised-button color="primary" (click)="redirectToAdd()">Dodaj dostawcę</button>
+      <button class="add-supplier-button" mat-raised-button color="primary" (click)="redirectToAdd()" *ngIf="isUserAdmin">Dodaj dostawcę</button>
     </div>
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="suppliersData" matSort>
@@ -71,7 +71,7 @@
                 <mat-icon>edit</mat-icon>
                 <span>Edycja</span>
               </button>
-              <button mat-menu-item (click)="redirectToDelete(element.idNumber)">
+              <button mat-menu-item (click)="redirectToDelete(element.idNumber)" *ngIf="isUserAdmin">
                 <mat-icon>delete</mat-icon>
                 <span>Usuwanie</span>
               </button>

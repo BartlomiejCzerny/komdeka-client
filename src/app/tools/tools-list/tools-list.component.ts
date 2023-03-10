@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Tool } from '../../interfaces/tool/tool.interface';
 import { ToolService } from '../../shared/services/tool.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 
 @Component({
@@ -13,6 +14,8 @@ import { ToolService } from '../../shared/services/tool.service';
   styleUrls: ['./tools-list.component.scss'],
 })
 export class ToolsListComponent implements OnInit {
+  isUserAdmin = false;
+
   searchKey: string;
 
   testowa = false;
@@ -36,10 +39,12 @@ export class ToolsListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private toolService: ToolService, private router: Router) { }
+  constructor(private toolService: ToolService, private router: Router, private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.getTools();
+    if (this.authenticationService.isUserAdmin())
+      this.isUserAdmin = true;
   }
 
   getTools() {

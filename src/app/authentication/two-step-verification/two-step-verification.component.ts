@@ -57,7 +57,8 @@ export class TwoStepVerificationComponent implements OnInit {
           this.authenticationService.sendAuthStateChangeNotification(
             res.isAuthSuccessful
           );
-          this.router.navigate([this.returnUrl]);
+          // this.router.navigate([this.returnUrl]);
+          this.router.navigate(['/orders/orders-list']);
         },
         (error) => {
           this.errorMessage = error;

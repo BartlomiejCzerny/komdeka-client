@@ -16,6 +16,10 @@ import { AboutComponent } from './about/about.component';
 import { AccountActivationDialogComponent } from './authentication/account-activation/account-activation-dialog/account-activation-dialog.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -29,21 +29,23 @@
         </a>
         <mat-divider></mat-divider>
       </div>
-      <a mat-list-item [routerLink]="['/orders/orders-list']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <mat-icon class="img-space">article</mat-icon>
-        Zamówienia
-      </a>
-      <mat-divider></mat-divider>
-      <a mat-list-item [routerLink]="['/suppliers/suppliers-list']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <mat-icon class="img-space">groups</mat-icon>
-        Dostawcy
-      </a>
-      <mat-divider></mat-divider>
-      <a mat-list-item [routerLink]="['/tools/tools-list']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <mat-icon class="img-space">construction</mat-icon>
-        Narzędzia
-      </a>
-      <mat-divider></mat-divider>
+      <div *ngIf="isUserAuthenticated">
+        <a mat-list-item [routerLink]="['/orders/orders-list']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <mat-icon class="img-space">article</mat-icon>
+          Zamówienia
+        </a>
+        <mat-divider></mat-divider>
+        <a mat-list-item [routerLink]="['/suppliers/suppliers-list']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <mat-icon class="img-space">groups</mat-icon>
+          Dostawcy
+        </a>
+        <mat-divider></mat-divider>
+        <a mat-list-item [routerLink]="['/tools/tools-list']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <mat-icon class="img-space">construction</mat-icon>
+          Narzędzia
+        </a>
+        <mat-divider></mat-divider>
+      </div>
       <a mat-list-item [routerLink]="['/about']">
         <mat-icon class="img-space">info</mat-icon>
         O systemie
