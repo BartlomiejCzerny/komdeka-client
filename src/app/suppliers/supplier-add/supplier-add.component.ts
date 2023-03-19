@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { Router } from '@angular/router';
 import { SupplierService } from 'src/app/shared/services/supplier.service';
 import { Supplier } from '../../interfaces/supplier/supplier.interface';
@@ -11,7 +11,7 @@ import { Supplier } from '../../interfaces/supplier/supplier.interface';
   styleUrls: ['./supplier-add.component.scss']
 })
 export class SupplierAddComponent implements OnInit {
-  supplierForm: FormGroup;
+  supplierForm: UntypedFormGroup;
 
   errorMessage: string;
   showError: boolean;
@@ -23,44 +23,44 @@ export class SupplierAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.supplierForm = new FormGroup({
-      idNumber: new FormControl('', [
+    this.supplierForm = new UntypedFormGroup({
+      idNumber: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(15),
       ]),
-      name: new FormControl('', [
+      name: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      street: new FormControl('', [
+      street: new UntypedFormControl('', [
         Validators.pattern('[a-zA-Z- ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]*'),
         Validators.maxLength(255)
       ]),
-      buildingNumber: new FormControl('', [
+      buildingNumber: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('[0-9a-zA-Z /]*'),
         Validators.maxLength(15)
       ]),
-      zipCode: new FormControl('', [
+      zipCode: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('[0-9]{2}-[0-9]{3}')
       ]),
-      place: new FormControl('', [
+      place: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('[a-zA-Z- ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]*'),
         Validators.maxLength(255)
       ]),
-      activitiesRange: new FormControl('', [
+      activitiesRange: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(500)
       ]),
-      approvalDate: new FormControl('',[
+      approvalDate: new UntypedFormControl('',[
         Validators.required
       ]),
-      approvalExpirationDate: new FormControl('',[
+      approvalExpirationDate: new UntypedFormControl('',[
         Validators.required
       ]),
-      remarks: new FormControl('', [
+      remarks: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ])
     });

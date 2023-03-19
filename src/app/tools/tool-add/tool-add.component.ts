@@ -1,6 +1,6 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Tool } from '../../interfaces/tool/tool.interface';
 import { ToolService } from '../../shared/services/tool.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./tool-add.component.scss']
 })
 export class ToolAddComponent implements OnInit {
-  toolForm: FormGroup;
+  toolForm: UntypedFormGroup;
 
   types: Tool[] = [
     { type: 'Narzędzie mechaniczne' },
@@ -41,29 +41,29 @@ export class ToolAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.toolForm = new FormGroup({
-      idNumber: new FormControl('', [
+    this.toolForm = new UntypedFormGroup({
+      idNumber: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(15)
       ]),
-      name: new FormControl('', [
+      name: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      type: new FormControl('', [
+      type: new UntypedFormControl('', [
         Validators.required
       ]),
-      serialNumber: new FormControl('', [
+      serialNumber: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      isMetrologicalService: new FormControl('', [
+      isMetrologicalService: new UntypedFormControl('', [
         Validators.required
       ]),
-      metrologicalServiceInterval: new FormControl(''),
-      lastMetrologicalService: new FormControl(''),
-      validUntil: new FormControl(''),
-      status: new FormControl('', [
+      metrologicalServiceInterval: new UntypedFormControl(''),
+      lastMetrologicalService: new UntypedFormControl(''),
+      validUntil: new UntypedFormControl(''),
+      status: new UntypedFormControl('', [
         Validators.required
       ])
     });

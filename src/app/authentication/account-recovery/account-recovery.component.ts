@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { AccountRecoveryDto } from '../../interfaces/reset-password/account-recovery-dto.interface';
 
 @Component({
@@ -11,8 +11,8 @@ import { AccountRecoveryDto } from '../../interfaces/reset-password/account-reco
   styleUrls: ['./account-recovery.component.scss'],
 })
 export class AccountRecoveryComponent implements OnInit {
-  accountRecoveryForm: FormGroup;
-  email: FormControl;
+  accountRecoveryForm: UntypedFormGroup;
+  email: UntypedFormControl;
 
   errorMessage: string;
   showSuccess: boolean;
@@ -25,9 +25,9 @@ export class AccountRecoveryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.email = new FormControl('', [Validators.required, Validators.email]);
+    this.email = new UntypedFormControl('', [Validators.required, Validators.email]);
 
-    this.accountRecoveryForm = new FormGroup({
+    this.accountRecoveryForm = new UntypedFormGroup({
       email: this.email
     });
   }

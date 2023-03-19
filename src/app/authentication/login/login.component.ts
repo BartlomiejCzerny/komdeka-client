@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './../../shared/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { UserForAuthenticationDto } from './../../interfaces/user/user-for-authentication-dto.interface';
 
 @Component({
@@ -10,9 +10,9 @@ import { UserForAuthenticationDto } from './../../interfaces/user/user-for-authe
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  email: FormControl;
-  password: FormControl;
+  loginForm: UntypedFormGroup;
+  email: UntypedFormControl;
+  password: UntypedFormControl;
 
   hidePassword = true;
 
@@ -27,15 +27,15 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.email = new FormControl('', [Validators.required, Validators.email]);
-    this.password = new FormControl('', [
+    this.email = new UntypedFormControl('', [Validators.required, Validators.email]);
+    this.password = new UntypedFormControl('', [
       Validators.required,
       Validators.pattern(
         '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@[-`{-~]).{8,64}$'
       )
     ]);
 
-    this.loginForm = new FormGroup({
+    this.loginForm = new UntypedFormGroup({
       email: this.email,
       password: this.password
     });

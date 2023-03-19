@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '../../shared/services/order.service';
 import { Order } from '../../interfaces/order/order.interface';
@@ -15,7 +15,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./order-edit.component.scss']
 })
 export class OrderEditComponent implements OnInit {
-  orderForm: FormGroup;
+  orderForm: UntypedFormGroup;
   order: Order;
 
   orderNumber: number;
@@ -157,309 +157,309 @@ export class OrderEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.orderForm = new FormGroup({
+    this.orderForm = new UntypedFormGroup({
 
       //Karta zamówienia
-      idNumber: new FormControl('', [
+      idNumber: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(15)
       ]),
-      orderNumber: new FormControl('', [
+      orderNumber: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('([1-9]|[1-9][0-9]{1,14})')
       ]),
-      customerName: new FormControl('', [
+      customerName: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      street: new FormControl('', [
+      street: new UntypedFormControl('', [
         Validators.pattern('[a-zA-Z- ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]*'),
         Validators.maxLength(255)
       ]),
-      buildingNumber: new FormControl('', [
+      buildingNumber: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('[0-9a-zA-Z /]*'),
         Validators.maxLength(15)
       ]),
-      zipCode: new FormControl('', [
+      zipCode: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('[0-9]{2}-[0-9]{3}')
       ]),
-      place: new FormControl('', [
+      place: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('[a-zA-Z- ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]*'),
         Validators.maxLength(255)
       ]),
-      customerFirstName: new FormControl('', [
+      customerFirstName: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      customerLastName: new FormControl('', [
+      customerLastName: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      admissionOrderDate: new FormControl('', [
+      admissionOrderDate: new UntypedFormControl('', [
         Validators.required
       ]),
-      orderDescription: new FormControl('', [
+      orderDescription: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(5000)
       ]),
-      orderComments: new FormControl('', [
+      orderComments: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      customerSignature: new FormControl('', [
+      customerSignature: new UntypedFormControl('', [
         Validators.required,
         Validators.requiredTrue
       ]),
-      contractorSignature: new FormControl('', [
+      contractorSignature: new UntypedFormControl('', [
         Validators.required
       ]),
 
       //Przegląd zamówienia
-      areRequirementsDefined: new FormControl('', [
+      areRequirementsDefined: new UntypedFormControl('', [
         Validators.requiredTrue
       ]),
-      areDocumentsUpToDate: new FormControl('', [
+      areDocumentsUpToDate: new UntypedFormControl('', [
         Validators.required
       ]),
-      areQualityApprovalsUpToDate: new FormControl('', [
+      areQualityApprovalsUpToDate: new UntypedFormControl('', [
         Validators.required
       ]),
-      haveSuppliersApprovals: new FormControl('', [
+      haveSuppliersApprovals: new UntypedFormControl('', [
         Validators.required
       ]),
-      haveProductionAndEquipmentProcedures: new FormControl('', [
+      haveProductionAndEquipmentProcedures: new UntypedFormControl('', [
         Validators.required
       ]),
-      haveControlProcedures: new FormControl('', [
+      haveControlProcedures: new UntypedFormControl('', [
         Validators.required
       ]),
-      haveTheResources: new FormControl('', [
+      haveTheResources: new UntypedFormControl('', [
         Validators.required
       ]),
-      haveEmployeesAndSkills: new FormControl('', [
+      haveEmployeesAndSkills: new UntypedFormControl('', [
         Validators.required
       ]),
-      areFirstPieceRequirementsDefined: new FormControl('', [
+      areFirstPieceRequirementsDefined: new UntypedFormControl('', [
         Validators.required
       ]),
-      haveWarehousesAndResources: new FormControl('', [
+      haveWarehousesAndResources: new UntypedFormControl('', [
         Validators.required
       ]),
-      hasRiskAssessed: new FormControl('', [
+      hasRiskAssessed: new UntypedFormControl('', [
         Validators.required
       ]),
-      isPriceCorrect: new FormControl('', [
+      isPriceCorrect: new UntypedFormControl('', [
         Validators.required
       ]),
-      areDeliveryTermsChecked: new FormControl('', [
+      areDeliveryTermsChecked: new UntypedFormControl('', [
         Validators.required
       ]),
-      orderReviewResult: new FormControl(),
+      orderReviewResult: new UntypedFormControl(),
 
       //Wymagania do zamówienia
-      orderNum: new FormControl('', [
+      orderNum: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('([1-9]|[1-9][0-9]{1,14})')
       ]),
-      orderRequirements: new FormControl('', [
+      orderRequirements: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(5000)
       ]),
-      requirementsEstablishedDate: new FormControl('', [
+      requirementsEstablishedDate: new UntypedFormControl('', [
         Validators.required
       ]),
-      orderingPersonSignature: new FormControl('', [
+      orderingPersonSignature: new UntypedFormControl('', [
         Validators.required
       ]),
 
       //Karta projektu
-      projectCardNumber: new FormControl('', [
+      projectCardNumber: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(15)
       ]),
-      orderNo: new FormControl('', [
+      orderNo: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('([1-9]|[1-9][0-9]{1,14})')
       ]),
-      orderingPersonName: new FormControl('', [
+      orderingPersonName: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      projectTeam: new FormControl('', [
+      projectTeam: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      documentName: new FormControl('', [
+      documentName: new UntypedFormControl('', [
         Validators.maxLength(255)
       ]),
-      documentNumber: new FormControl('', [
+      documentNumber: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('([1-9]|[1-9][0-9]{1,14})')
       ]),
-      comments: new FormControl('', [
+      comments: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      reviewResult: new FormControl('', [
+      reviewResult: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(5000)
       ]),
-      identifiedProblems: new FormControl('', [
+      identifiedProblems: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      plannedActivities: new FormControl('', [
+      plannedActivities: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      verificationResult: new FormControl('', [
+      verificationResult: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(5000)
       ]),
-      encounteredProblems: new FormControl('', [
+      encounteredProblems: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      plannedWorks: new FormControl('', [
+      plannedWorks: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      validationResult: new FormControl('', [
+      validationResult: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(5000)
       ]),
-      problems: new FormControl('', [
+      problems: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      activities: new FormControl('', [
+      activities: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      descriptionOfChange: new FormControl('', [
+      descriptionOfChange: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      shiftCardNumber: new FormControl('', [
+      shiftCardNumber: new UntypedFormControl('', [
         Validators.maxLength(15)
       ]),
-      docName: new FormControl('', [
+      docName: new UntypedFormControl('', [
         Validators.maxLength(255)
       ]),
-      documentOrDrawingNumber: new FormControl('', [
+      documentOrDrawingNumber: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      remarks: new FormControl('', [
+      remarks: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      additionalInformation: new FormControl('', [
+      additionalInformation: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      additionalComments: new FormControl('', [
+      additionalComments: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      projectApproval: new FormControl('', [
+      projectApproval: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(5000)
       ]),
-      designTeamSignatures: new FormControl('', [
+      designTeamSignatures: new UntypedFormControl('', [
         Validators.required
       ]),
 
       //Przewodnik pracy
-      jobGuideNumber: new FormControl('', [
+      jobGuideNumber: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(15)
       ]),
-      releaseDate: new FormControl('', [
+      releaseDate: new UntypedFormControl('', [
         Validators.required
       ]),
-      customer: new FormControl('', [
+      customer: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      productName: new FormControl('', [
+      productName: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      drawingNumber: new FormControl('', [
+      drawingNumber: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(15)
       ]),
-      drawingRelease: new FormControl('', [
+      drawingRelease: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('([1-9]|[1-9][0-9]{1,14})')
       ]),
-      material: new FormControl('', [
+      material: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(15)
       ]),
-      meltCertificateProof: new FormControl('', [
+      meltCertificateProof: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      orderNr: new FormControl('', [
+      orderNr: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('([1-9]|[1-9][0-9]{1,14})')
       ]),
-      quantity: new FormControl('', [
+      quantity: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('([1-9]|[1-9][0-9]{1,14})')
       ]),
-      jobGuideContent: new FormControl('', [
+      jobGuideContent: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(5000)
       ]),
 
       //Świadectwo jakości
-      qualityCertificateNumber: new FormControl('', [
+      qualityCertificateNumber: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(15)
       ]),
-      orderNbr: new FormControl('', [
+      orderNbr: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('([1-9]|[1-9][0-9]{1,14})')
       ]),
-      purchaser: new FormControl('', [
+      purchaser: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      madeProducts: new FormControl('', [
+      madeProducts: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(5000)
       ]),
-      remarksAndLimitations: new FormControl('', [
+      remarksAndLimitations: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      position: new FormControl('', [
+      position: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      firstName: new FormControl('', [
+      firstName: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      lastName: new FormControl('', [
+      lastName: new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(255)
       ]),
-      signature: new FormControl('', [
+      signature: new UntypedFormControl('', [
         Validators.required
       ]),
-      date: new FormControl('', [
+      date: new UntypedFormControl('', [
         Validators.required
       ]),
 
       //Ankieta zadowolenia klienta
-      customerComments: new FormControl('', [
+      customerComments: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ]),
-      timeSatisfaction: new FormControl('', [
+      timeSatisfaction: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('[1-5]{1}')
       ]),
-      qualitySatisfaction: new FormControl('', [
+      qualitySatisfaction: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern('[1-5]{1}')
       ]),
-      clientSignature: new FormControl('', [
+      clientSignature: new UntypedFormControl('', [
         Validators.required
       ]),
-      executingPersonSignature: new FormControl('', [
+      executingPersonSignature: new UntypedFormControl('', [
         Validators.required
       ])
     });

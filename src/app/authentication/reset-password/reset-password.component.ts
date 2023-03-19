@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './../../shared/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { matchValidator } from './../../shared/custom-validators/password-validator';
 import { ResetPasswordDto } from '../../interfaces/reset-password/reset-password-dto.interface';
 
@@ -12,9 +12,9 @@ import { ResetPasswordDto } from '../../interfaces/reset-password/reset-password
   styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent implements OnInit {
-  resetPasswordForm: FormGroup;
-  password: FormControl;
-  confirmPassword: FormControl;
+  resetPasswordForm: UntypedFormGroup;
+  password: UntypedFormControl;
+  confirmPassword: UntypedFormControl;
 
   hidePassword = true;
   hideConfirmPassword = true;
@@ -34,14 +34,14 @@ export class ResetPasswordComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.password = new FormControl('', [
+    this.password = new UntypedFormControl('', [
       Validators.required,
       Validators.pattern(
         '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@[-`{-~]).{8,64}$'
       ),
       matchValidator('confirmPassword', true)
     ]);
-    this.confirmPassword = new FormControl('', [
+    this.confirmPassword = new UntypedFormControl('', [
       Validators.required,
       Validators.pattern(
         '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@[-`{-~]).{8,64}$'
@@ -49,7 +49,7 @@ export class ResetPasswordComponent implements OnInit {
       matchValidator('password')
     ]);
 
-    this.resetPasswordForm = new FormGroup({
+    this.resetPasswordForm = new UntypedFormGroup({
       password: this.password,
       confirmPassword: this.confirmPassword
     });
