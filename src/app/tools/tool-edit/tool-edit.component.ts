@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Tool } from '../../interfaces/tool/tool.interface';
 import { ToolService } from '../../shared/services/tool.service';
 
@@ -11,7 +11,7 @@ import { ToolService } from '../../shared/services/tool.service';
   styleUrls: ['./tool-edit.component.scss']
 })
 export class ToolEditComponent implements OnInit {
-  toolForm: FormGroup;
+  toolForm: UntypedFormGroup;
   tool: Tool;
 
   types: Tool[] = [
@@ -43,16 +43,16 @@ export class ToolEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.toolForm = new FormGroup({
-      idNumber: new FormControl('', [Validators.required, Validators.maxLength(15)]),
-      name: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      type: new FormControl('', [Validators.required]),
-      serialNumber: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      isMetrologicalService: new FormControl('', [Validators.required]),
-      metrologicalServiceInterval: new FormControl(''),
-      lastMetrologicalService: new FormControl(''),
-      validUntil: new FormControl(''),
-      status: new FormControl('', [Validators.required])
+    this.toolForm = new UntypedFormGroup({
+      idNumber: new UntypedFormControl('', [Validators.required, Validators.maxLength(15)]),
+      name: new UntypedFormControl('', [Validators.required, Validators.maxLength(255)]),
+      type: new UntypedFormControl('', [Validators.required]),
+      serialNumber: new UntypedFormControl('', [Validators.required, Validators.maxLength(255)]),
+      isMetrologicalService: new UntypedFormControl('', [Validators.required]),
+      metrologicalServiceInterval: new UntypedFormControl(''),
+      lastMetrologicalService: new UntypedFormControl(''),
+      validUntil: new UntypedFormControl(''),
+      status: new UntypedFormControl('', [Validators.required])
     });
 
     this.getToolById();

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './../../shared/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { TwoFactorDto } from './../../interfaces/two-factor/two-factor-dto.interface';
 
 @Component({
@@ -10,8 +10,8 @@ import { TwoFactorDto } from './../../interfaces/two-factor/two-factor-dto.inter
   styleUrls: ['./two-step-verification.component.scss'],
 })
 export class TwoStepVerificationComponent implements OnInit {
-  twoStepVerificationForm: FormGroup;
-  private twoFactorCode: FormControl;
+  twoStepVerificationForm: UntypedFormGroup;
+  private twoFactorCode: UntypedFormControl;
 
   showError: boolean;
   errorMessage: string;
@@ -27,11 +27,11 @@ export class TwoStepVerificationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.twoFactorCode = new FormControl('', [
+    this.twoFactorCode = new UntypedFormControl('', [
       Validators.required,
       Validators.pattern('[0-9]{6}')
     ]);
-    this.twoStepVerificationForm = new FormGroup({
+    this.twoStepVerificationForm = new UntypedFormGroup({
       twoFactorCode: this.twoFactorCode
     });
 

@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { Supplier } from './../../interfaces/supplier/supplier.interface';
 import { SupplierService } from 'src/app/shared/services/supplier.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';

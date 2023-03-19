@@ -4,7 +4,7 @@ import { ToolService } from './../../shared/services/tool.service';
 import { Tool } from './../../interfaces/tool/tool.interface';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 @Component({
   selector: 'app-tool-delete',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { matchValidator } from './../../shared/custom-validators/password-validator';
 import { UserForRegistrationDto } from '../../interfaces/user/user-for-registration-dto.interface';
 import { AccountActivationDialogComponent } from '../account-activation/account-activation-dialog/account-activation-dialog.component';
@@ -13,12 +13,12 @@ import { AccountActivationDialogComponent } from '../account-activation/account-
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent implements OnInit {
-  registrationForm: FormGroup;
-  firstName: FormControl;
-  lastName: FormControl;
-  email: FormControl;
-  password: FormControl;
-  confirmPassword: FormControl;
+  registrationForm: UntypedFormGroup;
+  firstName: UntypedFormControl;
+  lastName: UntypedFormControl;
+  email: UntypedFormControl;
+  password: UntypedFormControl;
+  confirmPassword: UntypedFormControl;
 
   hidePassword = true;
   hideConfirmPassword = true;
@@ -33,23 +33,23 @@ export class RegistrationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.firstName = new FormControl('', [
+    this.firstName = new UntypedFormControl('', [
       Validators.required,
       Validators.pattern('^[a-zA-Z- ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{1,100}$'),
     ]);
-    this.lastName = new FormControl('', [
+    this.lastName = new UntypedFormControl('', [
       Validators.required,
       Validators.pattern('^[a-zA-Z- ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{1,100}$'),
     ]);
-    this.email = new FormControl('', [Validators.required, Validators.email]);
-    this.password = new FormControl('', [
+    this.email = new UntypedFormControl('', [Validators.required, Validators.email]);
+    this.password = new UntypedFormControl('', [
       Validators.required,
       Validators.pattern(
         '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@[-`{-~]).{8,64}$'
       ),
       matchValidator('confirmPassword', true),
     ]);
-    this.confirmPassword = new FormControl('', [
+    this.confirmPassword = new UntypedFormControl('', [
       Validators.required,
       Validators.pattern(
         '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@[-`{-~]).{8,64}$'
@@ -57,7 +57,7 @@ export class RegistrationComponent implements OnInit {
       matchValidator('password'),
     ]);
 
-    this.registrationForm = new FormGroup({
+    this.registrationForm = new UntypedFormGroup({
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
