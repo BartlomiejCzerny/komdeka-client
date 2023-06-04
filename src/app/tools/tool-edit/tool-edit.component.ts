@@ -58,10 +58,6 @@ export class ToolEditComponent implements OnInit {
     this.getToolById();
   }
 
-  public hasError(controlName: string, errorName: string) {
-    return this.toolForm.controls[controlName].hasError(errorName);
-  }
-
   private getToolById() {
     let toolId = this.activeRoute.snapshot.params['id'];
     let toolByIdUrl = `api/tools/${toolId}`;
@@ -77,7 +73,7 @@ export class ToolEditComponent implements OnInit {
       );
   }
 
-  public updateTool(toolFormValue: any) {
+  updateTool(toolFormValue: any) {
     if (this.toolForm.valid) {
       this.executeToolUpdate(toolFormValue);
     }

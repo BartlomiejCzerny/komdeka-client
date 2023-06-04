@@ -69,11 +69,7 @@ export class ToolAddComponent implements OnInit {
     });
   }
 
-  // public hasError(controlName: string, errorName: string) {
-  //   return this.toolForm.controls[controlName].hasError(errorName);
-  // }
-
-  public addTool(toolFormValue: any) {
+  addTool(toolFormValue: any) {
     if (this.toolForm.valid) {
       this.executeToolAdding(toolFormValue);
     }

@@ -66,11 +66,7 @@ export class SupplierAddComponent implements OnInit {
     });
   }
 
-  public hasError(controlName: string, errorName: string) {
-    return this.supplierForm.controls[controlName].hasError(errorName);
-  }
-
-  public addSupplier(supplierFormValue: any) {
+  addSupplier(supplierFormValue: any) {
     if (this.supplierForm.valid) {
       this.executeSupplierAdding(supplierFormValue);
     }

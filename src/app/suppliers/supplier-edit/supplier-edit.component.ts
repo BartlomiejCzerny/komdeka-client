@@ -57,18 +57,18 @@ export class SupplierEditComponent implements OnInit {
         Validators.required,
         Validators.maxLength(500)
       ]),
-      approvalDate: new UntypedFormControl(),
-      approvalExpirationDate: new UntypedFormControl(),
+      approvalDate: new UntypedFormControl('',[
+        Validators.required
+      ]),
+      approvalExpirationDate: new UntypedFormControl('',[
+        Validators.required
+      ]),
       remarks: new UntypedFormControl('', [
         Validators.maxLength(5000)
       ])
     });
 
     this.getSupplierById();
-  }
-
-  public hasError(controlName: string, errorName: string) {
-    return this.supplierForm.controls[controlName].hasError(errorName);
   }
 
   private getSupplierById() {
@@ -86,7 +86,7 @@ export class SupplierEditComponent implements OnInit {
       );
   }
 
-  public updateSupplier(supplierFormValue: any) {
+  updateSupplier(supplierFormValue: any) {
     if (this.supplierForm.valid) {
       this.executeSupplierUpdate(supplierFormValue);
     }
