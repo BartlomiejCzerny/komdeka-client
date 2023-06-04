@@ -130,7 +130,7 @@
                       {{customerSignature.signatureOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['customerSignature'].errors?.required">Nie określono, czy podpisano przez osobę zamawiającą.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['customerSignature'].errors?.required">Podpis osoby zamawiającej jest wymagany.</mat-error>
                 </mat-form-field>
               </div>
               <div class="input-field input-space">
@@ -141,7 +141,7 @@
                       {{contractorSignature.signatureOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['contractorSignature'].errors?.required">Nie określono, czy podpisano przez osobę zamawiającą.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['contractorSignature'].errors?.required">Podpis wykonawcy jest wymagany.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -160,7 +160,7 @@
                       {{areRequirementsDefined.orderReviewOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['areRequirementsDefined'].errors?.required">Nie określono, czy wymagania do zamówienia są odpowiednio zdefiniowane.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['areRequirementsDefined'].errors?.required">Wymagania do zamówienia muszą być odpowiednio zdefiniowane.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -173,7 +173,7 @@
                       {{areDocumentsUpToDate.orderReviewOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['areDocumentsUpToDate'].errors?.required">Nie określono, czy wszystkie rysunki i dokumenty są aktualne.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['areDocumentsUpToDate'].errors?.required">Wszystkie rysunki i dokumenty muszą być aktualne.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -186,7 +186,7 @@
                       {{areQualityApprovalsUpToDate.orderReviewOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['areQualityApprovalsUpToDate'].errors?.required">Nie określono, czy posiadamy aktualne zatwierdzenia jakości.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['areQualityApprovalsUpToDate'].errors?.required">Musimy posiadać aktualne zatwierdzenia jakości.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -199,7 +199,7 @@
                       {{haveSuppliersApprovals.orderReviewOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['haveSuppliersApprovals'].errors?.required">Nie określono, czy proponowani poddostawcy posiadają niezbędne zatwierdzenia.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['haveSuppliersApprovals'].errors?.required">Proponowani poddostawcy muszą posiadać niezbędne zatwierdzenia.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -212,7 +212,7 @@
                       {{haveProductionAndEquipmentProcedures.orderReviewOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['haveProductionAndEquipmentProcedures'].errors?.required">Nie określono, czy mamy niezbędne procedury produkcji i wyposażenia.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['haveProductionAndEquipmentProcedures'].errors?.required">Musimy mieć niezbędne procedury produkcji i wyposażenia.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -225,7 +225,7 @@
                       {{haveControlProcedures.orderReviewOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['haveControlProcedures'].errors?.required">Nie określono, czy mamy niezbędne procedury kontroli.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['haveControlProcedures'].errors?.required">Musimy mieć niezbędne procedury kontroli.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -238,7 +238,7 @@
                       {{haveTheResources.orderReviewOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['haveTheResources'].errors?.required">Nie określono, czy mamy niezbędne zasoby.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['haveTheResources'].errors?.required">Musimy mieć niezbędne zasoby.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -251,7 +251,7 @@
                       {{haveEmployeesAndSkills.orderReviewOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['haveEmployeesAndSkills'].errors?.required">Nie określono, czy mamy wystarczającą ilość pracowników i umiejętności.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['haveEmployeesAndSkills'].errors?.required">Musimy mieć wystarczającą ilość pracowników i umiejętności.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -264,7 +264,7 @@
                       {{areFirstPieceRequirementsDefined.orderReviewOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['areFirstPieceRequirementsDefined'].errors?.required">Nie określono, czy wymagania kontroli pierwszej sztuki jasno zostały zdefiniowane i wzięte pod uwagę.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['areFirstPieceRequirementsDefined'].errors?.required">Wymagania kontroli pierwszej sztuki muszą być jasno zdefiniowane i wzięte pod uwagę.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -277,7 +277,7 @@
                       {{haveWarehousesAndResources.orderReviewOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['haveWarehousesAndResources'].errors?.required">Nie określono, czy posiadamy magazyny i zasoby do produkcji.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['haveWarehousesAndResources'].errors?.required">Musimy posiadać magazyny i zasoby do produkcji.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -290,7 +290,7 @@
                       {{hasRiskAssessed.orderReviewOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['hasRiskAssessed'].errors?.required">Nie określono, czy ryzyko zostało ocenione.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['hasRiskAssessed'].errors?.required">Ryzyko musi zostać ocenione.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -303,7 +303,7 @@
                       {{isPriceCorrect.orderReviewOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['isPriceCorrect'].errors?.required">Nie określono, czy cena na zamówieniu odpowiada cenie oferowanej.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['isPriceCorrect'].errors?.required">Cena na zamówieniu musi odpowiadać cenie oferowanej.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -316,7 +316,7 @@
                       {{areDeliveryTermsChecked.orderReviewOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['areDeliveryTermsChecked'].errors?.required">Nie określono, czy warunki dostaw zostały sprawdzone.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['areDeliveryTermsChecked'].errors?.required">Warunki dostaw muszą zostać sprawdzone.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -366,7 +366,7 @@
                       {{orderingPersonSignature.signatureOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['orderingPersonSignature'].errors?.required">Nie określono, czy podpisano przez osobę zamawiającą.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['orderingPersonSignature'].errors?.required">Podpis osoby zamawiającej jest wymagany.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -607,7 +607,7 @@
                       {{designTeamSignatures.signatureOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['designTeamSignatures'].errors?.required">Nie określono, czy podpisano przez osobę zamawiającą.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['designTeamSignatures'].errors?.required">Podpisy zespołu projektowego są wymagane.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -812,7 +812,7 @@
                       {{signature.signatureOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['signature'].errors?.required">Nie określono, czy podpisano.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['signature'].errors?.required">Podpis jest wymagany.</mat-error>
                 </mat-form-field>
               </div>
               <div class="input-field input-space">
@@ -868,7 +868,7 @@
                       {{clientSignature.signatureOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['clientSignature'].errors?.required">Nie określono, czy podpisano przez osobę zamawiającą.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['clientSignature'].errors?.required">Podpis osoby zamawiającej jest wymagany.</mat-error>
                 </mat-form-field>
               </div>
               <div class="input-field input-space">
@@ -879,7 +879,7 @@
                       {{executingPersonSignature.signatureOption}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['executingPersonSignature'].errors?.required">Nie określono, czy podpisano przez wykonawcę.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['executingPersonSignature'].errors?.required">Podpis wykonawcy jest wymagany.</mat-error>
                 </mat-form-field>
               </div>
             </div>

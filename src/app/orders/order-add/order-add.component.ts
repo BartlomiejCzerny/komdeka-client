@@ -208,11 +208,10 @@ export class OrderAddComponent implements OnInit {
         Validators.maxLength(5000)
       ]),
       customerSignature: new UntypedFormControl('', [
-        Validators.required,
         Validators.requiredTrue
       ]),
       contractorSignature: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
 
       //Przegląd zamówienia
@@ -220,40 +219,40 @@ export class OrderAddComponent implements OnInit {
         Validators.requiredTrue
       ]),
       areDocumentsUpToDate: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       areQualityApprovalsUpToDate: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       haveSuppliersApprovals: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       haveProductionAndEquipmentProcedures: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       haveControlProcedures: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       haveTheResources: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       haveEmployeesAndSkills: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       areFirstPieceRequirementsDefined: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       haveWarehousesAndResources: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       hasRiskAssessed: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       isPriceCorrect: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       areDeliveryTermsChecked: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       orderReviewResult: new UntypedFormControl(),
 
@@ -270,7 +269,7 @@ export class OrderAddComponent implements OnInit {
         Validators.required
       ]),
       orderingPersonSignature: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
 
       //Karta projektu
@@ -356,7 +355,7 @@ export class OrderAddComponent implements OnInit {
         Validators.maxLength(5000)
       ]),
       designTeamSignatures: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
 
       //Przewodnik pracy
@@ -437,7 +436,7 @@ export class OrderAddComponent implements OnInit {
         Validators.maxLength(255)
       ]),
       signature: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       date: new UntypedFormControl('', [
         Validators.required
@@ -456,10 +455,10 @@ export class OrderAddComponent implements OnInit {
         Validators.pattern('[1-5]{1}')
       ]),
       clientSignature: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ]),
       executingPersonSignature: new UntypedFormControl('', [
-        Validators.required
+        Validators.requiredTrue
       ])
     });
   }
