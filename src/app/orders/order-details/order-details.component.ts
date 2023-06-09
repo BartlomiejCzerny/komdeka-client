@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { OrderService } from './../../shared/services/order.service';
 import { Order } from './../../interfaces/order/order.interface';
-import { HttpErrorResponse } from '@angular/common/http';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';

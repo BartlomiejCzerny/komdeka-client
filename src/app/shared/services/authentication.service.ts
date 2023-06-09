@@ -18,7 +18,7 @@ import { AuthResponseDto } from './../../interfaces/response/auth-response-dto.i
 })
 export class AuthenticationService {
   private authChangeSub = new Subject<boolean>();
-  public authChanged = this.authChangeSub.asObservable();
+  authChanged = this.authChangeSub.asObservable();
   email: string;
 
   constructor(
@@ -27,29 +27,29 @@ export class AuthenticationService {
     private jwtHelper: JwtHelperService
   ) { }
 
-  public register(route: string, body: UserForRegistrationDto) {
+  register(route: string, body: UserForRegistrationDto) {
     return this.http.post<RegistrationResponseDto> (this.createCompleteRoute(route, this.envUrl.urlAddress), body);
   }
 
-  public login(route: string, body: UserForAuthenticationDto) {
+  login(route: string, body: UserForAuthenticationDto) {
     this.email = body.email;
     return this.http.post<AuthResponseDto> (this.createCompleteRoute(route, this.envUrl.urlAddress), body);
   }
 
-  public sendAuthStateChangeNotification(isAuthenticated: boolean) {
+  sendAuthStateChangeNotification(isAuthenticated: boolean) {
     this.authChangeSub.next(isAuthenticated);
   }
 
-  public logout() {
+  logout() {
     localStorage.removeItem('token');
     this.sendAuthStateChangeNotification(false);
   }
 
-  public twoStepLogin(route: string, body: TwoFactorDto) {
+  twoStepLogin(route: string, body: TwoFactorDto) {
     return this.http.post<AuthResponseDto>(this.createCompleteRoute(route, this.envUrl.urlAddress), body);
   }
 
-  public activateAccount(route: string, token: string, email: string) {
+  activateAccount(route: string, token: string, email: string) {
     let params = new HttpParams({ encoder: new CustomEncoder() })
     params = params.append('token', token);
     params = params.append('email', email);
@@ -57,20 +57,20 @@ export class AuthenticationService {
     return this.http.get(this.createCompleteRoute(route, this.envUrl.urlAddress), { params: params });
   }
 
-  public accountRecovery(route: string, body: AccountRecoveryDto) {
+  accountRecovery(route: string, body: AccountRecoveryDto) {
     return this.http.post(this.createCompleteRoute(route, this.envUrl.urlAddress), body);
   }
 
-  public resetPassword(route: string, body: ResetPasswordDto) {
+  resetPassword(route: string, body: ResetPasswordDto) {
     return this.http.post(this.createCompleteRoute(route, this.envUrl.urlAddress), body);
   }
 
-  public isUserAuthenticated(): any {
+  isUserAuthenticated(): any {
     const token = localStorage.getItem('token');
     return token && !this.jwtHelper.isTokenExpired(token);
   };
 
-  public isUserAdmin(): any {
+  isUserAdmin(): any {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
@@ -83,7 +83,7 @@ export class AuthenticationService {
     return `${envAddress}/${route}`;
   }
 
-  public getEmail() {
+  getEmail() {
     return this.email;
   }
 }

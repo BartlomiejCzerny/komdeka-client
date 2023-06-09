@@ -18,9 +18,6 @@ export class ToolsListComponent implements OnInit {
 
   searchKey: string;
 
-  testowa = false;
-  today = new Date();
-
   public displayedColumns = [
     'idNumber',
     'name',
@@ -39,7 +36,11 @@ export class ToolsListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private toolService: ToolService, private router: Router, private authenticationService: AuthenticationService) { }
+  constructor(
+    private toolService: ToolService,
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit() {
     this.getTools();

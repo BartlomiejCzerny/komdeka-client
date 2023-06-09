@@ -18,7 +18,6 @@ export class TwoStepVerificationComponent implements OnInit {
 
   private provider: string;
   private email: string;
-  private returnUrl: string;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -37,7 +36,6 @@ export class TwoStepVerificationComponent implements OnInit {
 
     this.provider = this.route.snapshot.queryParams['provider'];
     this.email = this.route.snapshot.queryParams['email'];
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
   }
 
   login(twoStepVerificationFormValue: any) {
@@ -57,7 +55,6 @@ export class TwoStepVerificationComponent implements OnInit {
           this.authenticationService.sendAuthStateChangeNotification(
             res.isAuthSuccessful
           );
-          // this.router.navigate([this.returnUrl]);
           this.router.navigate(['/orders/orders-list']);
         },
         (error) => {

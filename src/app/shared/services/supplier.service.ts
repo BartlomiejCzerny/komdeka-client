@@ -14,19 +14,19 @@ export class SupplierService {
     private envUrl: EnvironmentUrlService
   ) {}
 
-  public getSuppliers(route: string): Observable<Supplier[]> {
+  getSuppliers(route: string): Observable<Supplier[]> {
     return this.http.get<Supplier[]>(
       this.createCompleteRoute(route, this.envUrl.urlAddress)
     );
   }
 
-  public getSupplier(route: string) {
+  getSupplier(route: string) {
     return this.http.get<Supplier>(
       this.createCompleteRoute(route, this.envUrl.urlAddress)
     );
   }
 
-  public postSupplier(route: string, body: any) {
+  postSupplier(route: string, body: any) {
     return this.http.post(
       this.createCompleteRoute(route, environment.urlAddress),
       body,
@@ -34,7 +34,7 @@ export class SupplierService {
     );
   }
 
-  public putSupplier(route: string, body: any) {
+  putSupplier(route: string, body: any) {
     return this.http.put(
       this.createCompleteRoute(route, environment.urlAddress),
       body,
@@ -42,7 +42,7 @@ export class SupplierService {
     );
   }
 
-  public deleteSupplier(route: string) {
+  deleteSupplier(route: string) {
     return this.http.delete(
       this.createCompleteRoute(route, environment.urlAddress)
     );
