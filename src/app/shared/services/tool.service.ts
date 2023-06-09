@@ -14,19 +14,19 @@ export class ToolService {
     private envUrl: EnvironmentUrlService
   ) {}
 
-  public getTools(route: string): Observable<Tool[]> {
+  getTools(route: string): Observable<Tool[]> {
     return this.http.get<Tool[]>(
       this.createCompleteRoute(route, this.envUrl.urlAddress)
     );
   }
 
-  public getTool(route: string) {
+  getTool(route: string) {
     return this.http.get<Tool>(
       this.createCompleteRoute(route, this.envUrl.urlAddress)
     );
   }
 
-  public postTool(route: string, body: any) {
+  postTool(route: string, body: any) {
     return this.http.post(
       this.createCompleteRoute(route, environment.urlAddress),
       body,
@@ -34,7 +34,7 @@ export class ToolService {
     );
   }
 
-  public putTool(route: string, body: any) {
+  putTool(route: string, body: any) {
     return this.http.put(
       this.createCompleteRoute(route, environment.urlAddress),
       body,
@@ -42,7 +42,7 @@ export class ToolService {
     );
   }
 
-  public deleteTool(route: string) {
+  deleteTool(route: string) {
     return this.http.delete(
       this.createCompleteRoute(route, environment.urlAddress)
     );

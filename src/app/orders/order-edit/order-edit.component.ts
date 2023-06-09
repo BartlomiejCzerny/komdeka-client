@@ -466,10 +466,6 @@ export class OrderEditComponent implements OnInit {
     this.getOrderById();
   }
 
-  public hasError(controlName: string, errorName: string) {
-    return this.orderForm.controls[controlName].hasError(errorName);
-  }
-
   private getOrderById() {
     let orderId = this.activeRoute.snapshot.params['id'];
     let orderByIdUrl = `api/orders/${orderId}`;
@@ -485,7 +481,7 @@ export class OrderEditComponent implements OnInit {
       );
   }
 
-  public updateOrder(orderFormValue: any) {
+  updateOrder(orderFormValue: any) {
     if (this.orderForm.valid) {
       this.executeOrderUpdate(orderFormValue);
     }

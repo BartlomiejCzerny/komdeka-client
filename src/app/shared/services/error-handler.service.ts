@@ -22,7 +22,7 @@ export class ErrorHandlerService implements HttpInterceptor {
     );
   }
 
-  public handleError(error: HttpErrorResponse): any {
+  handleError(error: HttpErrorResponse): any {
     if (error.status === 404) {
       return this.handleNotFound(error);
     } else if (error.status === 400) {

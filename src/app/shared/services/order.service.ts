@@ -14,19 +14,19 @@ export class OrderService {
     private envUrl: EnvironmentUrlService
   ) {}
 
-  public getOrders(route: string): Observable<Order[]> {
+  getOrders(route: string): Observable<Order[]> {
     return this.http.get<Order[]>(
       this.createCompleteRoute(route, this.envUrl.urlAddress)
     );
   }
 
-  public getOrder(route: string) {
+  getOrder(route: string) {
     return this.http.get<Order>(
       this.createCompleteRoute(route, this.envUrl.urlAddress)
     );
   }
 
-  public postOrder(route: string, body: any) {
+  postOrder(route: string, body: any) {
     return this.http.post(
       this.createCompleteRoute(route, environment.urlAddress),
       body,
@@ -34,7 +34,7 @@ export class OrderService {
     );
   }
 
-  public putOrder(route: string, body: any) {
+  putOrder(route: string, body: any) {
     return this.http.put(
       this.createCompleteRoute(route, environment.urlAddress),
       body,
@@ -42,7 +42,7 @@ export class OrderService {
     );
   }
 
-  public deleteOrder(route: string) {
+  deleteOrder(route: string) {
     return this.http.delete(
       this.createCompleteRoute(route, environment.urlAddress)
     );

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { Router } from '@angular/router';
 import { OrderService } from '../../shared/services/order.service';
@@ -463,11 +463,7 @@ export class OrderAddComponent implements OnInit {
     });
   }
 
-  public hasError(controlName: string, errorName: string) {
-    return this.orderForm.controls[controlName].hasError(errorName);
-  }
-
-  public addOrder(orderFormValue: any) {
+  addOrder(orderFormValue: any) {
     if (this.orderForm.valid) {
       this.executeOrderAdding(orderFormValue);
     }
