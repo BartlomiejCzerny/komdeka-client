@@ -1,8 +1,8 @@
 <mat-card>
   <mat-card class="order-delete-card">
     <mat-card-header class="order-delete-header">
-      <mat-card-title>Szczegóły zamówienia</mat-card-title>
-      <mat-card-subtitle>Zapoznaj się ze szczegółami tego zamówienia.</mat-card-subtitle>
+      <mat-card-title>Usuwanie zamówienia</mat-card-title>
+      <mat-card-subtitle>Przeglądnij dokumenty, a następnie zdecyduj, czy na pewno chcesz usunąć to zamówienie.</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <form class="order-form" [formGroup]="orderForm">
@@ -774,10 +774,7 @@
           <mat-step [stepControl]="orderForm">
             <h2>Podsumowanie</h2>
             <p>
-              Jeżeli wszystkie dokumenty zostały wypełnione prawidłowo możesz je zapisać. W przeciwnym wypadku sprawdź wprowadzone dane
-              i nanieś stosowne poprawki. Powodem braku możliwości zapisu może być nieuzupełnienie wymaganych pól, wprowadzenie danych
-              w nieprawidłowym formacie lub wpisanie numeru identyfikacyjnego, który wcześniej przyporządkowano do innego
-              zamówienia. Jeśli nie chcesz skorzystać z opcji zapisu anuluj dodawanie zamówienia lub wyczyść pola dokumentów.
+              Jeżeli istnieje taka potrzeba możesz usunąć to zamówienie. W przeciwnym wypadku anuluj usuwanie zamówienia.
             </p>
             <div class="buttons">
               <button mat-raised-button color="warn" tabindex="14" (click)="deleteOrder()">Usuń</button>
