@@ -19,7 +19,6 @@ import { AuthResponseDto } from './../../interfaces/response/auth-response-dto.i
 export class AuthenticationService {
   private authChangeSub = new Subject<boolean>();
   authChanged = this.authChangeSub.asObservable();
-  email: string;
 
   constructor(
     private http: HttpClient,
@@ -32,7 +31,7 @@ export class AuthenticationService {
   }
 
   login(route: string, body: UserForAuthenticationDto) {
-    this.email = body.email;
+    localStorage.setItem('e-mail', body.email);
     return this.http.post<AuthResponseDto> (this.createCompleteRoute(route, this.envUrl.urlAddress), body);
   }
 
@@ -41,6 +40,7 @@ export class AuthenticationService {
   }
 
   logout() {
+    localStorage.removeItem('e-mail');
     localStorage.removeItem('token');
     this.sendAuthStateChangeNotification(false);
   }
@@ -81,9 +81,5 @@ export class AuthenticationService {
 
   private createCompleteRoute(route: string, envAddress: string) {
     return `${envAddress}/${route}`;
-  }
-
-  getEmail() {
-    return this.email;
   }
 }

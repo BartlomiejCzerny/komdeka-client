@@ -11,10 +11,9 @@ export class AppComponent {
 
   constructor(private authenticationService: AuthenticationService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     if (this.authenticationService.isUserAuthenticated()) {
       this.authenticationService.sendAuthStateChangeNotification(true);
-      this.authenticationService.getEmail();
     }
   }
 }

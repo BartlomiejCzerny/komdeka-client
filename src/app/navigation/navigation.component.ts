@@ -16,7 +16,7 @@ export class NavigationComponent implements OnInit {
   isDarkMode: boolean;
 
   isUserAuthenticated: boolean;
-  email: string;
+  email: any;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -37,7 +37,13 @@ export class NavigationComponent implements OnInit {
 
     this.authenticationService.authChanged.subscribe((res) => {
       this.isUserAuthenticated = res;
-      this.email = this.authenticationService.getEmail();
+      this.email = localStorage.getItem('e-mail');
+    });
+  }
+
+  ngOnInit() {
+    this.authenticationService.authChanged.subscribe((res) => {
+      this.isUserAuthenticated = res;
     });
   }
 
@@ -47,13 +53,6 @@ export class NavigationComponent implements OnInit {
     this.isDarkMode
       ? this.themeService.update('light-mode')
       : this.themeService.update('dark-mode');
-  }
-
-  ngOnInit() {
-    this.authenticationService.authChanged.subscribe((res) => {
-      this.isUserAuthenticated = res;
-      this.email = this.authenticationService.getEmail();
-    });
   }
 
   logout() {
