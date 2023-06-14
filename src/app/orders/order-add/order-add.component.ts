@@ -33,80 +33,67 @@ export class OrderAddComponent implements OnInit {
 
   areRequirementsDefined: Order[] = [
     { areRequirementsDefined: true, orderReviewOption: 'Tak' },
-    { areRequirementsDefined: false, orderReviewOption: 'Nie' },
-    { areRequirementsDefined: true, orderReviewOption: 'Nie dotyczy' }
+    { areRequirementsDefined: false, orderReviewOption: 'Nie' }
   ]
 
   areDocumentsUpToDate: Order[] = [
     { areDocumentsUpToDate: true, orderReviewOption: 'Tak' },
-    { areDocumentsUpToDate: false, orderReviewOption: 'Nie' },
-    { areDocumentsUpToDate: true, orderReviewOption: 'Nie dotyczy' }
+    { areDocumentsUpToDate: false, orderReviewOption: 'Nie' }
   ]
 
   areQualityApprovalsUpToDate: Order[] = [
     { areQualityApprovalsUpToDate: true, orderReviewOption: 'Tak' },
-    { areQualityApprovalsUpToDate: false, orderReviewOption: 'Nie' },
-    { areQualityApprovalsUpToDate: true, orderReviewOption: 'Nie dotyczy' }
+    { areQualityApprovalsUpToDate: false, orderReviewOption: 'Nie' }
   ]
 
   haveSuppliersApprovals: Order[] = [
     { haveSuppliersApprovals: true, orderReviewOption: 'Tak' },
-    { haveSuppliersApprovals: false, orderReviewOption: 'Nie' },
-    { haveSuppliersApprovals: true, orderReviewOption: 'Nie dotyczy' }
+    { haveSuppliersApprovals: false, orderReviewOption: 'Nie' }
   ]
 
   haveProductionAndEquipmentProcedures: Order[] = [
     { haveProductionAndEquipmentProcedures: true, orderReviewOption: 'Tak' },
-    { haveProductionAndEquipmentProcedures: false, orderReviewOption: 'Nie' },
-    { haveProductionAndEquipmentProcedures: true, orderReviewOption: 'Nie dotyczy' }
+    { haveProductionAndEquipmentProcedures: false, orderReviewOption: 'Nie' }
   ]
 
   haveControlProcedures: Order[] = [
     { haveControlProcedures: true, orderReviewOption: 'Tak' },
-    { haveControlProcedures: false, orderReviewOption: 'Nie' },
-    { haveControlProcedures: true, orderReviewOption: 'Nie dotyczy' }
+    { haveControlProcedures: false, orderReviewOption: 'Nie' }
   ]
 
   haveTheResources: Order[] = [
     { haveTheResources: true, orderReviewOption: 'Tak' },
-    { haveTheResources: false, orderReviewOption: 'Nie' },
-    { haveTheResources: true, orderReviewOption: 'Nie dotyczy' }
+    { haveTheResources: false, orderReviewOption: 'Nie' }
   ]
 
   haveEmployeesAndSkills: Order[] = [
     { haveEmployeesAndSkills: true, orderReviewOption: 'Tak' },
-    { haveEmployeesAndSkills: false, orderReviewOption: 'Nie' },
-    { haveEmployeesAndSkills: true, orderReviewOption: 'Nie dotyczy' }
+    { haveEmployeesAndSkills: false, orderReviewOption: 'Nie' }
   ]
 
   areFirstPieceRequirementsDefined: Order[] = [
     { areFirstPieceRequirementsDefined: true, orderReviewOption: 'Tak' },
-    { areFirstPieceRequirementsDefined: false, orderReviewOption: 'Nie' },
-    { areFirstPieceRequirementsDefined: true, orderReviewOption: 'Nie dotyczy' }
+    { areFirstPieceRequirementsDefined: false, orderReviewOption: 'Nie' }
   ]
 
   haveWarehousesAndResources: Order[] = [
     { haveWarehousesAndResources: true, orderReviewOption: 'Tak' },
-    { haveWarehousesAndResources: false, orderReviewOption: 'Nie' },
-    { haveWarehousesAndResources: true, orderReviewOption: 'Nie dotyczy' }
+    { haveWarehousesAndResources: false, orderReviewOption: 'Nie' }
   ]
 
   hasRiskAssessed: Order[] = [
     { hasRiskAssessed: true, orderReviewOption: 'Tak' },
-    { hasRiskAssessed: false, orderReviewOption: 'Nie' },
-    { hasRiskAssessed: true, orderReviewOption: 'Nie dotyczy' }
+    { hasRiskAssessed: false, orderReviewOption: 'Nie' }
   ]
 
   isPriceCorrect: Order[] = [
     { isPriceCorrect: true, orderReviewOption: 'Tak' },
-    { isPriceCorrect: false, orderReviewOption: 'Nie' },
-    { isPriceCorrect: true, orderReviewOption: 'Nie dotyczy' }
+    { isPriceCorrect: false, orderReviewOption: 'Nie' }
   ]
 
   areDeliveryTermsChecked: Order[] = [
     { areDeliveryTermsChecked: true, orderReviewOption: 'Tak' },
-    { areDeliveryTermsChecked: false, orderReviewOption: 'Nie' },
-    { areDeliveryTermsChecked: true, orderReviewOption: 'Nie dotyczy' }
+    { areDeliveryTermsChecked: false, orderReviewOption: 'Nie' }
   ]
 
 
