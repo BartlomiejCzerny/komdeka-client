@@ -18,7 +18,7 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Numer zamówienia</mat-label>
-                  <input matInput type="number" formControlName="orderNumber" id="orderNumber" tabindex="1">
+                  <input matInput type="number" formControlName="orderNumber" id="orderNumber" tabindex="1" [(ngModel)]="orderNumber" (input)="autocompleteOrderNumber()">
                   <mat-error *ngIf="orderForm.controls['orderNumber'].errors?.required">Nie wprowadzono numeru zamówienia.</mat-error>
                   <mat-error *ngIf="orderForm.controls['orderNumber'].errors?.pattern">Nr zamówienia może zawierać maks. 15 znaków.</mat-error>
                 </mat-form-field>
@@ -28,7 +28,7 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Nazwa zamawiającego</mat-label>
-                  <input matInput type="text" formControlName="customerName" id="customerName" tabindex="2">
+                  <input matInput type="text" formControlName="customerName" id="customerName" tabindex="2" [(ngModel)]="customerName" (input)="autocompleteCustomerName()">
                   <mat-error *ngIf="orderForm.controls['customerName'].errors?.required">Nie wprowadzono nazwy zamawiającego.</mat-error>
                   <mat-error *ngIf="orderForm.controls['customerName'].errors?.maxlength">Nazwa zamawiającego może zawierać maks. 15 znaków.</mat-error>
                 </mat-form-field>
@@ -332,7 +332,7 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Numer zamówienia</mat-label>
-                  <input matInput type="number" formControlName="orderNum" id="orderNum" tabindex="30">
+                  <input matInput type="number" formControlName="orderNum" id="orderNum" tabindex="30" [(ngModel)]="orderNum" readonly>
                   <mat-error *ngIf="orderForm.controls['orderNum'].errors?.required">Nie wprowadzono numeru zamówienia.</mat-error>
                   <mat-error *ngIf="orderForm.controls['orderNum'].errors?.maxlength">Nr zamówienia może zawierać maks. 15 znaków.</mat-error>
                 </mat-form-field>
@@ -381,7 +381,7 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Numer karty projektu</mat-label>
-                  <input matInput type="text" formControlName="projectCardNumber" id="projectCardNumber" tabindex="36">
+                  <input matInput type="text" formControlName="projectCardNumber" id="projectCardNumber" tabindex="36" [(ngModel)]="projectCardNumber" (input)="autocompleteProjectCardNumber()">
                   <mat-error *ngIf="orderForm.controls['projectCardNumber'].errors?.required">Nie wprowadzono numeru karty projektu.</mat-error>
                   <mat-error *ngIf="orderForm.controls['projectCardNumber'].errors?.maxlength">Nr karty projektu może zawierać maks. 15 znaków.</mat-error>
                 </mat-form-field>
@@ -389,7 +389,7 @@
               <div class="input-field input-space">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Numer zamówienia</mat-label>
-                  <input matInput type="number" formControlName="orderNo" id="orderNo" tabindex="37">
+                  <input matInput type="number" formControlName="orderNo" id="orderNo" tabindex="37" [(ngModel)]="orderNo" readonly>
                   <mat-error *ngIf="orderForm.controls['orderNo'].errors?.required">Nie wprowadzono numeru zamówienia.</mat-error>
                   <mat-error *ngIf="orderForm.controls['orderNo'].errors?.maxlength">Nr zamówienia może zawierać maks. 15 znaków.</mat-error>
                 </mat-form-field>
@@ -399,7 +399,7 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Zamawiający</mat-label>
-                  <input matInput type="text" formControlName="orderingPersonName" id="orderingPersonName" tabindex="38">
+                  <input matInput type="text" formControlName="orderingPersonName" id="orderingPersonName" tabindex="38" [(ngModel)]="orderingPersonName" readonly>
                   <mat-error *ngIf="orderForm.controls['orderingPersonName'].errors?.required">Nie wprowadzono nazwy zamawiającego.</mat-error>
                   <mat-error *ngIf="orderForm.controls['orderingPersonName'].errors?.maxlength">Nazwa zamawiającego może zawierać maksymalnie 255 znaków.</mat-error>
                 </mat-form-field>
@@ -419,7 +419,7 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Nazwa dokumentu</mat-label>
-                  <input matInput type="text" formControlName="documentName" id="documentName" tabindex="40">
+                  <textarea matInput type="text" formControlName="documentName" id="documentName" tabindex="40" rows="1"></textarea>
                   <mat-error *ngIf="orderForm.controls['documentName'].errors?.required">Nie wprowadzono nazwy dokumentu.</mat-error>
                   <mat-error *ngIf="orderForm.controls['documentName'].errors?.maxlength">Nazwa dokumentu może zawierać maksymalnie 255 znaków.</mat-error>
                 </mat-form-field>
@@ -427,9 +427,9 @@
               <div class="input-field input-space">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Numer dokumentu</mat-label>
-                  <input matInput type="number" formControlName="documentNumber" id="documentNumber" tabindex="41">
+                  <textarea matInput type="text" formControlName="documentNumber" id="documentNumber" tabindex="41" rows="1" [(ngModel)]="documentNumber"></textarea>
                   <mat-error *ngIf="orderForm.controls['documentNumber'].errors?.required">Nie wprowadzono numeru dokumentu.</mat-error>
-                  <mat-error *ngIf="orderForm.controls['documentNumber'].errors?.maxlength">Numer dokumentu może zawierać maksymalnie 15 znaków.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['documentNumber'].errors?.maxlength">Numer dokumentu może zawierać maksymalnie 255 znaków.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -546,18 +546,17 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Nazwa dokumentu</mat-label>
-                  <input matInput type="text" formControlName="docName" id="docName" tabindex="54">
+                  <textarea matInput type="text" formControlName="docName" id="docName" tabindex="54" rows="1"></textarea>
+                  <mat-error *ngIf="orderForm.controls['docName'].errors?.required">Nie wprowadzono nazwy dokumentu.</mat-error>
                   <mat-error *ngIf="orderForm.controls['docName'].errors?.maxlength">Nazwa dokumentu może zawierać maksymalnie 255 znaków.</mat-error>
                 </mat-form-field>
               </div>
-            </div>
-            <div class="input-container">
-              <div class="input-field">
+              <div class="input-field input-space">
                 <mat-form-field class="field-width" appearance="fill">
-                  <mat-label>Numer dokumentu/rysunku</mat-label>
-                  <input matInput type="text" formControlName="documentOrDrawingNumber" id="documentOrDrawingNumber" tabindex="55">
-                  <mat-error *ngIf="orderForm.controls['documentOrDrawingNumber'].errors?.required">Nie wprowadzono numeru dokumentu/rysunku.</mat-error>
-                  <mat-error *ngIf="orderForm.controls['documentOrDrawingNumber'].errors?.maxlength">Numer dokumentu/rysunku może zawierać maksymalnie 255 znaków.</mat-error>
+                  <mat-label>Numer dokumentu / rysunku</mat-label>
+                  <textarea matInput type="text" formControlName="documentOrDrawingNumber" id="documentOrDrawingNumber" tabindex="55" rows="1" [(ngModel)]="documentOrDrawingNumber"></textarea>
+                  <mat-error *ngIf="orderForm.controls['documentOrDrawingNumber'].errors?.required">Nie wprowadzono numeru dokumentu / rysunku.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['documentOrDrawingNumber'].errors?.maxlength">Numer dokumentu / rysunku może zawierać maksymalnie 255 znaków.</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -622,7 +621,7 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Numer przewodnika pracy</mat-label>
-                  <input matInput type="text" formControlName="jobGuideNumber" id="jobGuideNumber" tabindex="63">
+                  <input matInput type="text" formControlName="jobGuideNumber" id="jobGuideNumber" tabindex="63" [(ngModel)]="jobGuideNumber">
                   <mat-error *ngIf="orderForm.controls['jobGuideNumber'].errors?.required">Nie wprowadzono numeru przewodnika pracy.</mat-error>
                   <mat-error *ngIf="orderForm.controls['jobGuideNumber'].errors?.maxlength">Numer przewodnika pracy może zawierać maksymalnie 15 znaków.</mat-error>
                 </mat-form-field>
@@ -641,7 +640,7 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Klient</mat-label>
-                  <input matInput type="text" formControlName="customer" id="customer" tabindex="65">
+                  <input matInput type="text" formControlName="customer" id="customer" tabindex="65" [(ngModel)]="customer" readonly>
                   <mat-error *ngIf="orderForm.controls['customer'].errors?.required">Nie wprowadzono nazwy klienta.</mat-error>
                   <mat-error *ngIf="orderForm.controls['customer'].errors?.maxlength">Nazwa klienta może zawierać maksymalnie 255 znaków.</mat-error>
                 </mat-form-field>
@@ -661,7 +660,7 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Numer rysunku</mat-label>
-                  <input matInput type="text" formControlName="drawingNumber" id="drawingNumber" tabindex="67">
+                  <input matInput type="text" formControlName="drawingNumber" id="drawingNumber" tabindex="67" [(ngModel)]="drawingNumber">
                   <mat-error *ngIf="orderForm.controls['drawingNumber'].errors?.required">Nie wprowadzono numeru rysunku.</mat-error>
                   <mat-error *ngIf="orderForm.controls['drawingNumber'].errors?.maxlength">Numer rysunku może zawierać maksymalnie 15 znaków.</mat-error>
                 </mat-form-field>
@@ -697,7 +696,7 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Numer zamówienia</mat-label>
-                  <input matInput type="number" formControlName="orderNr" id="orderNr" tabindex="71">
+                  <input matInput type="number" formControlName="orderNr" id="orderNr" tabindex="71" [(ngModel)]="orderNr" readonly>
                   <mat-error *ngIf="orderForm.controls['orderNr'].errors?.required">Nie wprowadzono numeru zamówienia.</mat-error>
                   <mat-error *ngIf="orderForm.controls['orderNr'].errors?.maxlength">Numer zamówienia może zawierać maksymalnie 15 znaków.</mat-error>
                 </mat-form-field>
@@ -732,7 +731,7 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Numer świadectwa jakości</mat-label>
-                  <input matInput type="text" formControlName="qualityCertificateNumber" id="qualityCertificateNumber" tabindex="76">
+                  <input matInput type="text" formControlName="qualityCertificateNumber" id="qualityCertificateNumber" tabindex="76" [(ngModel)]="qualityCertificateNumber">
                   <mat-error *ngIf="orderForm.controls['qualityCertificateNumber'].errors?.required">Nie wprowadzono numeru świadectwa jakości.</mat-error>
                   <mat-error *ngIf="orderForm.controls['qualityCertificateNumber'].errors?.maxlength">Numer świadectwa jakości może zawierać maksymalnie 15 znaków.</mat-error>
                 </mat-form-field>
@@ -740,7 +739,7 @@
               <div class="input-field input-space">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Numer zamówienia</mat-label>
-                  <input matInput type="number" formControlName="orderNbr" id="orderNbr" tabindex="77">
+                  <input matInput type="number" formControlName="orderNbr" id="orderNbr" tabindex="77" [(ngModel)]="orderNbr" readonly>
                   <mat-error *ngIf="orderForm.controls['orderNbr'].errors?.required">Nie wprowadzono numeru zamówienia.</mat-error>
                   <mat-error *ngIf="orderForm.controls['orderNbr'].errors?.maxlength">Numer zamówienia może zawierać maksymalnie 15 znaków.</mat-error>
                 </mat-form-field>
@@ -750,7 +749,7 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Zamawiający</mat-label>
-                  <input matInput type="text" formControlName="purchaser" id="purchaser" tabindex="78">
+                  <input matInput type="text" formControlName="purchaser" id="purchaser" tabindex="78" [(ngModel)]="purchaser" readonly>
                   <mat-error *ngIf="orderForm.controls['purchaser'].errors?.required">Nie wprowadzono danych zamawiającego.</mat-error>
                   <mat-error *ngIf="orderForm.controls['purchaser'].errors?.maxlength">Dane zamawiającego mogą zawierać maksymalnie 255 znaków.</mat-error>
                 </mat-form-field>
