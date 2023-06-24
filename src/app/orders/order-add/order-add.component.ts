@@ -18,7 +18,46 @@ import { map } from 'rxjs/operators';
 export class OrderAddComponent implements OnInit {
   orderForm: UntypedFormGroup;
 
-  orderNumber: number;
+
+  orderNumber = '';
+  orderNum: number;
+  orderNo: number;
+  documentNumber: string;
+  documentOrDrawingNumber: string;
+  drawingNumber: string;
+  orderNr: number;
+  orderNbr: number;
+
+  autocompleteOrderNumber() {
+    this.orderNum = +this.orderNumber;
+    this.orderNo = +this.orderNumber;
+    this.documentNumber = this.orderNumber.toString();
+    this.documentOrDrawingNumber = this.orderNumber.toString();
+    this.drawingNumber = this.orderNumber.toString();
+    this.orderNr = +this.orderNumber;
+    this.orderNbr = +this.orderNumber;
+  }
+
+  customerName = '';
+  orderingPersonName: string;
+  customer: string;
+  purchaser: string;
+
+  autocompleteCustomerName() {
+    this.orderingPersonName = this.customerName;
+    this.customer = this.orderingPersonName;
+    this.purchaser = this.orderingPersonName;
+  }
+
+  projectCardNumber = '';
+  jobGuideNumber: string;
+  qualityCertificateNumber: string;
+
+  autocompleteProjectCardNumber() {
+    this.jobGuideNumber = this.projectCardNumber;
+    this.qualityCertificateNumber = this.projectCardNumber;
+  }
+
 
   customerSignature: Order[] = [
     { customerSignature: true, signatureOption: 'Podpisano' },
@@ -273,14 +312,16 @@ export class OrderAddComponent implements OnInit {
         Validators.maxLength(255)
       ]),
       projectTeam: new UntypedFormControl('', [
+        Validators.required,
         Validators.maxLength(5000)
       ]),
       documentName: new UntypedFormControl('', [
+        Validators.required,
         Validators.maxLength(255)
       ]),
       documentNumber: new UntypedFormControl('', [
         Validators.required,
-        Validators.pattern('([1-9]|[1-9][0-9]{1,14})')
+        Validators.maxLength(255)
       ]),
       comments: new UntypedFormControl('', [
         Validators.maxLength(5000)
@@ -322,6 +363,7 @@ export class OrderAddComponent implements OnInit {
         Validators.maxLength(15)
       ]),
       docName: new UntypedFormControl('', [
+        Validators.required,
         Validators.maxLength(255)
       ]),
       documentOrDrawingNumber: new UntypedFormControl('', [
@@ -449,6 +491,8 @@ export class OrderAddComponent implements OnInit {
       ])
     });
   }
+
+
 
   addOrder(orderFormValue: any) {
     if (this.orderForm.valid) {

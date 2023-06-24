@@ -45,7 +45,7 @@ export interface Order {
   orderingPersonName?: string;
   projectTeam?: string;
   documentName?: string;
-  documentNumber?: number;
+  documentNumber?: string;
   comments?: string;
   reviewResult?: string;
   identifiedProblems?: string;
