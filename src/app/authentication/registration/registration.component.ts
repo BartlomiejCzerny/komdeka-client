@@ -30,7 +30,7 @@ export class RegistrationComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private router: Router,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.firstName = new UntypedFormControl('', [
@@ -85,7 +85,7 @@ export class RegistrationComponent implements OnInit {
           this.router.navigate(['/authentication/login']);
           this.openAccountActivationDialog();
         },
-        (error) => {
+        () => {
           this.showError = true;
         }
       );

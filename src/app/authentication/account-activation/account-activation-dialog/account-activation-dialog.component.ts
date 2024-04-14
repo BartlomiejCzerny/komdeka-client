@@ -9,7 +9,7 @@ import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dia
 export class AccountActivationDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AccountActivationDialogComponent>
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
