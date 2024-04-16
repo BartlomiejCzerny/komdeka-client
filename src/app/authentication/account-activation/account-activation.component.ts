@@ -16,7 +16,7 @@ export class AccountActivationComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.activateAccount();
