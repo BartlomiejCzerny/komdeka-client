@@ -7,9 +7,11 @@ import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dia
   styleUrls: ['./account-activation-dialog.component.scss'],
 })
 export class AccountActivationDialogComponent implements OnInit {
+
   constructor(
     public dialogRef: MatDialogRef<AccountActivationDialogComponent>
   ) { }
 
   ngOnInit(): void { }
+
 }
