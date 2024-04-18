@@ -24,10 +24,13 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.email = new UntypedFormControl('', [Validators.required, Validators.email]);
+    this.email = new UntypedFormControl('', [
+      Validators.required,
+      Validators.email
+    ]);
     this.password = new UntypedFormControl('', [
       Validators.required,
       Validators.pattern(
