@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container mat-app-background" [ngClass]="{ 'dark-mode' : isDarkMode, 'light-mode' : !isDarkMode }">
+<mat-sidenav-container class="sidenav-container" [ngClass]="{ 'dark-mode' : isDarkMode, 'light-mode' : !isDarkMode }">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"

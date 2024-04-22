@@ -41,11 +41,7 @@ export class NavigationComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.authenticationService.authChanged.subscribe((res) => {
-      this.isUserAuthenticated = res;
-    });
-  }
+  ngOnInit() { }
 
   toggleDarkMode() {
     this.isDarkMode = this.themeService.isDarkMode();
