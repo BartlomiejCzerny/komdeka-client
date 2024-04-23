@@ -18,7 +18,7 @@ export class ToolsListComponent implements OnInit {
 
   searchKey: string;
 
-  public displayedColumns = [
+  displayedColumns = [
     'idNumber',
     'name',
     'type',

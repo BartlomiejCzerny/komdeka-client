@@ -8,9 +8,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./account-activation.component.scss'],
 })
 export class AccountActivationComponent implements OnInit {
-  public showSuccess: boolean;
-  public showError: boolean;
-  public errorMessage: string;
+  showSuccess: boolean;
+  showError: boolean;
+  errorMessage: string;
 
   constructor(
     private authenticationService: AuthenticationService,

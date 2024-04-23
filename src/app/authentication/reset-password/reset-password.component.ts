@@ -19,7 +19,6 @@ export class ResetPasswordComponent implements OnInit {
   hidePassword = true;
   hideConfirmPassword = true;
 
-  showSuccess: boolean;
   showError: boolean;
   errorMessage: string;
 
@@ -59,8 +58,6 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   resetPassword(resetPasswordFormValue: any) {
-    this.showError = this.showSuccess = false;
-
     const resetPassword = { ...resetPasswordFormValue };
     const resetPasswordDto: ResetPasswordDto = {
       password: resetPassword.password,
@@ -73,7 +70,6 @@ export class ResetPasswordComponent implements OnInit {
       .resetPassword('api/accounts/resetpassword', resetPasswordDto)
       .subscribe(
         (_) => {
-          this.showSuccess = true;
           this.router.navigate(['/authentication/login']);
           this.openPasswordResetSnackbar();
         },
