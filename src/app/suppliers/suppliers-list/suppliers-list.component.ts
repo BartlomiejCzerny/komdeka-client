@@ -17,7 +17,7 @@ export class SuppliersListComponent implements OnInit {
 
   searchKey: string;
 
-  public displayedColumns = [
+  displayedColumns = [
     'idNumber',
     'name',
     'street',

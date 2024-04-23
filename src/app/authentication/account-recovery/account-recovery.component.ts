@@ -15,7 +15,6 @@ export class AccountRecoveryComponent implements OnInit {
   email: UntypedFormControl;
 
   errorMessage: string;
-  showSuccess: boolean;
   showError: boolean;
 
   constructor(
@@ -33,8 +32,6 @@ export class AccountRecoveryComponent implements OnInit {
   }
 
   accountRecovery(accountRecoveryFormValue: any) {
-    this.showError = this.showSuccess = false;
-
     const accountRecovery = { ...accountRecoveryFormValue };
     const accountRecoveryDto: AccountRecoveryDto = {
       email: accountRecovery.email,
@@ -45,7 +42,6 @@ export class AccountRecoveryComponent implements OnInit {
       .accountRecovery('api/accounts/accountrecovery', accountRecoveryDto)
       .subscribe(
         (_) => {
-          this.showSuccess = true;
           this.router.navigate(['/authentication/login']);
           this.openPasswordResetSnackBar();
         },

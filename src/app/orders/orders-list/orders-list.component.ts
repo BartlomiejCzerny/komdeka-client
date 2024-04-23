@@ -14,7 +14,7 @@ import { OrderService } from '../../shared/services/order.service';
 export class OrdersListComponent implements OnInit {
   searchKey: string;
 
-  public displayedColumns = [
+  displayedColumns = [
     'idNumber',
     'orderNumber',
     'admissionOrderDate',
