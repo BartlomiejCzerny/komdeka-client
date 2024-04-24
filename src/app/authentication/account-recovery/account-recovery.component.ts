@@ -21,10 +21,13 @@ export class AccountRecoveryComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.email = new UntypedFormControl('', [Validators.required, Validators.email]);
+    this.email = new UntypedFormControl('', [
+      Validators.required,
+      Validators.email
+    ]);
 
     this.accountRecoveryForm = new UntypedFormGroup({
       email: this.email
