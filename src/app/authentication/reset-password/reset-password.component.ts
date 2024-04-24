@@ -30,7 +30,7 @@ export class ResetPasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.password = new UntypedFormControl('', [
@@ -71,7 +71,7 @@ export class ResetPasswordComponent implements OnInit {
       .subscribe(
         (_) => {
           this.router.navigate(['/authentication/login']);
-          this.openPasswordResetSnackbar();
+          this.openPasswordResetSnackBar();
         },
         (error) => {
           this.showError = true;
@@ -80,7 +80,7 @@ export class ResetPasswordComponent implements OnInit {
       );
   }
 
-  openPasswordResetSnackbar() {
+  openPasswordResetSnackBar() {
     this.snackBar.open('Hasło zostało pomyślnie zresetowane.', 'OK', {
       duration: 5000
     });
