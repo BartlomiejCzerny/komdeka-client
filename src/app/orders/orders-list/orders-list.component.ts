@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { Order } from './../../interfaces/order/order.interface';
 import { OrderService } from '../../shared/services/order.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 @Component({
   selector: 'app-orders-list',
@@ -12,6 +13,7 @@ import { OrderService } from '../../shared/services/order.service';
   styleUrls: ['./orders-list.component.scss']
 })
 export class OrdersListComponent implements OnInit {
+  isUserAdmin = false;
   searchKey: string;
 
   displayedColumns = [
@@ -31,11 +33,14 @@ export class OrdersListComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
     this.getOrders();
+    if (this.authenticationService.isUserAdmin())
+      this.isUserAdmin = true;
   }
 
   getOrders() {

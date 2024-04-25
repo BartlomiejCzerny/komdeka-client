@@ -6,13 +6,14 @@ import { OrderDetailsComponent } from '../order-details/order-details.component'
 import { OrderAddComponent } from '../order-add/order-add.component';
 import { OrderEditComponent } from '../order-edit/order-edit.component';
 import { OrderDeleteComponent } from '../order-delete/order-delete.component';
+import { AdminGuard } from 'src/app/shared/guards/admin.guard';
 
 const routes: Routes = [
   { path: 'orders-list', component: OrdersListComponent },
   { path: 'order-details/:id', component: OrderDetailsComponent },
   { path: 'order-add', component: OrderAddComponent },
   { path: 'order-edit/:id', component: OrderEditComponent },
-  { path: 'order-delete/:id', component: OrderDeleteComponent }
+  { path: 'order-delete/:id', component: OrderDeleteComponent, canActivate: [AdminGuard] }
 ];
 
 @NgModule({

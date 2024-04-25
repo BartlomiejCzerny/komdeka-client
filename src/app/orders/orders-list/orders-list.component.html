@@ -55,7 +55,7 @@
                 <mat-icon>edit</mat-icon>
                 <span>Edycja</span>
               </button>
-              <button mat-menu-item (click)="redirectToDelete(element.idNumber)">
+              <button mat-menu-item (click)="redirectToDelete(element.idNumber)" *ngIf="isUserAdmin">
                 <mat-icon>delete</mat-icon>
                 <span>Usuwanie</span>
               </button>

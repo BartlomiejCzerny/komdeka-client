@@ -11,7 +11,7 @@ import { AdminGuard } from '../../shared/guards/admin.guard';
 const routes: Routes = [
   { path: 'suppliers-list', component: SuppliersListComponent },
   { path: 'supplier-details/:id', component: SupplierDetailsComponent },
-  { path: 'supplier-add', component: SupplierAddComponent, canActivate: [AdminGuard]},
+  { path: 'supplier-add', component: SupplierAddComponent },
   { path: 'supplier-edit/:id', component: SupplierEditComponent },
   { path: 'supplier-delete/:id', component: SupplierDeleteComponent, canActivate: [AdminGuard]}
 ];
