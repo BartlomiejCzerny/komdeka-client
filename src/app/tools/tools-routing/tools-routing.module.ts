@@ -11,7 +11,7 @@ import { AdminGuard } from 'src/app/shared/guards/admin.guard';
 const routes: Routes = [
   { path: 'tools-list', component: ToolsListComponent },
   { path: 'tool-details/:id', component: ToolDetailsComponent },
-  { path: 'tool-add', component: ToolAddComponent, canActivate: [AdminGuard] },
+  { path: 'tool-add', component: ToolAddComponent },
   { path: 'tool-edit/:id', component: ToolEditComponent },
   { path: 'tool-delete/:id', component: ToolDeleteComponent, canActivate: [AdminGuard] }
 ];
