@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ErrorHandlerService implements HttpInterceptor {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   intercept(
     req: HttpRequest<any>,
@@ -26,11 +26,11 @@ export class ErrorHandlerService implements HttpInterceptor {
     if (error.status === 404) {
       return this.handleNotFound(error);
     } else if (error.status === 400) {
-      return this.handleBadRequest(error);
+        return this.handleBadRequest(error);
     } else if (error.status === 401) {
-      return this.handleUnauthorized(error);
+        return this.handleUnauthorized(error);
     } else if (error.status === 403) {
-      return this.handleForbidden(error);
+        return this.handleForbidden(error);
     }
   }
 
@@ -44,15 +44,15 @@ export class ErrorHandlerService implements HttpInterceptor {
       this.router.url === '/authentication/registration' ||
       this.router.url.startsWith('/authentication/reset-password')
     ) {
-      let message = '';
-      const values = Object.values(error.error.errors);
-      values.map((m: any) => {
-        message += m + '<br>';
-      });
+        let message = '';
+        const values = Object.values(error.error.errors);
+        values.map((m: any) => {
+          message += m + '<br>';
+        });
 
-      return message.slice(0, -4);
+        return message.slice(0, -4);
     } else {
-      return error.error ? error.error : error.message;
+        return error.error ? error.error : error.message;
     }
   }
 
@@ -60,13 +60,17 @@ export class ErrorHandlerService implements HttpInterceptor {
     if (this.router.url.startsWith('/authentication/login')) {
       return error.error.errorMessage;
     } else {
-      this.router.navigate(['/authentication/login'], { queryParams: { returnUrl: this.router.url } });
-      return error.message;
+        this.router.navigate(['/authentication/login'], {
+          queryParams: { returnUrl: this.router.url }
+        });
+        return error.message;
     }
   }
 
   private handleForbidden(error: HttpErrorResponse) {
-    this.router.navigate(["/forbidden"], { queryParams: { returnUrl: this.router.url }});
+    this.router.navigate(["/forbidden"], {
+      queryParams: { returnUrl: this.router.url }
+    });
     return "Forbidden";
   }
 }
