@@ -12,7 +12,7 @@ export class OrderService {
   constructor(
     private http: HttpClient,
     private envUrl: EnvironmentUrlService
-  ) {}
+  ) { }
 
   getOrders(route: string): Observable<Order[]> {
     return this.http.get<Order[]>(

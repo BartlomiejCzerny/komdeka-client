@@ -45,9 +45,9 @@ export class OrdersListComponent implements OnInit {
 
   getOrders() {
     this.orderService.getOrder('api/orders')
-    .subscribe(res => {
-      this.ordersData.data = res as unknown as Order[];
-    });
+      .subscribe(res => {
+        this.ordersData.data = res as unknown as Order[];
+      });
   }
 
   ngAfterViewInit(): void {

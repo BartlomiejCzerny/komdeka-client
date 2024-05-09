@@ -11,7 +11,7 @@
             <h2>Karta zamówienia</h2>
             <div *ngIf="showError" class="input-container">
               <div class="input-field">
-                <mat-card class="error-card">{{errorMessage}}</mat-card>
+                <mat-card class="error-card">{{ errorMessage }}</mat-card>
               </div>
             </div>
             <div class="input-container">
@@ -19,16 +19,26 @@
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Numer identyfikacyjny</mat-label>
                   <input matInput type="text" formControlName="idNumber" id="idNumber" tabindex="1">
-                  <mat-error *ngIf="orderForm.controls['idNumber'].errors?.required">Nie wprowadzono numeru identyfikacyjnego.</mat-error>
-                  <mat-error *ngIf="orderForm.controls['idNumber'].errors?.maxlength">Nr id. może zawierać maks. 15 znaków.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['idNumber'].errors?.required">
+                    Nie wprowadzono numeru identyfikacyjnego.
+                  </mat-error>
+                  <mat-error *ngIf="orderForm.controls['idNumber'].errors?.maxlength">
+                    Nr id. może zawierać maks. 15 znaków.
+                  </mat-error>
                 </mat-form-field>
               </div>
               <div class="input-field input-space">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Numer zamówienia</mat-label>
-                  <input matInput type="number" formControlName="orderNumber" id="orderNumber" tabindex="2" [(ngModel)]="orderNumber" (input)="autocompleteOrderNumber()">
-                  <mat-error *ngIf="orderForm.controls['orderNumber'].errors?.required">Nie wprowadzono numeru zamówienia.</mat-error>
-                  <mat-error *ngIf="orderForm.controls['orderNumber'].errors?.pattern">Nr zamówienia może zawierać maks. 15 znaków.</mat-error>
+                  <input matInput type="number" formControlName="orderNumber" id="orderNumber" tabindex="2" [(ngModel)]="orderNumber"
+                    (input)="autocompleteOrderNumber()"
+                  >
+                  <mat-error *ngIf="orderForm.controls['orderNumber'].errors?.required">
+                    Nie wprowadzono numeru zamówienia.
+                  </mat-error>
+                  <mat-error *ngIf="orderForm.controls['orderNumber'].errors?.pattern">
+                    Nr zamówienia może zawierać maks. 15 znaków.
+                  </mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -135,7 +145,7 @@
                   <mat-label>Podpis osoby zamawiającej</mat-label>
                   <mat-select formControlName="customerSignature" id="customerSignature" name="customerSignature" tabindex="13">
                     <mat-option *ngFor="let customerSignature of customerSignature" [value]="customerSignature.customerSignature">
-                      {{customerSignature.signatureOption}}
+                      {{customerSignature.signatureStatus}}
                     </mat-option>
                   </mat-select>
                   <mat-error *ngIf="orderForm.controls['customerSignature'].errors?.required">Podpis osoby zamawiającej jest wymagany.</mat-error>
@@ -146,7 +156,7 @@
                   <mat-label>Podpis wykonawcy</mat-label>
                   <mat-select formControlName="contractorSignature" id="contractorSignature" name="contractorSignature" tabindex="14">
                     <mat-option *ngFor="let contractorSignature of contractorSignature" [value]="contractorSignature.contractorSignature">
-                      {{contractorSignature.signatureOption}}
+                      {{contractorSignature.signatureStatus}}
                     </mat-option>
                   </mat-select>
                   <mat-error *ngIf="orderForm.controls['contractorSignature'].errors?.required">Podpis wykonawcy jest wymagany.</mat-error>
@@ -371,7 +381,7 @@
                   <mat-label>Podpis</mat-label>
                   <mat-select formControlName="orderingPersonSignature" id="orderingPersonSignature" name="orderingPersonSignature" tabindex="34">
                     <mat-option *ngFor="let orderingPersonSignature of orderingPersonSignature" [value]="orderingPersonSignature.orderingPersonSignature">
-                      {{orderingPersonSignature.signatureOption}}
+                      {{orderingPersonSignature.signatureStatus}}
                     </mat-option>
                   </mat-select>
                   <mat-error *ngIf="orderForm.controls['orderingPersonSignature'].errors?.required">Podpis osoby zamawiającej jest wymagany.</mat-error>
@@ -611,7 +621,7 @@
                   <mat-label>Podpisy zespołu projektowego</mat-label>
                   <mat-select formControlName="designTeamSignatures" id="designTeamSignatures" name="designTeamSignatures" tabindex="61">
                     <mat-option *ngFor="let designTeamSignatures of designTeamSignatures" [value]="designTeamSignatures.designTeamSignatures">
-                      {{designTeamSignatures.signatureOption}}
+                      {{designTeamSignatures.signatureStatus}}
                     </mat-option>
                   </mat-select>
                   <mat-error *ngIf="orderForm.controls['designTeamSignatures'].errors?.required">Podpisy zespołu projektowego są wymagane.</mat-error>
@@ -816,7 +826,7 @@
                   <mat-label>Podpis</mat-label>
                   <mat-select formControlName="signature" id="signature" name="signature" tabindex="85">
                     <mat-option *ngFor="let signature of signature" [value]="signature.signature">
-                      {{signature.signatureOption}}
+                      {{signature.signatureStatus}}
                     </mat-option>
                   </mat-select>
                   <mat-error *ngIf="orderForm.controls['signature'].errors?.required">Podpis jest wymagany.</mat-error>
@@ -872,7 +882,7 @@
                   <mat-label>Podpis osoby zamawiającej</mat-label>
                   <mat-select formControlName="clientSignature" id="clientSignature" name="clientSignature" tabindex="92">
                     <mat-option *ngFor="let clientSignature of clientSignature" [value]="clientSignature.clientSignature">
-                      {{clientSignature.signatureOption}}
+                      {{clientSignature.signatureStatus}}
                     </mat-option>
                   </mat-select>
                   <mat-error *ngIf="orderForm.controls['clientSignature'].errors?.required">Podpis osoby zamawiającej jest wymagany.</mat-error>
@@ -883,7 +893,7 @@
                   <mat-label>Podpis wykonawcy</mat-label>
                   <mat-select formControlName="executingPersonSignature" id="executingPersonSignature" name="executingPersonSignature" tabindex="93">
                     <mat-option *ngFor="let executingPersonSignature of executingPersonSignature" [value]="executingPersonSignature.executingPersonSignature">
-                      {{executingPersonSignature.signatureOption}}
+                      {{executingPersonSignature.signatureStatus}}
                     </mat-option>
                   </mat-select>
                   <mat-error *ngIf="orderForm.controls['executingPersonSignature'].errors?.required">Podpis wykonawcy jest wymagany.</mat-error>

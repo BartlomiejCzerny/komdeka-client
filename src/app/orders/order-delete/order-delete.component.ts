@@ -24,13 +24,13 @@ export class OrderDeleteComponent implements OnInit {
   orderNumber: number;
 
   customerSignature: Order[] = [
-    { customerSignature: true, signatureOption: 'Podpisano' },
-    { customerSignature: false, signatureOption: 'Nie podpisano' }
+    { customerSignature: true, signatureStatus: 'Podpisano' },
+    { customerSignature: false, signatureStatus: 'Nie podpisano' }
   ]
 
   contractorSignature: Order[] = [
-    { contractorSignature: true, signatureOption: 'Podpisano' },
-    { contractorSignature: false, signatureOption: 'Nie podpisano' }
+    { contractorSignature: true, signatureStatus: 'Podpisano' },
+    { contractorSignature: false, signatureStatus: 'Nie podpisano' }
   ]
 
 
@@ -114,31 +114,31 @@ export class OrderDeleteComponent implements OnInit {
 
 
   orderingPersonSignature: Order[] = [
-    { orderingPersonSignature: true, signatureOption: 'Podpisano' },
-    { orderingPersonSignature: false, signatureOption: 'Nie podpisano' }
+    { orderingPersonSignature: true, signatureStatus: 'Podpisano' },
+    { orderingPersonSignature: false, signatureStatus: 'Nie podpisano' }
   ]
 
 
   designTeamSignatures: Order[] = [
-    { designTeamSignatures: true, signatureOption: 'Podpisano' },
-    { designTeamSignatures: false, signatureOption: 'Nie podpisano' }
+    { designTeamSignatures: true, signatureStatus: 'Podpisano' },
+    { designTeamSignatures: false, signatureStatus: 'Nie podpisano' }
   ]
 
 
   signature: Order[] = [
-    { signature: true, signatureOption: 'Podpisano' },
-    { signature: false, signatureOption: 'Nie podpisano' }
+    { signature: true, signatureStatus: 'Podpisano' },
+    { signature: false, signatureStatus: 'Nie podpisano' }
   ]
 
 
   clientSignature: Order[] = [
-    { clientSignature: true, signatureOption: 'Podpisano' },
-    { clientSignature: false, signatureOption: 'Nie podpisano' }
+    { clientSignature: true, signatureStatus: 'Podpisano' },
+    { clientSignature: false, signatureStatus: 'Nie podpisano' }
   ]
 
   executingPersonSignature: Order[] = [
-    { executingPersonSignature: true, signatureOption: 'Podpisano' },
-    { executingPersonSignature: false, signatureOption: 'Nie podpisano' }
+    { executingPersonSignature: true, signatureStatus: 'Podpisano' },
+    { executingPersonSignature: false, signatureStatus: 'Nie podpisano' }
   ]
 
 

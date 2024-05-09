@@ -105,7 +105,7 @@
                   <mat-label>Podpis osoby zamawiającej</mat-label>
                   <mat-select disabled [value]="order.customerSignature">
                     <mat-option *ngFor="let customerSignature of customerSignature" [value]="customerSignature.customerSignature">
-                      {{customerSignature.signatureOption}}
+                      {{customerSignature.signatureStatus}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -115,7 +115,7 @@
                   <mat-label>Podpis wykonawcy</mat-label>
                   <mat-select disabled [value]="order.contractorSignature">
                     <mat-option *ngFor="let contractorSignature of contractorSignature" [value]="contractorSignature.contractorSignature">
-                      {{contractorSignature.signatureOption}}
+                      {{contractorSignature.signatureStatus}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -328,7 +328,7 @@
                   <mat-label>Podpis</mat-label>
                   <mat-select disabled [value]="order.orderingPersonSignature">
                     <mat-option *ngFor="let orderingPersonSignature of orderingPersonSignature" [value]="orderingPersonSignature.orderingPersonSignature">
-                      {{orderingPersonSignature.signatureOption}}
+                      {{orderingPersonSignature.signatureStatus}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -531,7 +531,7 @@
                   <mat-label>Podpisy zespołu projektowego</mat-label>
                   <mat-select disabled [value]="order.designTeamSignatures">
                     <mat-option *ngFor="let designTeamSignatures of designTeamSignatures" [value]="designTeamSignatures.designTeamSignatures">
-                      {{designTeamSignatures.signatureOption}}
+                      {{designTeamSignatures.signatureStatus}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -699,7 +699,7 @@
                   <mat-label>Podpis</mat-label>
                   <mat-select disabled [value]="order.signature">
                     <mat-option *ngFor="let signature of signature" [value]="signature.signature">
-                      {{signature.signatureOption}}
+                      {{signature.signatureStatus}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -748,7 +748,7 @@
                   <mat-label>Podpis osoby zamawiającej</mat-label>
                   <mat-select disabled [value]="order.clientSignature">
                     <mat-option *ngFor="let clientSignature of clientSignature" [value]="clientSignature.clientSignature">
-                      {{clientSignature.signatureOption}}
+                      {{clientSignature.signatureStatus}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -758,7 +758,7 @@
                   <mat-label>Podpis wykonawcy</mat-label>
                   <mat-select disabled [value]="order.executingPersonSignature">
                     <mat-option *ngFor="let executingPersonSignature of executingPersonSignature" [value]="executingPersonSignature.executingPersonSignature">
-                      {{executingPersonSignature.signatureOption}}
+                      {{executingPersonSignature.signatureStatus}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
