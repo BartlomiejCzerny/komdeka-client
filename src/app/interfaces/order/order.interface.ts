@@ -14,7 +14,7 @@ export interface Order {
   orderComments?: string;
   customerSignature?: boolean;
   contractorSignature?: boolean;
-  signatureOption?: string;
+  signatureStatus?: string;
 
   //Przegląd zamówienia
   areRequirementsDefined?: boolean;
