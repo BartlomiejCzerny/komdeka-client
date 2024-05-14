@@ -616,7 +616,7 @@ export class OrderAddComponent implements OnInit {
     this.orderService.postOrder(apiUrl, order)
       .subscribe(() => {
         this.redirectToOrdersList();
-        this.openOrderAddSnackbar();
+        this.openOrderAddSnackBar();
       },
         ((error) => {
           this.showError = true;
@@ -633,7 +633,7 @@ export class OrderAddComponent implements OnInit {
     this.orderForm.reset();
   }
 
-  openOrderAddSnackbar() {
+  openOrderAddSnackBar() {
     this.snackBar.open('Zamówienie zostało dodane pomyślnie.', 'OK', {
       duration: 5000
     });

@@ -137,6 +137,9 @@ export class OrderDetailsComponent implements OnInit {
     { executingPersonSignature: false, signatureStatus: 'Nie podpisano' }
   ]
 
+  showError: boolean;
+  errorMessage: string;
+
   stepperOrientation: Observable<StepperOrientation>;
 
   constructor(
@@ -468,7 +471,11 @@ export class OrderDetailsComponent implements OnInit {
       .subscribe(res => {
         this.order = res as Order;
         this.orderForm.patchValue(this.order);
-      }
+      },
+        ((error) => {
+          this.showError = true;
+          this.errorMessage = error;
+        })
       );
   }
 

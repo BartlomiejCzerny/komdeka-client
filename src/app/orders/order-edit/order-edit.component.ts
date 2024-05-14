@@ -504,8 +504,8 @@ export class OrderEditComponent implements OnInit {
         this.orderForm.patchValue(this.order);
       },
         ((error) => {
-          this.errorMessage = error;
           this.showError = true;
+          this.errorMessage = error;
         })
       );
   }
@@ -633,11 +633,11 @@ export class OrderEditComponent implements OnInit {
     this.orderService.putOrder(apiUrl, order)
       .subscribe(() => {
         this.redirectToOrdersList();
-        this.openOrderUpdateSnackbar();
+        this.openOrderUpdateSnackBar();
       },
         ((error) => {
-          this.errorMessage = error;
           this.showError = true;
+          this.errorMessage = error;
         })
       );
   }
@@ -650,7 +650,7 @@ export class OrderEditComponent implements OnInit {
     this.orderForm.reset();
   }
 
-  openOrderUpdateSnackbar() {
+  openOrderUpdateSnackBar() {
     this.snackBar.open('Zamówienie zostało zaktualizowane pomyślnie.', 'OK', {
       duration: 5000
     });
