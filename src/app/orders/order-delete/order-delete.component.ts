@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ErrorHandlerService } from './../../shared/services/error-handler.service';
 import { OrderService } from './../../shared/services/order.service';
 import { Order } from './../../interfaces/order/order.interface';
-import { HttpErrorResponse } from '@angular/common/http';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -141,9 +139,8 @@ export class OrderDeleteComponent implements OnInit {
     { executingPersonSignature: false, signatureStatus: 'Nie podpisano' }
   ]
 
-
-  errorMessage: string;
   showError: boolean;
+  errorMessage: string;
 
   stepperOrientation: Observable<StepperOrientation>;
 
@@ -486,11 +483,11 @@ export class OrderDeleteComponent implements OnInit {
     this.orderService.deleteOrder(deleteUri)
       .subscribe(() => {
         this.redirectToOrdersList();
-        this.openOrderDeleteSnackbar();
+        this.openOrderDeleteSnackBar();
       },
         ((error) => {
-          this.errorMessage = error;
           this.showError = true;
+          this.errorMessage = error;
         })
       );
   }
@@ -499,7 +496,7 @@ export class OrderDeleteComponent implements OnInit {
     this.router.navigate(['/orders/orders-list']);
   }
 
-  openOrderDeleteSnackbar() {
+  openOrderDeleteSnackBar() {
     this.snackBar.open('Zamówienie zostało usunięte pomyślnie.', 'OK', {
       duration: 5000
     });

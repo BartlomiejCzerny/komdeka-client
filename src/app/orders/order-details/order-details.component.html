@@ -310,7 +310,9 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Wymagania do zamówienia</mat-label>
-                  <textarea matInput disabled rows="5" [value]="order.orderRequirements"></textarea>
+                  <textarea matInput disabled rows="5"
+                    [value]="order.orderRequirements"
+                  ></textarea>
                 </mat-form-field>
               </div>
             </div>
@@ -318,8 +320,11 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Data</mat-label>
-                  <input matInput disabled [matDatepicker]="requirementsEstablishedDatePicker" [value]="order.requirementsEstablishedDate">
-                  <mat-datepicker-toggle matSuffix [for]="requirementsEstablishedDatePicker"></mat-datepicker-toggle>
+                  <input matInput disabled [matDatepicker]="requirementsEstablishedDatePicker"
+                    [value]="order.requirementsEstablishedDate"
+                  >
+                  <mat-datepicker-toggle matSuffix [for]="requirementsEstablishedDatePicker">
+                  </mat-datepicker-toggle>
                   <mat-datepicker #requirementsEstablishedDatePicker></mat-datepicker>
                 </mat-form-field>
               </div>
@@ -327,7 +332,9 @@
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Podpis</mat-label>
                   <mat-select disabled [value]="order.orderingPersonSignature">
-                    <mat-option *ngFor="let orderingPersonSignature of orderingPersonSignature" [value]="orderingPersonSignature.orderingPersonSignature">
+                    <mat-option *ngFor="let orderingPersonSignature of orderingPersonSignature"
+                      [value]="orderingPersonSignature.orderingPersonSignature"
+                    >
                       {{orderingPersonSignature.signatureStatus}}
                     </mat-option>
                   </mat-select>
@@ -335,8 +342,20 @@
               </div>
             </div>
             <div class="buttons">
-              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="4" matStepperPrevious>Wstecz</button>
-              <button class="stepper-button" type="button" mat-raised-button color="primary" tabindex="5" matStepperNext>Dalej</button>
+              <button class="stepper-button" type="button" mat-raised-button
+                color="primary"
+                tabindex="4"
+                matStepperPrevious
+              >
+                Wstecz
+              </button>
+              <button class="stepper-button" type="button" mat-raised-button
+                color="primary"
+                tabindex="5"
+                matStepperNext
+              >
+                Dalej
+              </button>
             </div>
           </mat-step>
           <mat-step [stepControl]="orderForm">

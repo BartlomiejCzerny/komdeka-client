@@ -772,11 +772,27 @@
           <mat-step [stepControl]="orderForm">
             <h2>Podsumowanie</h2>
             <p>
-              Jeżeli istnieje taka potrzeba możesz usunąć to zamówienie. W przeciwnym wypadku anuluj usuwanie zamówienia.
+              Jeżeli istnieje taka potrzeba możesz usunąć to zamówienie.
+              W przeciwnym wypadku anuluj usuwanie zamówienia.
             </p>
             <div class="buttons">
-              <button mat-raised-button color="warn" tabindex="14" (click)="deleteOrder()">Usuń</button>
-              <button class="cancel-button" mat-raised-button color="accent" tabindex="15" (click)="redirectToOrdersList()">Anuluj</button>
+              <button
+                mat-raised-button
+                color="warn"
+                tabindex="14"
+                (click)="deleteOrder()"
+              >
+                Usuń
+              </button>
+              <button
+                class="cancel-button"
+                mat-raised-button
+                color="accent"
+                tabindex="15"
+                (click)="redirectToOrdersList()"
+              >
+                Anuluj
+              </button>
             </div>
           </mat-step>
         </mat-stepper>

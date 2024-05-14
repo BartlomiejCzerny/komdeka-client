@@ -862,23 +862,35 @@
               <div class="input-field">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Podpis osoby zamawiającej</mat-label>
-                  <mat-select formControlName="clientSignature" id="clientSignature" name="clientSignature" tabindex="91">
-                    <mat-option *ngFor="let clientSignature of clientSignature" [value]="clientSignature.clientSignature">
+                  <mat-select formControlName="clientSignature" id="clientSignature"
+                    name="clientSignature" tabindex="91"
+                  >
+                    <mat-option *ngFor="let clientSignature of clientSignature"
+                      [value]="clientSignature.clientSignature"
+                    >
                       {{clientSignature.signatureStatus}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['clientSignature'].errors?.required">Podpis osoby zamawiającej jest wymagany.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['clientSignature'].errors?.required">
+                    Podpis osoby zamawiającej jest wymagany.
+                  </mat-error>
                 </mat-form-field>
               </div>
               <div class="input-field input-space">
                 <mat-form-field class="field-width" appearance="fill">
                   <mat-label>Podpis wykonawcy</mat-label>
-                  <mat-select formControlName="executingPersonSignature" id="executingPersonSignature" name="executingPersonSignature" tabindex="92">
-                    <mat-option *ngFor="let executingPersonSignature of executingPersonSignature" [value]="executingPersonSignature.executingPersonSignature">
+                  <mat-select formControlName="executingPersonSignature" id="executingPersonSignature"
+                    name="executingPersonSignature" tabindex="92"
+                  >
+                    <mat-option *ngFor="let executingPersonSignature of executingPersonSignature"
+                      [value]="executingPersonSignature.executingPersonSignature"
+                    >
                       {{executingPersonSignature.signatureStatus}}
                     </mat-option>
                   </mat-select>
-                  <mat-error *ngIf="orderForm.controls['executingPersonSignature'].errors?.required">Podpis wykonawcy jest wymagany.</mat-error>
+                  <mat-error *ngIf="orderForm.controls['executingPersonSignature'].errors?.required">
+                    Podpis wykonawcy jest wymagany.
+                  </mat-error>
                 </mat-form-field>
               </div>
             </div>
