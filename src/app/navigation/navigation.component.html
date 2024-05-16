@@ -1,4 +1,6 @@
-<mat-sidenav-container class="sidenav-container" [ngClass]="{ 'dark-mode' : isDarkMode, 'light-mode' : !isDarkMode }">
+<mat-sidenav-container class="sidenav-container"
+  [ngClass]="{ 'dark-mode' : isDarkMode, 'light-mode' : !isDarkMode }"
+>
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
@@ -12,7 +14,12 @@
     <mat-nav-list>
       <a mat-list-item>
         <mat-icon>wb_sunny</mat-icon>
-        <mat-slide-toggle color="primary" labelPosition="before" (click)="toggleDarkMode()" [(ngModel)]="isDarkMode">
+        <mat-slide-toggle
+          color="primary"
+          labelPosition="before"
+          (click)="toggleDarkMode()"
+          [(ngModel)]="isDarkMode"
+        >
         </mat-slide-toggle>
         <mat-icon>bedtime</mat-icon>
       </a>
