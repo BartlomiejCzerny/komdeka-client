@@ -32,13 +32,13 @@ export class NavigationComponent implements OnInit {
     private snackBar: MatSnackBar,
     private themeService: ThemeService
   ) {
-    this.themeService.initTheme();
-    this.isDarkMode = this.themeService.isDarkMode();
+      this.themeService.initTheme();
+      this.isDarkMode = this.themeService.isDarkMode();
 
-    this.authenticationService.authChanged.subscribe((res) => {
-      this.isUserAuthenticated = res;
-      this.email = localStorage.getItem('e-mail');
-    });
+      this.authenticationService.authChanged.subscribe((res) => {
+        this.isUserAuthenticated = res;
+        this.email = localStorage.getItem('e-mail');
+      });
   }
 
   ngOnInit() { }
