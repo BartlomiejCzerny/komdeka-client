@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { NavigationComponent } from './navigation/navigation.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
@@ -30,9 +30,9 @@ export function tokenGetter() {
     AccountActivationDialogComponent,
     ForbiddenComponent
   ],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
     LayoutModule,
     BrowserAnimationsModule,
@@ -52,8 +52,8 @@ export function tokenGetter() {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerService,
       multi: true,
-    }
-  ],
-  bootstrap: [AppComponent]
+    },
+    provideHttpClient(withInterceptorsFromDi())
+  ]
 })
-export class AppModule {}
+export class AppModule { }
